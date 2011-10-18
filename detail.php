@@ -9,7 +9,8 @@
         <link href="css/tindetail.css" rel="stylesheet" type="text/css" media="screen" />
         <script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="js/tinlogin.js"></script>
-        <script type="text/javascript" src="js/jwplayer/swfnew.js"></script>
+        <script type="text/javascript" src="js/jwplayer/swfobject.js"></script>
+        
         <script type="text/javascript">
         	$(function()
 			{
@@ -23,22 +24,14 @@
 				});
 			});
                         
-                function initPlayer(theFile) {
-                        $('div.image-here').after('<div id="container">Loading the player ... </div>');
-                
-                        var flashvars = {
-                                file:theFile,
-                                autostart:"true"
-                        }
-                        var params = {
-                                allowfullscreen:"true",
-                                allowscriptaccess:"always"
-                        }
-                        var attributes = {
-                                id:"player1",
-                                name:"player1"
-                        }
-                        swfobject.embedSWF("js/jwplayer/player.swf", "container", "640", "392", "9.0.115", false, flashvars, params, attributes);
+                function initPlayer(url) {
+                          $('div.image-here').after('<div id="container1">Loading the player ... </div>');
+                          
+                          var flashvars = { file:url,autostart:'true' };
+                          var params = { allowfullscreen:'true', allowscriptaccess:'always' };
+                          var attributes = { id:'player1', name:'player1' };
+
+                          swfobject.embedSWF('js/jwplayer/player.swf','container1','640','350','9.0.115','false', flashvars, params, attributes);
                 }
 		</script>
     </head>
