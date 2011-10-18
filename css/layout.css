@@ -53,7 +53,29 @@ div#nav ul li a {
         color: #FFFFFF;
         text-decoration: none;
 }
-
+div.navtabs {
+        margin-left: 350px;
+        width: 240px;
+        height: 34px;
+}
+.navtabs a.tab1, .navtabs a.tab2 {
+        float: left;
+        display: block;
+        width: 148px;
+        height: 34px;
+        background: url('../images/preview.jpg') 0 0 no-repeat;
+}
+.navtabs a.tab2 {
+        margin-left: 15px;
+        width: 77px;
+        background: url('../images/vintage.jpg') 0 0 no-repeat;
+}
+.navtabs a.tab1:hover {
+        background: url('../images/preview_over.jpg') 0 0 no-repeat;
+}
+.navtabs a.tab2:hover {
+        background: url('../images/vintage_over.jpg') 0 0 no-repeat;
+}
 div.tinSearchSidebar
 {
 	width: 278px;
@@ -246,12 +268,6 @@ div.faq a {
         display: block;
         height: 36px;
         width: 36px;
-}
-img#faqinfo {
-        z-index: 10;
-	position: absolute;
-	top: 109px;
-	right: 0px;
 }
 .tinSearchResults {
 	color: #666666;

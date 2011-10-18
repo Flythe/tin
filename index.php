@@ -72,7 +72,10 @@ if($ip == '127.0.0.1')
                                         <li><a href="http://www.theaterinstituut.nl/theater-instituut-nederland/over-tin">Over TIN</a></li>
                                 </ul>
                         </div> 
-                        
+                        <div class="navtabs">
+                                <a class="tab1" href="#1"></a>
+                                <a class="tab2" href="#2"></a>
+                        </div>
                         <!--faq en info buttons-->
                         
                         <div class="faq">
