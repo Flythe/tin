@@ -1,0 +1,98 @@
+<div id="tinLogin">
+	<div id="tinLoginTopNav" class="topnav">
+		<a href="javascript:void(0);" id="signin"><span id="label_inloggen"><script type="text/javascript">
+				function readCookie(name) {
+					var nameEQ = name + "=";
+					var ca = document.cookie.split(';');
+					for (var i = 0; i < ca.length; i++) {
+						var c = ca[i];
+						while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+						if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+					}
+					return null;
+				}
+				document.write((email = readCookie('emailaddress')) && readCookie('password') ? email : "Inloggen");
+			</script></span></a>
+	</div>
+	<fieldset id="signin_menu" class="menu">
+		<form id="loginForm" onSubmit="return false;">
+			<label for="loginForm_emailaddress" class="required">E-mail adres</label>
+			<input type="text" id="loginForm_emailaddress" name="loginForm_emailaddress" maxlength="250" />
+			<br style="clear:both;" />
+
+			<label for="loginForm_password" class="required">Wachtwoord</label>
+			<input type="password" id="loginForm_password" name="loginForm_password" maxlength="150" />
+			<br style="clear:both;" />
+
+			<input type="submit" id="loginForm_submit" value="Inloggen" />
+			<div id="loginResults"></div>
+        	<br/><br/>
+            Nieuw hier? <a href="javascript:void(0);" id="createAccount"><span>Registreren</span></a>
+            <br/><br />
+            Wachtwoord kwijt? <a href="javascript:void(0);" id="requestPassword"><span>Opnieuw aanvragen</span></a>
+        </form>
+	</fieldset>
+	<fieldset id="loggedin_menu" class="menu">
+		<form id="logoutForm" onSubmit="return false;">
+            Wachtwoord veranderen? <a href="javascript:void(0);" id="changePassword"><span>Nieuw wachtwoord opgeven</span></a>
+            <br /><br />
+			<input type="submit" id="logoutForm_submit" value="Uitloggen" />
+		</form>
+	</fieldset>
+	<fieldset id="changePassword_menu" class="menu">
+		<form id="changePForm" onSubmit="return false;">
+			<input type="hidden" id="changePForm_emailaddress" name="changePForm_emailaddress" />
+			<input type="hidden" id="changePForm_oldpassword" name="changePForm_oldpassword" />
+			<label for="changePForm_password1" class="required">Nieuw wachtwoord</label>
+			<input type="text" id="changePForm_password1" name="changePForm_password1" maxlength="150" />
+			<br style="clear:both;" />
+			<label for="changePForm_password2" class="required">Nieuw wachtwoord (herhalen)</label>
+			<input type="text" id="changePForm_password2" name="changePForm_password2" maxlength="150" />
+			<br style="clear:both;" />
+			<input type="button" id="updateForm_annuleren" value="Annuleren" />&nbsp;&nbsp;&nbsp;<input type="submit" id="changePForm_submit" value="Wijzigen" />
+			<div id="changePResults"></div>
+		</form>
+	</fieldset>
+	<fieldset id="createAccount_menu" class="menu">
+		<form id="createForm" onSubmit="return false;">
+	  		<div style="float:left; margin-right: 20px;">
+		  		<label for="createForm_nameFirst" class="required">Voornaam</label>
+		  		<input type="text" id="createForm_nameFirst" name="createForm_nameFirst" maxlength="250" />
+
+		  		<label for="createForm_nameLast" class="required">Achternaam</label>
+		  		<input type="text" id="createForm_nameLast" name="createForm_nameLast" maxlength="250" />
+
+		  		<label for="createForm_emailaddress" class="required">E-mail adres</label>
+		  		<input type="text" id="createForm_emailaddress" name="createForm_emailaddress" maxlength="250" />
+
+		  		<label for="createForm_address" class="required">Adres</label>
+		  		<input type="text" id="createForm_address" name="createForm_address" maxlength="150" />
+		  	</div>
+		  	<div style="float:left">
+		  		<label for="createForm_postalcode" class="required">Postcode</label>
+		  		<input type="text" id="createForm_postalcode" name="createForm_postalcode" style="width:45px;" maxlength="7" />
+
+		  		<label for="createForm_city" class="required">Plaats</label>
+		  		<input type="text" id="createForm_city" name="createForm_city" maxlength="50" />
+
+		  		<label for="createForm_phone" class="required">Telefoon</label>
+		  		<input type="text" id="createForm_phone" name="createForm_phone" maxlength="75" value="" />
+
+		  		<label for="createForm_password" class="required">Wachtwoord</label>
+		  		<input type="password" id="createForm_password" name="createForm_password" maxlength="150" value="" />
+	  		</div>
+	  		<br style="clear:both;" /><br />
+	  		<input type="button" id="createForm_annuleren" value="Annuleren" />&nbsp;&nbsp;&nbsp;<input type="submit" id="createForm_submit" value="Registreren" />
+	  		<div id="updateResults"></div>
+	 	</form>
+	</fieldset>
+	<fieldset id="requestPassword_menu" class="menu">
+		<form id="requestPForm" onSubmit="return false;">
+	  		<label for="requestPForm_emailaddress" class="required">E-mail adres</label>
+	  		<input type="text" id="requestPForm_emailaddress" name="requestPForm_emailaddress" maxlength="250" />
+	  		<br style="clear:both;" /><br />
+	  		<input type="button" id="createForm_annuleren" value="Annuleren" />&nbsp;&nbsp;&nbsp;<input type="submit" id="requestPForm_submit" value="Aanvragen" />
+	  		<div id="requestPResults"></div>
+	  </form>
+	</fieldset>
+</div>

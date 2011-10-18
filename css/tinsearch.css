@@ -1,0 +1,831 @@
+@charset "utf-8";
+
+.tinSearch {
+	position: relative;
+	margin: 1.4em 0;
+	border-top: dashed 1px #8B8178;
+	border-bottom: dashed 1px #8B8178;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: .7em;
+	color: #000;
+	padding-bottom: 2.3em;
+}
+
+	.tinSearch a {
+	    text-decoration: none;
+	    color: #5A447A;
+	    cursor: pointer;
+	}
+
+	.tinSearch a:hover {
+	    color: #641F45;
+	}
+
+	.tinSearch a img {
+		border-width: 0px;
+	}
+
+	.tinSearch form {
+		padding: 0px;
+		margin: 0px;
+	}
+
+	.tinSearch button::-moz-focus-inner,
+	.tinSearch input[type="reset"]::-moz-focus-inner,
+	.tinSearch input[type="button"]::-moz-focus-inner,
+	.tinSearch input[type="submit"]::-moz-focus-inner,
+	.tinSearch input[type="file"] > input[type="button"]::-moz-focus-inner {
+		border:0;
+		padding:0;
+		margin:0;
+	}
+
+div.tinClear {
+	display: block;
+	clear: both;
+	font-size: 1px;
+	line-height: 1px;
+	background: transparent;
+}
+
+div.tinSearchLeft {
+	width: 30%;
+	float: left;
+}
+
+div.tinSearchFacets {
+	width: 100%;
+	margin: 120px 0 0;
+}
+
+	div.tinSearchFacets ul {
+	    list-style: none;
+	    margin: 0;
+	    padding: 0 20px 0 0;
+	}
+
+	div.tinSearchFacets ul ul {
+		display: none;
+	}
+
+	div.tinSearchFacets li {
+	    background-position: 0 1px;
+	    background-repeat: no-repeat;
+		font-size: 14px;
+		padding: 0;
+		margin: 0;
+	}
+
+	div.tinSearchFacets li li {
+	    padding-left: 20px;
+	    border-bottom: 0;
+	}
+
+	div.tinSearchFacets a {
+		font-family: Verdana,Arial,Helvetica,sans-serif;
+		font-weight: bold;
+		font-size: 11px;
+		display: block;
+		border-bottom: dashed 1px #8B8178;
+		padding: 5px 0;
+		outline: none;
+	}
+
+	div.tinSearchFacets li li a {
+		border-bottom: 0;
+	}
+
+div.tinTagCloud {
+	margin: 60px 0 0;
+	width: 100%;
+	line-height: 22px;
+	text-align: center;
+}
+
+	div.tinTagCloudInner {
+		border: dashed 1px #8B8178;
+		border-left: 0;
+		border-right: 0;
+		margin: 0 20px 0 0;
+		padding: 5px 0;
+	}
+
+	div.tinTagCloud a {
+		font-size: 0.8em;
+	}
+
+	div.tinTagCloud a.tagweight1 {
+		font-size: 1.4em;
+		font-weight: bold;
+	}
+
+	div.tinTagCloud a.tagweight2 {
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+
+	div.tinTagCloud a.tagweight3 {
+		font-size: 1em;
+		font-weight: bold;
+	}
+
+	div.tinTagCloud a.tagweight4 {
+		font-size: 1em;
+	}
+
+div.tinSearchContainer {
+	width: 70%;
+	float: left;
+}
+
+	div.tinSearchContainer .label {
+		float: left;
+		font-size: 16px;
+		letter-spacing: 1px;
+		margin-left: 20px;
+		margin-top: 10px;
+		margin-bottom: 0px;
+		color: #FFF;
+		font-family: "Times New Roman";
+		font-weight: bold;
+		font-style: italic;
+	}
+
+div.tinSearchTabs {
+	padding: 6px 10px;
+	margin-bottom: 0px;
+	border-left: dashed 1px #8B8178;
+	border-right: dashed 1px #8B8178;
+}
+
+	div.tinSearchTabs a {
+		font-weight: bold;
+		padding: 0 10px;
+	}
+
+div.tinSearchMenu {
+	padding-bottom: 1.5em;
+	background-color: #8B8178;
+	float: left;
+	width: 100%;
+	position: relative;
+}
+
+input.tinSearchInput {
+	width: 50%;
+	height: 20px;
+	border: 0;
+	float: left;
+	margin-top: 8px;
+	margin-left: 19px;
+	padding: 1px 3px 2px;
+	line-height: 20px;
+	background: #FFF;
+}
+
+input.tinSearchThesaurusInput {
+	width: 200px;
+	height: 20px;
+	border: solid 1px #999;
+	float: left;
+	padding: 1px 3px 2px;
+	line-height: 20px;
+	background: #FFF;
+}
+
+a.tinSearchSubmit {
+	float: left;
+	margin-top: 8px;
+	margin-left: 12px;
+	display: block;
+	height: 21px;
+	border: solid 1px #000;
+	color: #FFF;
+	background: #A02383;
+	line-height: 21px;
+	padding: 0 35px;
+	font-weight: bold;
+}
+
+	a.tinSearchSubmit:hover {
+		background: #B2A59B;
+		color: #FFF;
+		text-decoration: none;
+	}
+
+div.tinSearchExtra {
+	float: left;
+	margin: 8px 0 0 12px;
+	color: #FFF;
+	line-height: 21px;
+	font-weight: bold;
+	word-spacing: .4em;
+}
+
+a.tinSearchToggleAdvanced,
+a.tinSearchReset {
+	color: #FFF;
+	font-weight: bold;
+}
+
+a.tinSearchToggleAdvanced {
+	margin-top: 2px;
+}
+
+a.tinSearchToggleAdvanced:hover,
+a.tinSearchReset:hover {
+	color: #F1F1F1;
+}
+
+form.tinSearchAdvancedForm,
+form.tinSearchAdlibForm {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	background-color: #B2A59B;
+	border-style: solid;
+	border-color: #716962;
+	border-width: 0px 1px 1px 1px;
+}
+
+form.tinSearchAdlibForm select {
+	font-size: 11px;
+	float: left;
+	margin-top: 8px;
+}
+
+form.tinSearchThesaurusForm {
+	position: relative;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	background-color: #fff;
+	border: solid 2px #000;
+	height: 400px;
+	-moz-box-shadow: 5px 5px 8px #707070;
+	-webkit-box-shadow: 5px 5px 8px #707070;
+	box-shadow: 5px 5px 8px #707070;
+}
+
+form.tinSearchThesaurusForm h1 {
+	font-size: 18px;
+	line-height: 36px;
+	font-weight: normal;
+	margin: 10px 15px;
+	border-bottom: solid 2px #A02383
+}
+
+form.tinSearchThesaurusForm h1 span {
+	font-family: "Times New Roman";
+	color: #A02383;
+	font-size: 23px
+}
+
+form.tinSearchThesaurusForm h2 {
+	font-size: 14px;
+	margin-top: 0;
+}
+
+div.tinSearchThesaurusBroader {
+	margin: 15px 15px 0;
+	width: 165px;
+	height: 310px;
+	float: left;
+	overflow: auto;
+}
+
+div.tinSearchThesaurusMiddle {
+	width: 250px;
+	float: left;
+}
+
+div.tinSearchThesaurusSimilar,
+div.tinSearchThesaurusSynonyms {
+	max-height: 130px;
+	margin-left: 40px;
+	overflow: auto;
+}
+
+div.tinSearchThesaurusNarrower {
+	margin: 15px 0 0 15px;
+	width: 165px;
+	float: left;
+	height: 310px;
+	overflow: auto;
+}
+
+div.tinSearchAdvancedWrapper {
+	clear: both;
+	margin-bottom: 10px;
+	height: 1.6em;
+}
+
+div.tinSearchAdvanced,
+div.tinSearchAdlib {
+	position: relative;
+	width: 100%;
+	float: left;
+	display:none;
+}
+
+div.tinSearchThesaurus {
+	position: absolute;
+	top: 160px;
+	left: 180px;
+	display: none;
+	width: 650px;
+	z-index: 999;
+}
+
+	div.tinSearchAdvanced span {
+		display: block;
+		float: left;
+		width: 10em;
+		margin-left: 20px;
+		color: #FFF;
+		font-weight: bold;
+	}
+
+	div.tinSearchAdvanced select {
+		display: block;
+		float: left;
+	}
+
+	div.tinSearchAdvanced .tinButton,
+	div.tinSearchAdlib .tinButton,
+	div.tinSearchThesaurus .tinButton {
+		position: absolute;
+		top: .5em;
+		right: 1.3em;
+		font-size: 0.7em;
+	}
+
+	div.tinSearchAdlib .tinButton {
+		right: .7em;
+	}
+
+a.tinSearchToggleAdlib {
+	float: right;
+	text-decoration: underline;
+	margin-right: 10px;
+	font-size: 9px;
+}
+
+div.tinSearchThesaurusAdd {
+	margin: 10px 0 50px 0;
+	line-height: 18px;
+}
+
+span.tinSearchThesaurusPlus {
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	clear: both;
+	float: left;
+	width: 90px;
+}
+
+
+a.tinSearchToggleThesaurus {
+	text-decoration: underline;
+	white-space: nowrap;
+	display: block;
+	float: left;
+}
+
+div.tinSearchThesaurus a.tinSearchToggleThesaurus {
+	text-decoration: none;
+}
+
+div.tinSearchResultsWrapper {
+	position: relative;
+	float: left;
+	width: 100%;
+	line-height: 16px;
+}
+
+div.tinSearchNumberOfResults h3 {
+	color: #000;
+	font-size: 13px;
+	line-height: 16px;
+	font-weight: normal;
+}
+
+a.tinSeeAlso,
+a.tinSeeAlso:hover {
+	color: #A02383;
+	font-weight: normal;
+	line-height: 17px;
+	margin: 0;
+	padding-top: 1px;
+}
+
+a.tinSeeAlso:hover {
+	color: #641F45;
+}
+
+div.tinSearchResults {
+	padding-bottom: 1.8em;
+}
+
+div.tinSearchResults h1 {
+	font-size: 13px;
+	font-weight: normal;
+	display: inline;
+	padding-right: .5em;
+}
+
+	div.tinSearchResults h1 a {
+		font-size: 13px;
+	    color: #2200C1;
+	}
+
+	div.tinSearchResults h1 span {
+		font-weight: bold;
+	}
+
+	div.tinSearchResults h1 a:hover {
+	    color: #2200C1;
+		text-decoration: underline;
+	}
+
+div.tinSearchResult, div.tinSearchResultAudio {
+	clear: both;
+	margin-bottom: 15px;
+	line-height: 17px;
+}
+
+div.tinSearchResultAudio {
+	border-top: dashed 1px #999;
+	padding-top: 1em;
+}
+
+div.tinSearchAudioInfo {
+	float: left;
+	width: 60%;
+}
+
+div.tinSearchAudioInfo p {
+	margin-top: 0;
+}
+
+div.tinSearchAudioPlay {
+	position: relative;
+	width: 40%;
+	padding-top: 5px;
+	float: right;
+}
+
+div.tinSearchResultAudio embed {
+	float: right;
+	margin: 0 0 .5em .5em;
+}
+
+div.tinSearchSuggestion {
+	margin-bottom: 15px;
+	font-size: 13px;
+}
+
+div.tinSearchSuggestion a {
+	font-weight: bold;
+	font-size: 13px;
+}
+
+div.tinSearchResultPhoto {
+	position: relative;
+	margin-bottom: 15px;
+	line-height: 17px;
+	float: left;
+	min-width: 10em;
+	text-align: center;
+	height: 100px;
+}
+
+	div.tinSearchResultPhoto img {
+		background: #ccc;
+		margin: 0;
+	}
+
+	.tinSearchPhoto {
+		margin-right: 20px;
+		cursor: pointer;
+	}
+
+	div.tinSearchDetail {
+		display: none;
+		position: absolute;
+		top: -20px;
+		left: 0;
+		min-width: 14em;
+		background: #fff;
+		padding: .5em;
+		z-index: 99;
+		text-align: left;
+		-moz-box-shadow: 0 0 10px #707070;
+		-webkit-box-shadow: 0 0 10px #707070;
+		box-shadow: 0 0 10px #707070;
+	}
+
+	div.tinSearchDetail .tinSearchPhoto {
+		margin: 0 0 .5em;
+	}
+
+	div.tinSearchResults div.tinSearchDetail h1 {
+		float: none;
+		display: inline;
+	}
+
+	div.tinSearchDetail img {
+		height: 140px;
+		display: block;
+		margin: 0 auto;
+	}
+
+div.tinSearchPhotoExcluded {
+	border: dashed 1px #8B8178;
+	min-width: 7em;
+	padding: 38px 1em 0;
+	height: 62px;
+	text-align: center;
+	color: #999;
+	background: #EFEFEF;
+	background-image: -moz-linear-gradient(top,#F5F5F5,#FFFFFF);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#EFEFEF),to(#FFFFFF));
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#EFEFEF,endColorStr=#FFFFFF);
+}
+
+a.tinSearchPhotoExcluded {
+	border: dashed 1px #8B8178;
+	min-width: 7em;
+	padding: 40px 1em 0;
+	height: 60px;
+	text-align: center;
+	color: #999;
+	display: block;
+	background: #EFEFEF;
+	background-image: -moz-linear-gradient(top,#F5F5F5,#FFFFFF);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#EFEFEF),to(#FFFFFF));
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#EFEFEF,endColorStr=#FFFFFF);
+}
+
+div.tinPageNav {
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	color: #5A447A;
+	border: dashed 1px #8B8178;
+	border-bottom: 0;
+	padding: 0.9em 0 .7em;
+	display: none;
+	text-align: center;
+	width: 70%;
+}
+
+	div.tinPageNavMiddle {
+		position: relative;
+		margin: 0 7em 0 5.5em;
+	}
+
+	div.tinPageNav a {
+		padding: 0 4px;
+		color: #5A447A;
+		font-weight: bold;
+		display: inline-block;
+	}
+
+	div.tinPageNav span {
+		position: relative;
+		display: inline-block;
+		padding: 0 6px;
+		color: #5A447A;
+		font-weight: bold;
+	}
+
+	div.tinPageNav span.tinPageNavPrev {
+		position: absolute;
+		left: 0;
+		top: 0.9em;
+		padding: 0 0 0 .8em;
+		height: auto;
+	}
+
+	div.tinPageNav span.tinPageNavNext {
+		position: absolute;
+		right: 0;
+		top: 0.9em;
+		padding: 0 .8em 0 0;
+		height: auto;
+	}
+
+	div.tinPageNav span.tinPageNavPrev a,
+	div.tinPageNav span.tinPageNavNext a {
+		padding: 0 .2em 0;
+		float: none;
+	}
+
+	div.tinPageNav span.tinPageNavPrev a {
+		padding-left: .25em;
+	}
+
+	div.tinPageNav .tinButton {
+	    margin: -.25em 2px 0;
+	}
+
+	div.tinPageNav a.tinButton {
+	    text-decoration: none;
+	}
+
+div.tinAutocompleteWrapper {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin: 0;
+}
+
+div.tinAutocomplete {
+	border: 1px solid #999;
+	background: #FFF;
+	cursor: default;
+	text-align: left;
+	max-height: 350px;
+	overflow: auto;
+	margin: 1px 1px 0 -1px;
+	/* IE6 specific: */ _height: 350px;
+	_margin: 0;
+	_overflow-x: hidden;
+	position: relative;
+}
+
+div.tinAutocomplete { margin-top: 31px\9 }
+div.tinAutocomplete { *margin-top: 2px }
+:root *> div.tinAutocomplete { margin-top: 1px }
+
+	div.tinAutocomplete .selected {
+		background:#F0F0F0;
+	}
+
+	div.tinAutocomplete div {
+		padding: 2px 5px; white-space:nowrap;
+	}
+
+	div.tinAutocomplete strong {
+		color: #00C;
+	}
+
+span.tinPlayMessage {
+	position: absolute;
+	right: 0;
+    display: block;
+	padding: 1em;
+	margin-bottom: 1em;
+	background: #F9F9F9;
+	border: 1px solid #CCC;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	white-space: nowrap;
+	vertical-align: middle;
+	font-size: 1em;
+}
+
+span.tinPlayMessage img {
+    display: block;
+    clear: both;
+    margin: .5em auto;
+}
+
+.tinButton {
+    display: block;
+	padding: .5em 1em 0;
+	height: 1.7em;
+	border: 1px solid #CCC;
+	background: #F6F6F6;
+	background-image: -moz-linear-gradient(top,#FFFFFF,#EFEFEF);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#EFEFEF));
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFFFFF,endColorStr=#EFEFEF);
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	overflow: visible;
+	font-size: 1em;
+	text-decoration: none;
+}
+
+	.tinButton:hover,
+	.tinButton:focus {
+		border-color: #999;
+		background: #F3F3F3;
+		background-image: -moz-linear-gradient(top,#FFFFFF,#EBEBEB);
+		background-image: -webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#EBEBEB));
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFFFFF,endColorStr=#EBEBEB);
+		outline: 0;
+		-moz-box-shadow: 0 0 3px #999;
+		-webkit-box-shadow: 0 0 3px #999;
+		box-shadow: 0 0 3px #999;
+		text-decoration: none;
+	}
+
+	.tinButton:active {
+		border-color: #999;
+		background: #DDD;
+		background-image: -moz-linear-gradient(top,#CCCCCC,#FFFFFF);
+		background-image: -webkit-gradient(linear,left top,left bottom,from(#CCCCCC),to(#FFFFFF));
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#CCCCCC,endColorStr=#FFFFFF)
+	}
+
+.tinSmallButton {
+    display: inline-block;
+    padding: 0 1em;
+    height: 1.7em;
+    width: auto;
+    min-width: 1em;
+    text-align: center;
+    font-size: 0.9em;
+    line-height: 1.7em;
+}
+
+
+.tinCloseButton {
+    display: inline-block;
+    padding: 0 .45em 0;
+    margin-right: .5em;
+    height: 1.7em;
+    width: auto;
+    text-align: center;
+    font-size: 0.65em;
+    line-height: 1.6em;
+    font-weight: normal;
+}
+
+a.tinCloseButton {
+	color: #000;
+}
+
+a.tinCloseButton:hover {
+	color: #000;
+}
+
+button.tinPlayButton {
+	display: block;
+    float: right;
+    clear: both;
+    margin-bottom: 1em;
+}
+
+#dbg {
+	font-size: 10px;
+	height: 200px;
+	width: 100%;
+	overflow: scroll;
+}
+
+.tinWrap {
+        height: 100%;
+        width: 960px;
+        margin: 0 auto;
+}
+
+div.tinTop {
+	position: relative;
+	font-size: .633em;
+}
+
+div.tinHeader {
+        
+}
+
+div.tinHeaderBarUpper {
+        background-color: #A40084;
+        height: 5px;
+        width: 100%;
+}
+
+div.tinHeaderBarLower {
+        background-color: #818181;
+        color: #FFF;
+        font: bold 10px verdana;
+        height: 30px;
+        width: 100%;
+}
+
+a.tinBack, a.tinDemosLogout, div.tinTop div {
+	display: block;
+	float: left;
+	margin: 5px 20px 0;
+	color: #999;
+	text-decoration: none;
+}
+
+a.tinDemosLogout {
+	float: right;
+}
+
+a.tinBack:hover, a.tinDemosLogout:hover {
+	text-decoration: underline;
+}
+
+a.tinDemosLogout span {
+	font-size: .9em;
+	vertical-align: baseline;
+}

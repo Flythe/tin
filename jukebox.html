@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="nl" xml:lang="nl">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="description" content="JQuery frontend Lucene/SOLR" />
+        <meta name="keywords" content="tin theater instituut nederland adlib zoeken zoekmachine lucene solr jquery" />
+        <style type="text/css" media="screen, projection">
+            body, html { margin: 0; padding: 0; font-family: Verdana,Arial,Helvetica,sans-serif; }
+            html { overflow-y: scroll }
+        </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script type="text/javascript" src="js/tinScriptIncluder.js"></script>
+        <script type="text/javascript">
+            /* Load widgets on page load */
+            $(function()
+            {
+				/* Add jukebox widget */
+				$('#jukeBox').tinSearch({
+					facet: 'audio:*',					/* Search audio only, leave unchanged */
+					jukebox: true,						/* Set jukebox mode, enables special layout with mp3 player. Default: false */
+					disableFacets: true,				/* Disable sidebar facet navigation. Default: false */
+					disableTabs: true,					/* Disable top facet tabs. Default: false */
+					disableTagCloud: true,				/* Disable sidebar tag cloud. Default: false */
+					disableAdvanced: true,				/* Disable advanced search. Default: false */
+					disableReset: true,					/* Disable search reset. Default: false */
+					disableCatalogusLink: true,			/* Disable search results links to catalog. Default: false */
+					disableTitleLink: true,				/* Disable search results title links. Default: false */
+					inputLabel: "Zoek op titel, artiest of jaartal:", 	/* Search field label. Default: "Zoek naar:" */
+					resultsPerPage: 5,					/* Number of results per page. Default: 10 */
+					searchSuggestionText: 'bedoelde u misschien: {SUGGESTION}',	/* Search suggestion text. Default: Bedoelde u: {SUGGESTION}? */
+					prevPageArrow: '&laquo;', 			/* Previous page arrow. Default: &#x25C0; */
+					nextPageArrow: '&raquo;', 			/* Next page arrow. Default: &#x25BA; */
+					/* prevPageHtml: '...', */			/* Previous page link. Default: {PREVARR}<a href="{URL}" class="tinNavLink">Vorige</a> */
+					/* nextPageHtml: '...', */			/* Next page link. Default: <a href="{URL}" class="tinNavLink">Volgende</a>{NEXTARR} */
+					searchButtonLabel: 'zoek',			/* Search button label text. Default: Zoeken */
+					/* advancedButtonLabel: 'Uitgebreid', */	/* Advanced search label text. Default: Uitgebreid */
+					resetLinkLabel: 'reset',			/* Reset label text. Default: Reset */
+					/* disableDefaultCss: true, */  	/* Do not autoload default CSS file. Default: false */
+
+					/* Overrride default CSS with the following: */
+					css: [
+						"#jukeBox { background: #f6f6f6; border-color: #788B81 }",
+						"#jukeBox div.tinSearchMenu { background: #788B81 }",
+						"#jukeBox a.tinSearchSubmit:hover { background: #98ABA1 }",
+						"#jukeBox form.tinSearchAdvancedForm { background: #98ABA1 }",
+						"#jukeBox div.tinPageNav { border-color: #788B81 }",
+						"#jukeBox { border-color: #788B81 }",
+						"#jukeBox div.tinSearchResults { padding-left: .7em; padding-right: .7em }",
+						"#jukeBox div.tinSearchNumberOfResults { padding-left: .7em; padding-right: .7em; display: inline-block }",
+						"#jukeBox div.tinSearchSuggestion { padding-right: .7em; font-style: italic; display: inline-block }",
+						"#jukeBox div.tinSearchResultAudio p { margin-top: 10px }",
+						"#jukeBox div.tinSearchAudioInfo { float: none; width: auto }",
+						"#jukeBox div.tinSearchAudioPlay { float: none; width: auto; padding-top: 0 }",
+						"#jukeBox div.tinSearchResultAudio embed { float: none }",
+						"#jukeBox button.tinPlayButton { float: none; width: 100px; }",
+						"#jukeBox span.tinPlayMessage { float: left }"
+					]
+				});
+            });
+        </script>
+    </head>
+    <body>
+        <div id="jukeBox" style="width: 800px; margin: 20px"></div>
+    </body>
+</html>

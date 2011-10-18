@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/* CSS Document */
+div.tinSearchThesaurus
+{
+	width: 573px;
+	min-height: 305px;
+	background: #A40084;
+	position: absolute;
+	top: 194px;
+	left: 276px;
+	text-align: center;
+	color: white;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11.5px;
+	line-height: 21px;
+}
+div.tinSearchThesaurus {
+	position: absolute;
+	top: 160px;
+	left: 180px;
+	display: none;
+	width: 650px;
+	z-index: 999;
+}
+div.tinSearchThesaurus a.tinButton {
+        background: url('../images/thesaurus_close.png') 0 0 no-repeat;
+        height: 22px;
+        width: 22px;
+        position: absolute;
+	right: 8px;
+	top: 8px;
+}
+div.tinSearchThesaurus div
+{
+	display: inline-block;
+	vertical-align: top;
+}
+div.tinSearchThesaurus div.tinAutocompleteWrapper {
+        display: block;
+        top: 29px;
+        left: -224px;        
+}
+div.tinSearchThesaurus div.tinAutocomplete div {
+        display: block;
+}
+div.tinSearchThesaurus ul
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+div.tinSearchThesaurusBroader
+{
+        width: 190px;
+	text-align: right;
+	margin: 40px 0 10px 0;
+}
+div.tinSearchThesaurusBroader ul li
+{
+        cursor: pointer;
+        text-decoration: underline;
+	margin-right: 20px;
+}
+div.tinSearchThesaurusNarrower
+{
+        width: 190px;
+	text-align: left;
+	margin: 40px 0 10px 0;
+}
+div.tinSearchThesaurusNarrower ul li
+{
+        cursor: pointer;
+        text-decoration: underline;
+	margin-left: 20px;
+}
+div.tinSearchThesaurusMiddle
+{
+        width: 270px;
+	margin: 18px 0 10px 0;
+	text-align: left;
+}
+div.tinSearchThesaurusMiddle ul li
+{
+        cursor: pointer;
+        text-decoration: underline;
+	margin-left: 8px;
+}
+div.tinSearchThesaurusMiddle input.tinSearchThesaurusInput
+{
+        font-family: Georgia,"Times New Roman",Times,serif;
+        border: 4px solid #93238E;    
+        color: #93238E;
+        font-size: 16px;
+        font-weight: normal;
+        height: 20px;  
+        padding-top: 4px;
+        margin: 0;
+        text-indent: 10px;
+        width: 220px;
+}

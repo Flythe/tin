@@ -1,0 +1,38 @@
+div.tinAutocompleteWrapper {
+        color: black !important;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin: 0;
+}
+
+div.tinAutocomplete {
+	border: 1px solid #999;
+	background: #FFF;
+	cursor: default;
+	text-align: left;
+	max-height: 350px;
+	overflow: auto;
+	margin: 1px 1px 0 -1px;
+	/* IE6 specific: */ _height: 350px;
+	_margin: 0;
+	_overflow-x: hidden;
+	position: relative;
+}
+
+div.tinAutocomplete { margin-top: 0 }
+
+:root *> div.tinAutocomplete { margin-top: 1px }
+
+	div.tinAutocomplete .selected {
+		background:#F0F0F0;
+	}
+
+	div.tinAutocomplete div {
+		padding: 2px 5px; white-space:nowrap;
+                font-size: 11.5px;
+	}
+
+	div.tinAutocomplete strong {
+		color: #00C;
+	}

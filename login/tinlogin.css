@@ -1,0 +1,70 @@
+html, body { font-family: Arial; font-size: 0.9em !important; margin: 0px; padding: 0px; height: 100%; width: 100%; background: #FFF; }
+input[type=submit] { -moz-border-radius:4px; -webkit-border-radius:4px; border:1px solid #ACE; font-size:13px; background: #ff; float:right; color: #27b}
+input[type=button] { -moz-border-radius:4px; -webkit-border-radius:4px; border:1px solid #ACE; font-size:13px; background: #ff; float:right; color: #27b; margin-left: 10px;}
+input.error { border: 1px solid #660000 !important; }
+label.error { /*background: url('/tinUser/login/components/images/unchecked.gif') no-repeat; padding-left: 16px; margin-left: .3em; height: 36px; display:block;*/ display:none !important; }
+label.valid { /*background: url('/tinUser/login/components/images/checked.gif') no-repeat; display: block; width: 16px; height: 16px; display:block;*/ display:none !important; }
+label.required { color: #27b; }
+.resultsError { color: red; }
+table { padding: 0; margin: 0; border: none; }
+td { vertical-align: top; }
+#container { width:780px; margin:0 auto; position: relative; }
+#content { width:520px; min-height:500px; }
+a:link, a:visited { color:#27b; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border-width:0; }
+
+/* NAVIGATION MENU */
+	#topnav { padding:10px 0px 0px; font-size:11px; line-height:23px; text-align:right; }
+	#topnav a { background:#88bbd4; padding:4px 6px 6px; text-decoration:none; font-weight:bold; color:#fff; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; *background:transparent url("signin-nav-bg-ie.png") no-repeat 0 0; *padding:4px 12px 6px; }
+	#topnav a:hover { background:#59B; *background:transparent url("signin-nav-bg-hover-ie.png") no-repeat 0 0; *padding:4px 12px 6px; }
+	#topnav a, #topnav a:hover { *background-position:0 3px!important; position:relative; margin-left:3px; }
+	#topnav a span { background-image:url("../images/toggle_down_light.png"); background-repeat:no-repeat; background-position:100% 50%; padding:4px 16px 6px 0; }
+	#topnav a.menu-open { background:#ddeef6!important; color:#666!important; outline:none; }
+	a.menu-open span, a.menu-open span { background-image:url("../images/toggle_up_dark.png"); color:#789; }
+	#topnav br {margin-bottom: 5px;}
+
+/* LOGIN FORM */
+	fieldset.menu {
+	    -moz-border-radius-topleft:5px;
+	    -moz-border-radius-bottomleft:5px;
+	    -moz-border-radius-bottomright:5px;
+	    -webkit-border-top-left-radius:5px;
+	    -webkit-border-bottom-left-radius:5px;
+	    -webkit-border-bottom-right-radius:5px;
+	    display:none;
+	    background-color:#ddeef6;
+	    position:absolute;
+	    width:210px;
+	    z-index:100;
+	    border:1px transparent;
+	    text-align:left;
+	    padding:12px;
+	    top: 24.5px; 
+	    right: 0px; 
+	    margin-top:5px;
+	    margin-right: 0px;
+	    *margin-right: -1px;
+	    color:#789;
+	    font-size:11px;
+	}	
+	fieldset#signin_menu { top: 27px; }
+	fieldset#createAccount_menu { top: 27px; width: 680px !important; }
+	fieldset#requestPassword_menu { top: 27px; }
+	fieldset#changePassword_menu { top: 27px; }
+	fieldset.menu input[type=text], fieldset.menu input[type=password] { display:block; -moz-border-radius:4px; -webkit-border-radius:4px; border:1px solid #ACE; font-size:13px; margin:0 0 5px; padding:5px; width:175px; }
+	fieldset.menu p { margin:0; }
+	fieldset.menu a { color:#6AC; }
+	fieldset.menu label { font-weight:normal; }
+	fieldset.menu p.remember { padding:10px 0; }
+	fieldset.menu p.forgot, fieldset.menu p.complete { clear:both; margin:5px 0; }
+	fieldset.menu p a { color:#27B!important; }
+
+/* TOOLTIPS */
+	.tipsy-inner { padding:10px 15px; line-height:1.5em; font-weight:bold; }
+	.tipsy { opacity:.8; filter:alpha(opacity=80); background-repeat:no-repeat; padding:5px; }
+	.tipsy-inner { padding:8px 8px; max-width:200px; font:11px 'Lucida Grande', sans-serif; font-weight:bold; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; background-color:#000; color:white; text-align:left; }
+	.tipsy-north { background-image:url(images/tipsy-north.gif); background-position:top center; }
+	.tipsy-south { background-image:url(images/tipsy-south.gif); background-position:bottom center; }
+	.tipsy-east { background-image:url(images/tipsy-east.gif); background-position:right center; }
+	.tipsy-west { background-image:url(images/tipsy-west.gif); background-position:left center; }

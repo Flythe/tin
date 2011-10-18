@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>UserProfile</title>
+<link href="tinlogin.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="tinlogin.js"></script> 
+</head>
+<body>
+<div id="container">
+	<div id="topnav" class="topnav">
+		<a href="javascript:void(0);" id="signin"><span id="label_inloggen">Inloggen</span></a> 
+	</div>
+	<fieldset id="signin_menu" class="menu">
+		<form id="loginForm" onSubmit="return false;">
+			<label for="loginForm_emailaddress" class="required">E-mail adres</label>
+			<input type="text" id="loginForm_emailaddress" name="loginForm_emailaddress" maxlength="250" />
+			<br style="clear:both;" />
+			
+			<label for="loginForm_password" class="required">Wachtwoord</label>
+			<input type="password" id="loginForm_password" name="loginForm_password" maxlength="150" />
+			<br style="clear:both;" />
+			
+			<input type="submit" id="loginForm_submit" value="Inloggen" />
+			<div id="loginResults"></div>
+            	<br/>
+                <br/>
+                Nieuw hier?<a href="javascript:void(0);" id="createAccount"> <span>Registreren</span></a> 
+                <br/>
+                <br />
+                Wachtwoord kwijt? <a href="javascript:void(0);" id="requestPassword"> <span>Opnieuw aanvragen</span></a>
+            </form>
+	</fieldset>
+	<fieldset id="changePassword_menu" class="menu">
+		<form id="changePForm" onSubmit="return false;">
+			<input type="hidden" id="changePForm_emailaddress" name="changePForm_emailaddress" />
+			<input type="hidden" id="changePForm_oldpassword" name="changePForm_oldpassword" />
+			<label for="changePForm_password1" class="required">Nieuw wachtwoord</label>
+			<input type="text" id="changePForm_password1" name="changePForm_password1" maxlength="150" />
+			<br style="clear:both;" />
+			<label for="changePForm_password2" class="required">Nieuw wachtwoord (herhalen)</label>
+			<input type="text" id="changePForm_password2" name="changePForm_password2" maxlength="150" />
+			<br style="clear:both;" />
+			<input type="button" id="updateForm_annuleren" value="Annuleren"  onclick="hideAllButLogin();"/>&nbsp;&nbsp;&nbsp;<input type="submit" id="changePForm_submit" value="Wijzigen" />
+			<div id="changePResults"></div>
+		</form>
+	</fieldset>
+	<fieldset id="createAccount_menu" class="menu">
+		<form id="updateForm" onSubmit="return false;">
+	  		<div style="float:left;width:300px;">
+		  		<label for="updateForm_nameFirst" class="required">Voornaam</label>
+		  		<input type="text" id="updateForm_nameFirst" name="updateForm_nameFirst" maxlength="250" />
+		  		
+		  		<label for="updateForm_nameLast" class="required">Achternaam</label>
+		  		<input type="text" id="updateForm_nameLast" name="updateForm_nameLast" maxlength="250" />
+		  		
+		  		<label for="updateForm_emailaddress" class="required">E-mail adres</label>
+		  		<input type="text" id="updateForm_emailaddress" name="updateForm_emailaddress" maxlength="250" />
+		  		
+		  		<label for="updateForm_address" class="required">Adres</label>
+		  		<input type="text" id="updateForm_address" name="updateForm_address" maxlength="150" />
+		  	</div>
+		  	<div style="float:left;width:300px;">
+		  		<label for="updateForm_postalcode" class="required">Postcode</label>
+		  		<input type="text" id="updateForm_postalcode" name="updateForm_postalcode" style="width:45px;" maxlength="7" />
+		  		
+		  		<label for="updateForm_city" class="required">Plaats</label>
+		  		<input type="text" id="updateForm_city" name="updateForm_city" maxlength="50" />
+		  		
+		  		<label for="updateForm_phone" class="required">Telefoon</label>
+		  		<input type="text" id="updateForm_phone" name="updateForm_phone" maxlength="75" />
+		  		
+		  		<label for="updateForm_password" class="required">Wachtwoord</label>
+		  		<input type="password" id="updateForm_password" name="updateForm_password" maxlength="150" />
+	  		</div>
+	  		<br style="clear:both;" />
+	  		<input type="button" id="updateForm_annuleren" value="Annuleren"  onclick="hideAllButLogin();"/>&nbsp;&nbsp;&nbsp;<input type="submit" id="updateForm_submit" value="Registreren" />
+	  		<div id="updateResults"></div>
+	 	</form>
+	</fieldset>
+	
+	<fieldset id="requestPassword_menu" class="menu">
+		<form id="requestPForm" onSubmit="return false;">
+	  		<label for="requestPForm_emailaddress" class="required">E-mail adres</label>
+	  		<input type="text" id="requestPForm_emailaddress" name="requestPForm_emailaddress" maxlength="250" />
+	  		<br style="clear:both;" /><br />
+	  		<input type="button" id="updateForm_annuleren" value="Annuleren" onclick="hideAllButLogin();"/>&nbsp;&nbsp;&nbsp;<input type="submit" id="requestPForm_submit" value="Aanvragen" />
+	  		<div id="requestPResults"></div>
+	  </form>
+	</fieldset>
+</div>
+
+</body>
+</html>

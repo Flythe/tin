@@ -1,0 +1,715 @@
+.tintxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #333;
+}
+.kop1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #F00;
+}
+.nav {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #FFF;
+	font-weight: bold;
+}
+.alternatief {
+	font-family: arial;
+	font-size: 12px;
+	font-style: italic;
+	color: #666;
+}
+.foundheadtxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #666;
+}
+.foundtxtinfo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 13px;
+	color: #666;
+	font-style: italic;
+}
+.stippellijn {
+	border-bottom-width: thin;
+	border-bottom-style: dashed;
+	border-bottom-color: #CCC;
+}
+.keuzemenu {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 12px;
+	font-style: italic;
+	line-height: 24px;
+	color: #666;
+}
+.line {
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+}
+.foundkopkap {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+	color: #666;
+	font-weight: bold;
+	line-height: 21px;
+	text-align: right;
+}
+.foundtxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 17px;
+	color: #666;
+	text-align: right;
+}
+.foundnumbers {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #CCC;
+	text-align: right;
+}
+.meer {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #CCC;
+}
+.verticalline {
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #666;
+}
+.zoekvak {
+	border: 4px solid #93238e;
+	height: 16px;
+	width: 250px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 16px;
+	color: #93238e;
+	text-align: left;
+	text-indent: 12px;
+	line-height: 18px;
+	padding-top: 4px;
+	font-weight: normal;
+}
+#balkpaars {
+	background-color: #a40084;
+	position: absolute;
+	height: 5px;
+	width: 957px;
+	left: 67px;
+	top: 70px;
+}
+#resultaat {
+	position:absolute;
+	left:409px;
+	top:142px;
+	width:284px;
+	height:24px;
+	z-index:1;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #a40084;
+}
+#cross {
+	position:absolute;
+	left:691px;
+	top:143px;
+	width:33px;
+	height:25px;
+	z-index:2;
+}
+#balkgrijsnav {
+	font-family: verdana;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #818181;
+	left: 67px;
+	top: 75px;
+	position: absolute;
+	height: 30px;
+	width: 957px;
+}
+#ofzoek {
+	position:absolute;
+	left:69px;
+	top:114px;
+	width:278px;
+	height:21px;
+	z-index:3;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 12px;
+	color: #999;
+	text-decoration: underline;
+}
+#foto {
+	position:absolute;
+	left:408px;
+	top:199px;
+	width:70px;
+	height:70px;
+	z-index:5;
+}
+
+#bedoeldeu {
+	position:absolute;
+	left:410px;
+	top:169px;
+	width:282px;
+	height:17px;
+	z-index:4;
+}
+#foto2 {
+	position:absolute;
+	left:408px;
+	top:285px;
+	width:70;
+	height:70;
+	z-index:6;
+}
+#stippellijn {
+	position:absolute;
+	left:408px;
+	top:272px;
+	width:597px;
+	height:5px;
+	z-index:7;
+	border-bottom-width: thin;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+}
+#foundhead {
+	position:absolute;
+	left:492px;
+	top:202px;
+	width:313px;
+	height:16px;
+	z-index:8;
+}
+
+#bedoeldeu {
+	position:absolute;
+	left:410px;
+	top:169px;
+	width:282px;
+	height:17px;
+	z-index:4;
+}
+#foto2 {
+	position:absolute;
+	left:408px;
+	top:283px;
+	width:72;
+	height:72;
+	z-index:6;
+}
+#stippellijn {
+	position:absolute;
+	left:405px;
+	top:191px;
+	width:597px;
+	height:5px;
+	z-index:7;
+	border-bottom-width: thin;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+}
+#foundhead {
+	position:absolute;
+	left:493px;
+	top:203px;
+	width:313px;
+	height:16px;
+	z-index:8;
+}
+#apDiv2 {
+	position:absolute;
+	left:494px;
+	top:209px;
+	width:316px;
+	height:54px;
+	z-index:9;
+}
+#apDiv3 {
+	position:absolute;
+	left:408px;
+	top:270px;
+	width:590px;
+	height:7px;
+	z-index:10;
+}
+#apDiv4 {
+	position:absolute;
+	left:408px;
+	top:188px;
+	width:590px;
+	height:7px;
+	z-index:11;
+}
+#apDiv5 {
+	position:absolute;
+	left:408px;
+	top:352px;
+	width:590px;
+	height:7px;
+	z-index:12;
+}
+#faqinfo {
+	position:absolute;
+	left:932px;
+	top:109px;
+	width:93px;
+	height:57px;
+	z-index:13;
+}
+#apDiv6 {
+	position:absolute;
+	left:72px;
+	top:245px;
+	width:16px;
+	height:16;
+	z-index:14;
+}
+#apDiv7 {
+	position:absolute;
+	left:72px;
+	top:270px;
+	width:16px;
+	height:16;
+	z-index:15;
+}
+#apDiv8 {
+	position:absolute;
+	left:72px;
+	top:295px;
+	width:16px;
+	height:16;
+	z-index:16;
+}
+#apDiv9 {
+	position:absolute;
+	left:99px;
+	top:244px;
+	width:172px;
+	height:78px;
+	z-index:17;
+}
+#specifiek {
+	position:absolute;
+	left:66px;
+	top:329px;
+	width:276px;
+	height:46px;
+	z-index:18;
+}
+#apDiv10 {
+	position:absolute;
+	left:64px;
+	top:393px;
+	width:278px;
+	height:52px;
+	z-index:19;
+}
+#apDiv11 {
+	position:absolute;
+	left:70px;
+	top:379px;
+	width:255;
+	height:5px;
+	z-index:20;
+}
+#apDiv12 {
+	position:absolute;
+	left:70px;
+	top:443px;
+	width:255;
+	height:5;
+	z-index:21;
+}
+#apDiv13 {
+	position:absolute;
+	left:70px;
+	top:320px;
+	width:255;
+	height:5;
+	z-index:22;
+}
+#foundfield {
+	position:absolute;
+	left:48px;
+	top:456px;
+	width:278px;
+	height:207px;
+	z-index:23;
+	text-align: right;
+}
+#apDiv14 {
+	position:absolute;
+	left:70;
+	top:590px;
+	width:255;
+	height:7px;
+	z-index:24;
+}
+#apDiv15 {
+	position:absolute;
+	left:69px;
+	top:583px;
+	width:57px;
+	height:17px;
+	z-index:25;
+}
+#apDiv16 {
+	position:absolute;
+	left:67px;
+	top:141px;
+	width:277px;
+	height:29px;
+	z-index:26;
+}
+#apDiv17 {
+	position:absolute;
+	left:65px;
+	top:171px;
+	width:68px;
+	height:26px;
+	z-index:27;
+}
+#apDiv18 {
+	position:absolute;
+	left:130px;
+	top:170px;
+	width:142px;
+	height:31px;
+	z-index:28;
+}
+#zoekvak {
+	position:absolute;
+	left:67px;
+	top:194px;
+	width:246px;
+	height:24px;
+	z-index:29;
+}
+#apDiv20 {
+	position:absolute;
+	left:341px;
+	top:195px;
+	width:2px;
+	height:564px;
+	z-index:30;
+}
+#apDiv21 {
+	position:absolute;
+	left:67px;
+	top:0px;
+	width:167px;
+	height:74px;
+	z-index:31;
+}
+#apDiv22 {
+	position:absolute;
+	left:232;
+	top:0;
+	width:792;
+	height:70;
+	z-index:32;
+}
+#apDiv19 {
+	position:absolute;
+	left:846px;
+	top:283px;
+	width:71px;
+	height:68px;
+	z-index:33;
+}
+#apDiv23 {
+	position:absolute;
+	left:928px;
+	top:282px;
+	width:74px;
+	height:74px;
+	z-index:34;
+}
+#apDiv24 {
+	position:absolute;
+	left:69px;
+	top:636px;
+	width:57px;
+	height:17;
+	z-index:35;
+}
+#apDiv25 {
+	position:absolute;
+	left:70px;
+	top:644px;
+	width:255;
+	height:6px;
+	z-index:36;
+}
+
+#bedoeldeu {
+	position:relative;
+	left:410px;
+	top:169px;
+	width:282px;
+	height:17px;
+	z-index:4;
+}
+#foto2 {
+	position:absolute;
+	left:408px;
+	top:283px;
+	width:72;
+	height:72;
+	z-index:6;
+}
+#stippellijn {
+	position:absolute;
+	left:405px;
+	top:191px;
+	width:597px;
+	height:5px;
+	z-index:7;
+	border-bottom-width: thin;
+	border-bottom-style: dashed;
+	border-bottom-color: #999;
+}
+#foundhead {
+	position:absolute;
+	left:493px;
+	top:203px;
+	width:313px;
+	height:16px;
+	z-index:8;
+}
+#apDiv2 {
+	position:absolute;
+	left:494px;
+	top:209px;
+	width:316px;
+	height:54px;
+	z-index:9;
+}
+#apDiv3 {
+	position:absolute;
+	left:408px;
+	top:270px;
+	width:590px;
+	height:7px;
+	z-index:10;
+}
+#apDiv4 {
+	position:absolute;
+	left:408px;
+	top:188px;
+	width:590px;
+	height:7px;
+	z-index:11;
+}
+#apDiv5 {
+	position:absolute;
+	left:408px;
+	top:352px;
+	width:590px;
+	height:7px;
+	z-index:12;
+}
+#faqinfo {
+	position:absolute;
+	left:932px;
+	top:109px;
+	width:93px;
+	height:57px;
+	z-index:13;
+}
+#apDiv6 {
+	position:absolute;
+	left:72px;
+	top:245px;
+	width:16px;
+	height:16;
+	z-index:14;
+}
+#apDiv7 {
+	position:absolute;
+	left:72px;
+	top:270px;
+	width:16px;
+	height:16;
+	z-index:15;
+}
+#apDiv8 {
+	position:absolute;
+	left:72px;
+	top:295px;
+	width:16px;
+	height:16;
+	z-index:16;
+}
+#apDiv9 {
+	position:absolute;
+	left:99px;
+	top:244px;
+	width:172px;
+	height:78px;
+	z-index:17;
+}
+#specifiek {
+	position:absolute;
+	left:66px;
+	top:329px;
+	width:276px;
+	height:46px;
+	z-index:18;
+}
+#apDiv10 {
+	position:absolute;
+	left:64px;
+	top:393px;
+	width:278px;
+	height:52px;
+	z-index:19;
+}
+#apDiv11 {
+	position:absolute;
+	left:70px;
+	top:379px;
+	width:250;
+	height:5px;
+	z-index:20;
+}
+#apDiv12 {
+	position:absolute;
+	left:70px;
+	top:443px;
+	width:250;
+	height:5;
+	z-index:21;
+}
+#apDiv13 {
+	position:absolute;
+	left:70px;
+	top:320px;
+	width:250;
+	height:5;
+	z-index:22;
+}
+#foundfield {
+	position:absolute;
+	left:48px;
+	top:456px;
+	width:278px;
+	height:207px;
+	z-index:23;
+	text-align: right;
+}
+#apDiv14 {
+	position:absolute;
+	left:70;
+	top:590px;
+	width:250;
+	height:7px;
+	z-index:24;
+}
+#apDiv15 {
+	position:absolute;
+	left:70px;
+	top:583px;
+	width:57px;
+	height:17px;
+	z-index:25;
+}
+#apDiv16 {
+	position:absolute;
+	left:67px;
+	top:141px;
+	width:277px;
+	height:29px;
+	z-index:26;
+}
+#apDiv17 {
+	position:absolute;
+	left:65px;
+	top:171px;
+	width:68px;
+	height:26px;
+	z-index:27;
+}
+#apDiv18 {
+	position:absolute;
+	left:130px;
+	top:170px;
+	width:142px;
+	height:31px;
+	z-index:28;
+}
+#zoekvak {
+	position:absolute;
+	left:67px;
+	top:194px;
+	width:259px;
+	height:20px;
+	z-index:29;
+}
+#apDiv20 {
+	position:absolute;
+	left:341px;
+	top:195px;
+	width:2px;
+	height:564px;
+	z-index:30;
+}
+#apDiv21 {
+	position:absolute;
+	left:67px;
+	top:0px;
+	width:167px;
+	height:74px;
+	z-index:31;
+}
+#apDiv22 {
+	position:absolute;
+	left:232;
+	top:0;
+	width:792;
+	height:70;
+	z-index:32;
+}
+#apDiv19 {
+	position:absolute;
+	left:846px;
+	top:283px;
+	width:71px;
+	height:68px;
+	z-index:33;
+}
+#apDiv23 {
+	position:absolute;
+	left:928px;
+	top:282px;
+	width:74px;
+	height:74px;
+	z-index:34;
+}
+#apDiv24 {
+	position:absolute;
+	left:70px;
+	top:636px;
+	width:57px;
+	height:17;
+	z-index:35;
+}
+#apDiv25 {
+	position:absolute;
+	left:70px;
+	top:644px;
+	width:250;
+	height:6px;
+	z-index:36;
+}

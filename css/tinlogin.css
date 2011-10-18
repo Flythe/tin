@@ -1,0 +1,211 @@
+#tinLogin {
+	margin:0 auto;
+	font-family: Arial;
+	font-size: 0.9em !important;
+	position: relative;
+}
+
+#tinLogin input[type=submit],
+#tinLogin input[type=button] {
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	padding: 3px 10px;
+	border:1px solid #CCC;
+	font-size:12px;
+	font-weight: bold;
+	background: #fff;
+	float:right;
+	color: #5A447A;
+	cursor: pointer;
+	background: #F6F6F6;
+	background-image: -moz-linear-gradient(top,#FFFFFF,#EFEFEF);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#EFEFEF));
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFFFFF,endColorStr=#EFEFEF);
+}
+
+#tinLogin input[type=submit]:hover,
+#tinLogin input[type=button]:hover,
+#tinLogin input[type=submit]:focus,
+#tinLogin input[type=button]:focus {
+		border-color: #999;
+		background: #F3F3F3;
+		background-image: -moz-linear-gradient(top,#FFFFFF,#EBEBEB);
+		background-image: -webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#EBEBEB));
+		filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFFFFF,endColorStr=#EBEBEB);
+		outline: 0;
+		-moz-box-shadow: 0 0 3px #999;
+		-webkit-box-shadow: 0 0 3px #999;
+		box-shadow: 0 0 3px #999;
+		text-decoration: none;
+}
+
+#tinLogin input[type=button] {
+	margin-left: 10px;
+}
+
+#tinLogin input.error { border: 1px solid #660000 !important; }
+#tinLogin label.error { /*background: url('/tinUser/login/components/images/unchecked.gif') no-repeat; padding-left: 16px; margin-left: .3em; height: 36px; display:block;*/ display:none !important; }
+#tinLogin label.valid { /*background: url('/tinUser/login/components/images/checked.gif') no-repeat; display: block; width: 16px; height: 16px; display:block;*/ display:none !important; }
+#tinLogin label.required { color: #333; }
+#tinLogin .resultsError { color: #900; }
+#tinLogin table { padding: 0; margin: 0; border: none; }
+#tinLogin td { vertical-align: top; }
+#tinLogin a:link,
+#tinLogin a:visited { color:#27b; text-decoration:none; }
+#tinLogin a:hover { text-decoration:underline; }
+#tinLogin img { border-width:0; }
+
+/* NAVIGATION MENU */
+#tinLogin #tinLoginTopNav { padding:10px 0px 0px; font-size:11px; line-height:23px; text-align:right; }
+
+#tinLogin #tinLoginTopNav a {
+	border: 1px transparent;
+	background:#A02383;
+	padding:5px 6px 5px 8px;
+	text-decoration:none;
+	font-weight:bold;
+	color:#fff;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	*background:transparent url("signin-nav-bg-ie.png") no-repeat 0 0;
+	*padding:4px 12px 6px;
+}
+
+#tinLogin #tinLoginTopNav a:hover {
+	background:#C043A3;
+	*background:transparent url("signin-nav-bg-hover-ie.png") no-repeat 0 0;
+	*padding:4px 12px 6px;
+}
+
+#tinLogin #tinLoginTopNav a,
+#tinLogin #tinLoginTopNav a:hover {
+	*background-position:0 3px!important;
+	position:relative;
+	margin-left:3px;
+}
+
+#tinLogin #tinLoginTopNav a span {
+	background-image:url("../images/toggle_down_light.png");
+	background-repeat:no-repeat;
+	background-position:100% 4px;
+	padding:4px 17px 6px 0;
+}
+
+#tinLogin #tinLoginTopNav br {
+	margin-bottom: 5px;
+}
+
+#tinLogin #tinLoginTopNav a.menu-open {
+	border: 1px solid #CCC;
+	background: #FCFCFC;
+	background-image: -moz-linear-gradient(top,#FFFFFF,#F9F9F9);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#F9F9F9));
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFFFFF,endColorStr=#F9F9F9);
+	color:#666!important;
+	outline:none;
+    -moz-border-radius-bottomleft:0;
+    -moz-border-radius-bottomright:0;
+    -webkit-border-bottom-left-radius:0;
+    -webkit-border-bottom-right-radius:0;
+}
+
+#tinLogin #tinLoginTopNav a.menu-open span, #tinLoginTopNav a.menu-open span { background-image:url("../images/toggle_up_dark.png"); color:#A02383; }
+
+/* LOGIN FORM */
+#tinLogin fieldset.menu {
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
+	border: 1px solid #CCC;
+	background: #FCFCFC;
+	background-image: -moz-linear-gradient(top,#FFFFFF,#F9F9F9);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#FFFFFF),to(#F9F9F9));
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr=#FFFFFF,endColorStr=#F9F9F9);
+    display:none;
+    background-color:#FDF;
+    position:absolute;
+    width:210px;
+    z-index:100;
+    text-align:left;
+    padding:12px 20px;
+    top: 28px;
+    right: 0px;
+    margin-top:5px;
+    margin-right: 0px;
+    *margin-right: -1px;
+    color:#333;
+    font-size:11px;
+	-moz-box-shadow: 2px 2px 2px #ccc;
+	-webkit-box-shadow: 2px 2px 2px #ccc;
+	box-shadow: 2px 2px 2px #ccc;
+}
+fieldset#signin_menu { top: 27px; }
+fieldset#createAccount_menu { top: 27px; width: 440px !important; }
+fieldset#requestPassword_menu { top: 27px; }
+fieldset#changePassword_menu { top: 27px; width: 280px !important; }
+fieldset#loggedin_menu { width: 280px !important; }
+
+#tinLogin fieldset.menu input[type=text],
+#tinLogin fieldset.menu input[type=password] {
+	display:block;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius: 4px;
+	border:1px solid #CCC;
+	font-size: 13px;
+	margin:0 0 5px;
+	padding:5px;
+	width: 198px;
+}
+
+#tinLogin fieldset.menu p { margin:0; }
+#tinLogin fieldset.menu a { color:#5A447A; }
+#tinLogin fieldset.menu label { font-weight:normal; }
+#tinLogin fieldset.menu p.remember { padding:10px 0; }
+#tinLogin fieldset.menu p.forgot,
+#tinLogin fieldset.menu p.complete { clear:both; margin:5px 0; }
+#tinLogin fieldset.menu p a { color:#27B!important; }
+
+/* TOOLTIPS */
+#tinLogin .tipsy-inner { padding:10px 15px; line-height:1.5em; font-weight:bold; }
+#tinLogin .tipsy { opacity:.8; filter:alpha(opacity=80); background-repeat:no-repeat; padding:5px; }
+#tinLogin .tipsy-inner { padding:8px 8px; max-width:200px; font:11px 'Lucida Grande', sans-serif; font-weight:bold; -moz-border-radius:4px; -khtml-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; background-color:#000; color:white; text-align:left; }
+#tinLogin .tipsy-north { background-image:url(images/tipsy-north.gif); background-position:top center; }
+#tinLogin .tipsy-south { background-image:url(images/tipsy-south.gif); background-position:bottom center; }
+#tinLogin .tipsy-east { background-image:url(images/tipsy-east.gif); background-position:right center; }
+#tinLogin .tipsy-west { background-image:url(images/tipsy-west.gif); background-position:left center; }
+
+#tinLogin div.tinLoginResults {
+	padding-top: 10px;
+	clear: both;
+}
+
+#tinLogin table#tinLoginProfile {
+	border: solid 1px #CCC;
+	width: 280px;
+	margin: 0;
+	padding: 5px 10px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+	position: relative;
+}
+
+#tinLoginProfile td {
+	padding: 7px 10px 0 0;
+}
+
+#tinLoginProfile caption {
+	position: absolute;
+	top: -6px;
+	left: 10px;
+	font-weight: bold;
+	color:#5A447A;
+	background: #fff;
+	display: block;
+	padding: 0 4px;
+}
