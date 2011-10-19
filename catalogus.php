@@ -3,9 +3,12 @@ $imgUrl = "images/TIN_Catalogus_caroussel_1moving.gif";
 $ip=$_SERVER['REMOTE_ADDR'];
 
 $intern = 'false';
+$tinUrl = 'http://vintagecatalogus.tin.nl';
 
-if($ip == '188.205.194.154')
+if($ip == '188.205.194.154') {
+        $tinUrl = 'http://tin-as-01/catalogus';
         $intern = 'true';
+}
 
 if($ip == '127.0.0.1')
         $imgUrl = "images/TIN_Catalogus_caroussel_1.gif";
@@ -73,8 +76,8 @@ if($ip == '127.0.0.1')
                                 </ul>
                         </div> 
                         <div class="navtabs">
-                                <a class="tab1" href="#1"></a>
-                                <a class="tab2" href="#2"></a>
+                                <a class="tab1" href="http://catalogus.tin.nl"></a>
+                                <a class="tab2" href="<?php echo $tinUrl; ?>"></a>
                         </div>
                         <!--faq en info buttons-->
                         
