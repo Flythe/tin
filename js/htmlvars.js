@@ -83,7 +83,7 @@ function getMenus(opts)
                                         '<input type="hidden" class="tinSearchThesaurusValue"/>' +
                                 '</div>' +
                                 
-                                '<div class="tinSearchFacets" style="display: none;"></div>' +
+                                '<div class="tinSearchFacets"></div>' +
                         '</div>';
          
          return mainsearchMenu;

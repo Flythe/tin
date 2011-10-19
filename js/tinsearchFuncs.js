@@ -70,7 +70,7 @@ function getSearchContainer(ob)
 }
 
 function messageQuery(q, cont, combine)
-{        
+{       
         if (q === undefined || q == '')
                 return q;
         
