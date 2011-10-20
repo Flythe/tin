@@ -736,12 +736,14 @@ function getSearchEntry(entry, options)
                 while (index < numimages && index < 3) {
                         var media = entry.images[index];
                         
-                        if(media.webExclusion === false || options.isIntern === true){
+                        if(options.isIntern == true) {
+                                imgstr += '<img src="' + media.url + '&b=70" alt=""/> ';
+                        } if(media.webExclusion === false){
                                 if (media.type == 'photo')
                                         imgstr += '<img src="' + media.url + '&b=70" alt=""/> ';
                         } else {
                                 imgstr += '<img src="' + media.url + '" alt=""/> ';
-                        }
+                        } 
                         
                         index++;
                 }

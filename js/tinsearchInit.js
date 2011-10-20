@@ -161,7 +161,7 @@
                 case 'http://src.tin.nl/devtest/':
 			break;
 		default:
-			burl = 'http://src.tin.nl/zoek/';
+			burl = 'http://catalogus.tin.nl/';
 	}
         
         $.fn.tinSearch.defaults = 
