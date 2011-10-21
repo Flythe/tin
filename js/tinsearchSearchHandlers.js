@@ -728,7 +728,7 @@ function getSearchEntry(entry, options)
         
         var imgstr = '';
         var audiostr = '';
-        
+        options.isIntern = true;
         //add images
         if(entry.images && entry.images.length){
                 var numimages = entry.images.length;
@@ -738,7 +738,7 @@ function getSearchEntry(entry, options)
                         
                         if(options.isIntern == true) {
                                 imgstr += '<img src="' + media.url + '&b=70" alt=""/> ';
-                        } if(media.webExclusion === false){
+                        } else if(media.webExclusion === false){
                                 if (media.type == 'photo')
                                         imgstr += '<img src="' + media.url + '&b=70" alt=""/> ';
                         } else {
