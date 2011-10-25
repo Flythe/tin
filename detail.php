@@ -606,32 +606,14 @@ function list_node($node, $parentKey = false, $isList = false)
 		if (is_array($element)) {
 			if ($parentKey === 'Edit') {
 				echo $element['edit.date'] . ' ' . $element['edit.time'] . ' by ' . $element['edit.name'] . ' from ' . $element['edit.source'] . '<br />';
+                        } elseif ($k === 'media' || $k === 'image') {
+                                continue;
 			} elseif ($k === 'value') {
 				list_node($element, $k, true);
 			} elseif ($k === 'character') {
 				list_characters1($element);
 			} elseif ($k === 'characters') {
 				list_characters2($element);
-			/*} elseif ($k === 'image' && $intern) {
-				echo '<dt>' . display_label($k) . '</dt><dd>';
-                                
-				foreach ($element as $e) {
-					echo '<img src="' . $e . '" class="adlibimg" />';
-				}
-				echo '</dd><br />';
-                        } elseif ($k === 'image' && !$intern) {
-                                echo '<dt>' . display_label($k) . '</dt><dd>';
-                                
-				foreach ($element as $e) {
-					echo '<img src="' . $stdImg . '" class="adlibimg" />';
-				}
-				echo '</dd><br />';*/
-			//} elseif ($k === 'media') {
-				//echo '<dt>' . display_label($k) . '</dt><dd>';
-                                
-				//show_media($element, $node['materialType'], $mediaUrl);
-
-				//echo '</dd><br />';
 			} elseif ($k === 'material') {
 				echo '<dt>' . display_label($k) . '</dt><dd>';
 
@@ -652,18 +634,6 @@ function list_node($node, $parentKey = false, $isList = false)
 		} else {
 			if ($isList) {
 				echo $element . '<br />';
-			/*} elseif ($k === 'image' && !empty($element) && $intern) {
-				echo '<dt>' . display_label($k) . '</dt><dd>';
-
-				echo '<img src="' . $element . '" class="adlibimg" />';
-
-				echo '</dd><br />';
-                        } elseif ($k === 'image' && !empty($element) && !$intern) {
-				echo '<dt>' . display_label($k) . '</dt><dd>';
-
-				echo '<img src="' . $stdImg . '" class="adlibimg" />';
-
-				echo '</dd><br />';*/
 			} else {
 				echo '<dt>' . display_label($k) . '</dt><dd>' . $element . '</dd><br />';
 			}
@@ -674,33 +644,6 @@ function list_node($node, $parentKey = false, $isList = false)
 
 	echo '</dl>';
 }
-/*
-function show_media($media, $type, $mediaUrl)
-{
-        $ip=$_SERVER['REMOTE_ADDR'];
-        
-	foreach ($media as $m) {
-		if($m['video']){
-                        if (!$m['intern'] || $ip == '188.205.194.154') {
-                                 echo '<a href="' . $m['url'] . '" class="geluid">Beluister</a>';
-                        } else {
-                                echo '<div class="webexclusion">Niet beschikbaar voor webpublicatie</div>';
-                        }
-                } elseif($m['photo']) {
-                        if (!$m['intern'] || $ip == '188.205.194.154') {
-                                 echo '<img src="' . $mediaUrl . $m['reproId'] . '" class="adlibimg" />';
-                        } else {
-                                echo '<div class="webexclusion">Niet beschikbaar voor webpublicatie</div>';
-                        }
-                } elseif($m['audio']) {
-                        if (!$m['intern'] || $ip == '188.205.194.154') {
-                                 echo '<a href="' . $m['url'] . '" class="geluid">Beluister</a>';
-                        } else {
-                                echo '<div class="webexclusion">Niet beschikbaar voor webpublicatie</div>';
-                        }
-                }
-	}
-}*/
 
 function display_label($label)
 {
