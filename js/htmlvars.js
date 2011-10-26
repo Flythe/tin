@@ -3,6 +3,7 @@ function getMainStruc(opts) {
         
         return '<div class="tinSearchSidebar">' +
                         '<h4 class="tinUitgebreid">Of zoek uitgebreid</h4>' +
+                        '<h4 class="tinSimpel" style="display:none;"><a href="" class="eenvoudigZoeken">Eenvoudig zoeken</a></h4>' +
                         '<div class="headImg" style="display: none;">' + insertImg('Catalogus uitgebreid') + '</div>' +
                         '<div class="tabs">' +
                                 insertImg('Alles', 'normalSearch') +

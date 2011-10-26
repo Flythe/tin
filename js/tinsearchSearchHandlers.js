@@ -327,6 +327,11 @@ function parseParams(ob, params) {
         $('a.tinRemoveTheSaurus', ob).fragment($.param(saurusParams));
         $('a.tinSearchToggleThesaurus').fragment($.param(saurusParams));
         
+        //eenvoudig zoeken
+        var zoekenParams = {};
+        zoekenParams.tinSearchInput = params.tinSearchInput;
+        $('a.eenvoudigZoeken', ob).fragment($.param( zoekenParams ));
+        
         /*
         var removeSearchInputParams = new cloneObject(params);
         if (removeSearchInputParams.tinPage) delete removeSearchInputParams.tinPage;
@@ -424,7 +429,7 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
 
         while (i < docs.length) {
                 if (photodisp) {
-                        str_html += getSearchPhoto(docs[i], options);
+                        str_html += getSearchPhoto(docs[i], options, i);
                 /*} else if (options.jukebox) {
                         str_html += getSearchAudio(docs[i], options);*/
                 } else {
@@ -563,7 +568,7 @@ function ucfirst(str)
     return str.charAt(0).toUpperCase() + str.substr(1);
 }
 
-function getSearchPhoto(entry, options)
+function getSearchPhoto(entry, options, count)
 {
         var str_html = '';
         var title = !entry.title ? '' : entry.title;
@@ -607,17 +612,15 @@ function getSearchPhoto(entry, options)
                 var numimages = entry.images.length;
                 var index = 0;
                 while (index < numimages) {
+                        var lastItem = '';
                         var media = entry.images[index];
                         if (media.type == 'photo') {
                                 if (media.webExclusion == false)
                                         media.url += '&b=190';
-
-                                str_html += '<div class="tinSearchResultPhoto"><div class="tinSearchPhoto"><a href="' + listingUrl + '"><img src="' + media.url + '" alt="" /></a>'
+                                if ((count + 1)%3 == 0)
+                                        lastItem = 'lastPhoto';
+                                str_html += '<div class="tinSearchResultPhoto ' + lastItem + '"><div class="tinSearchPhoto"><a href="' + listingUrl + '"><img class="tinSearchResultImg" src="' + media.url + '" alt="" /></a>'
                                         + '<div class ="tinSearchResultTitle"><a href="' + listingUrl + '"><span class="title">' + title + '</span><br/><span class="info">' + disciplines_only + ' - ' + year_only + '</a></div></div>';
-                                        /*+ '<div class="tinSearchDetail"><a href="' + weburl + '" target="_blank" class="tinSearchPhoto"><img src="' + media.url + '&b=190" alt="" /></a><div style="margin-top: 5px; clear: left"></div>'
-                                        + '<h1><a href="' + listingUrl  + '" target="_blank" class="apiuri">' + title + '</a></h1><br/>'
-                                        + '<a href="' + weburl + '" target="_blank" class="tinSeeAlso">catalogus</a><br/><br/>'
-                                        + description + type + disciplines + year + keywords + '<div class="tinClear"></div></div>';*/
                         
                                 if(entry.youtubeurl) {
                                         var inclURL = entry.youtubeurl.split('?v=');
@@ -728,9 +731,14 @@ function getSearchEntry(entry, options)
         
         var imgstr = '';
         var audiostr = '';
+        
+        /** DEV **/
         //options.isIntern = true;
+        /** DEV **/
+        
         //add images
-        if(entry.images && entry.images.length){
+        
+        if(entry.images && entry.images.length){ //fotos
                 var numimages = entry.images.length;
                 var index = 0;
                 while (index < numimages && index < 3) {
@@ -747,23 +755,31 @@ function getSearchEntry(entry, options)
                         
                         index++;
                 }
-        } else if(entry.audio) {
+        } else if(entry.audio && entry.audio.length) { // audio
                 var numaudio = entry.audio.length;
                 index = 0;
                 var play_buttons = '';
                 str_html = '<div class="tinSearchResultAudio">';
-                while (index < numaudio) {
-                        var audioMedia = entry.audio[index];
+                if(numaudio > 1) {
+                        audiostr = '<div class="tinSearchAudioPlayText">Beluister op detailpagina</div>'
+                } else {
+                        var audioMedia = entry.audio[0];
+
                         if (audioMedia.type == 'audio') {
                                 play_buttons += '<button type="button" class="tinButton tinSmallButton tinPlayButton" title="Afspelen" value="' + audioMedia.url + '.mp3"><strong>Afspelen &#x25BA;</strong><input name="mp3' + index + '" type="hidden" class="tinInputHidden" value="' + audioMedia.url + '.mp3" /></button>';
 
-                                if (index == numaudio - 1) {
-                                        audiostr = '<div class="tinSearchAudioPlay">' + play_buttons + '</div>';
-                                }
-                        }
-                        index++;
+                                audiostr = '<div class="tinSearchAudioPlay">' + play_buttons + '</div>';
+                        }               
                 }
-        } else {
+        } else if(entry.video && entry.video.length) { // video
+                if(options.isIntern == true) {
+                        imgstr += ''; //intern dus plaatje hier maken
+                } else if(entry.video.webExclusion === false) {
+                        imgstr += ''; //rechten zijn vrijgegeven dus plaatje hier maken
+                } else {
+                        imgstr += '<img src="' + entry.video.url + '" alt=""/>';
+                }
+        } else  {
                 imgstr += '<img src="' + options.mediaserver + 'Itemnietdigitaal_klein.gif" alt=""/> ';
         }
 

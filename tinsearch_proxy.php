@@ -1,4 +1,4 @@
-<?php
+        <?php
 /**
  * TIN search proxy
  *
@@ -19,7 +19,7 @@
 $host = 'http://rest.tin.nl/';
 $ip=$_SERVER['REMOTE_ADDR'];
 
-if($ip == '188.205.194.154')
+if($ip == '188.205.194.154' || $ip = '127.0.0.1')
         $intern = '&intern=TIN';
 
 ////print_r($_GET); exit;
