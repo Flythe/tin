@@ -286,9 +286,13 @@ div.tinSearchResults .tinSearchResult {
 	margin: 0 0 0 -2px;
 }
 div.tinSearchResults div img:first-child {
-    margin: 0;
+        margin: 0;
 	float: left;
 }
+/*div.tinSearchResults div img.tinSearchResultImg {
+        margin: 0;
+        float: left;
+}*/
 div.tinSearchResults div img {
         margin: 4px 0px 6px 15px;
 	float: right;
@@ -311,6 +315,10 @@ div.tinSearchResults button.tinPlayButton, div.tinSearchResults div.tinSearchAud
 	display: block;
         float: right;
         margin-bottom: 1em;
+}
+div.tinSearchResults div.tinSearchAudioPlayText {
+        float: right;
+        font-size: 13px;
 }
 div.tinSearchResult
 {
@@ -344,13 +352,12 @@ div.tinSearchResultPhoto {
 	text-align: center;
 	height: 190px;
 	width: 190px;
-	border: 1px solid black;
 	margin:0 20px 20px 0;
 }
 
-	div.tinSearchResultPhoto:nth-child(3n+3){
-		margin-right:0;
-	}
+div.lastPhoto {
+        margin-right: 0;
+}
 	
 	div.tinSearchResultPhoto img {
 		background: #ccc;
@@ -374,10 +381,10 @@ div.tinSearchResultPhoto {
 		padding:4px 0;
 		width:100%;
 		margin-bottom:5px;
-        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-        filter: alpha(opacity=80);
-        -moz-opacity:0.8;
-        -khtml-opacity: 0.8;
+                -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+                filter: alpha(opacity=80);
+                -moz-opacity:0.8;
+                -khtml-opacity: 0.8;
 		opacity:0.8;
 		position: absolute;
 		bottom: 5px;

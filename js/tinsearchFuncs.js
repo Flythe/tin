@@ -129,9 +129,15 @@ function removeDefault(el) {
 }
 
 function showMenu(ob) {
+        $('h4.tinSimpel', ob).show();
         $('h4.tinUitgebreid', ob).hide();
-        $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd, div.headImg, div.tinSearchFacets', ob).show();
-        $('div.tinSearchSidebar', ob).css('margin-top', '36px');
+        $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd, div.headImg', ob).show();
+}
+
+function hideMenu(ob) {
+        $('h4.tinSimpel').hide();
+        $('h4.tinUitgebreid', ob).show();
+        $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd, div.headImg', ob).hide();
 }
 
 /*

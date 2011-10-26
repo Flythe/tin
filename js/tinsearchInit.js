@@ -63,7 +63,7 @@
                                 button = $('button[value="' + uri + '"]').parent();
 
                         dbg('pingAudio(' + uri + ') button: ' + button.length + ' ob: ' + ob.attr('id') + ' url: ' + options.proxy);
-
+                        
                         $.ajax({
                                 url: options.proxy,
                                 global: false,
@@ -77,6 +77,7 @@
                                 success: function(responseText) {
                                     responseText = $.trim(responseText);
                                     dbg('response: ' + responseText);
+                                    
                                     switch (responseText) {
                                         case '200':
                                             $('span.tinPlayMessage', ob).remove();
@@ -275,7 +276,9 @@ function initContinue(ob, opts)
                                 rnd: Math.floor(Math.random()*9999999)
                         }),
                         success: function(responseText) {
+                                responseText = $.trim(responseText);
                                 dbg('response: ' + responseText);
+                                
                                 switch (responseText) {
                                         case '200':
                                                 $('<embed type="application/x-shockwave-flash" flashvars="audioUrl=' + button_val + '&autoPlay=true" src="http://www.google.com/reader/ui/3523697345-audio-player.swf" width="300" height="27" quality="best"></embed>').insertAfter(button);
@@ -373,6 +376,10 @@ function initContinue(ob, opts)
         
         $('h4.tinUitgebreid', ob).live('click', function() {
                 showMenu(ob);
+        });
+        
+        $('a.eenvoudigZoeken', ob).live('click', function() {                
+                hideMenu(ob);
         });
 
         //append functions to link elements in previously build HTML

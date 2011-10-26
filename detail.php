@@ -12,6 +12,8 @@
         <script type="text/javascript" src="js/jwplayer/swfobject.js"></script>
         
         <script type="text/javascript">
+                var count = 1;
+                
         	$(function()
 			{
 				$('#tinLogin').tinLogin({
@@ -24,14 +26,19 @@
 				});
 			});
                         
-                function initPlayer(url) {
-                          $('div.image-here').after('<div id="container1">Loading the player ... </div>');
+                function initPlayer(url, height, title) {
+                          //plaats swfobject in html van image-here
+                          $('div.image-here').html($('div.image-here').html() + '<h4>' + title + ' ' + count + '</h4><div id="container1">Loading the player ... </div><br/>');
+                          //verwijder grijze background
+                          $('div.image-here').css('background', 'none');
                           
-                          var flashvars = { file:url,autostart:'true' };
+                          var flashvars = { file:url, autostart:'false' };
                           var params = { allowfullscreen:'true', allowscriptaccess:'always' };
                           var attributes = { id:'player1', name:'player1' };
-
-                          swfobject.embedSWF('js/jwplayer/player.swf','container1','640','350','9.0.115','false', flashvars, params, attributes);
+                          
+                          swfobject.embedSWF('js/jwplayer/player.swf','container1','640',height,'9.0.115','false', flashvars, params, attributes);
+                          
+                          count += 1;
                 }
 		</script>
     </head>
@@ -559,43 +566,40 @@ function list_node_image($node, $parentKey = false, $isList = false)
         if($ip == '188.205.194.154' || $ip == '127.0.0.1')
                 $intern = true;
         
-	foreach ($node as $k => $element) {
-		if(!empty($element) && '' != $element){
-                        if (is_array($element)) {
-                                if ($k === 'media') {
-                                        foreach ($element as $e) {
-                                                //webexcluded, intern gebruik
-                                                if($e['webExclusion'] == true && $intern) {
-                                                        if($e['photo'])
-                                                                echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                                        elseif($e['video']) {
-                                                                echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.flv') . '");</script>';
-                                                        }
-                                                        elseif($e['audio'])
-                                                                echo '<a href="' . str_replace('?webExclusion=true', '', $e['url']) . '" class="geluid">Beluister</a><br/>';
-                                                //niet webexcluded
-                                                } elseif ($e['webExclusion'] == false) {
-                                                        if($e['photo'])
-                                                                echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                                        elseif($e['video'])
-                                                                echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.flv') . '");</script>';
-                                                        elseif($e['audio'])
-                                                                echo '<a href="' . str_replace('?webExclusion=false', '', $e['url']) . '" class="geluid">Beluister</a><br/>';
-                                                //webexcluded, geen intern gebruik
-                                                } elseif ($e['webExclusion'] == true && !$intern) {
-                                                        if($e['photo'])
-                                                                echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                                        elseif($e['video']) {
-                                                                echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                                        }
-                                                        elseif($e['audio'])
-                                                                echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                                }
-                                        }
+        $element = $node["media"];
+        
+        if(!empty($element) && '' != $element) {
+                foreach ($element as $e) {
+                        //webexcluded, intern gebruik
+                        if($e['webExclusion'] == true && $intern) {
+                                if($e['photo']) {
+                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
+                                } elseif($e['video']) {
+                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.flv') . '", "350", "Videofragment");</script>';
+                                } elseif($e['audio']) {
+                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>';
+                                }
+                        //niet webexcluded
+                        } elseif ($e['webExclusion'] == false) {
+                                if($e['photo']) {
+                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
+                                } elseif($e['video']) {
+                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=false', '', $e['url'].'.flv') . '", "350", "Videofragment");</script>';
+                                } elseif($e['audio']) {
+                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=false', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>';
+                                }
+                        //webexcluded, geen intern gebruik
+                        } elseif ($e['webExclusion'] == true && !$intern) {
+                                if($e['photo']) {
+                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
+                                } elseif($e['video']) {
+                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
+                                } elseif($e['audio']) {
+                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
                                 }
                         }
                 }
-	}
+        }
 }
 
 function list_node($node, $parentKey = false, $isList = false)
