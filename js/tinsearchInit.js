@@ -332,12 +332,13 @@ function initContinue(ob, opts)
         
         // Handle search input field
         $('input.tinSearchInput', ob).live('keyup', function(e) {
+                var params = getSearchParams(ob);
+                var data = $(ob).data( 'tinSearch' );
+            
                 if(e.which == 13) {
                         e.preventDefault();
                         dbg('input.tinSearchInput: ENTER pressed.');
                         
-                        var params = getSearchParams(ob);
-                        var data = $(ob).data( 'tinSearch' );
                         data.enter = true;
                         
                         params.tinSearchInput = $(this).val();
@@ -345,8 +346,6 @@ function initContinue(ob, opts)
                         search(ob, $.param(params));
                         return false;
                 } else {
-						var params = getSearchParams(ob);
-                        var data = $(ob).data( 'tinSearch' );
                         data.enter = true;
                         
                         params.tinSearchInput = $(this).val();
@@ -449,7 +448,6 @@ function initContinue(ob, opts)
                         }
                 }
                 
-                //alert($.param( params ));
                 state[ id ] = $.param( params );
 
                 dbg('new state url=[' + state[id] + ']');

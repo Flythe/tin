@@ -99,6 +99,8 @@ function parseFacets(container, jsonObject, facets)
                 }
         }
         
+        $('div.tinSearchMenu').css('border-right', '1px solid black');
+        
         for (var k = 0; k < jsonObject.facets.length; k++) {
                 var facet = jsonObject.facets[k].field;
                 var i;
@@ -111,14 +113,20 @@ function parseFacets(container, jsonObject, facets)
                                 continue;
                         }
                         
+                        //fix for year = 0, rolbezetting = 0
+                        if (jsonObject.facets[k].facets[i].title == '0')
+                            jsonObject.facets[k].facets[i].title = 'onbekend';
+                        
                         attr_current = '';
                         selected_facets = true
 
                         var f = jsonObject.facets[k].facets[i].title;
                         var facet_title = options.facetTranslations[f] ? options.facetTranslations[f] : f;
-                        if (facet_title.indexOf('.') == -1)
+                        if (facet_title.indexOf('.') == -1) {
                                 facet_title = ucfirst(facet_title);
+                        }
                         
+                        //highlight previously selected facets
                         if (extra_facets.match(jsonObject.facets[k].facets[i].title)) {
                                 attr_current = ' class="current"';
                                 selected_facets = false;
@@ -144,11 +152,11 @@ function parseFacets(container, jsonObject, facets)
                                 '</div>'
                         );
 
-                        // Add more button to te filter in the left hand side
+                        // Add more button to the facets
                         $('.hideFacet_' + facet + ' ul').each(function(){
                                 $('li:gt(2)', this).hide();
                                 if ($(this, 'li').children().length > 3) {
-                                        $(this, ':last').append('<li class="facet_toggle"><a href="javascript:void(0);" class="tr_more">Meer...</a></li>');
+                                        $(this, ':last').append('<li class="facet_toggle"><a href="javascript:void(0);" class="tr_more">(Meer)</a></li>');
                                 }
                                 
                                 if(drop_facet) {
@@ -159,14 +167,10 @@ function parseFacets(container, jsonObject, facets)
                         
                         $('.tr_more').toggle(function(){
                                 $(this).closest('li').siblings().show();
-                                $(this).attr('class', 'tr_less').text("Minder...");
+                                $(this).attr('class', 'tr_less').text("(Minder)");
                         }, function(){
                                 $(this).closest('ul').children('li:gt(2):not(:last)').hide();
-                                /*var curr_ul_y_pos = $(this).closest('ul').prev().offset().top;
-                                $('html:not(:animated), body:not(:animated)').animate({
-                                        scrollTop: curr_ul_y_pos-5
-                                }, 'normal');*/
-                                $(this).attr('class', 'tr_more').text("Meer...");
+                                $(this).attr('class', 'tr_more').text("(Meer)");
                         });
                 }
 

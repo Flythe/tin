@@ -62,6 +62,17 @@ function getMenus(opts)
         var mainsearchMenu = '<div class="tinSearchMenu">' +
                                 '<input onfocus="removeDefault($(this));" class="tinSearchInput" type="text" value="' + opts.defaultInput + '" />' +
                                 '<a class="hiddenUpdater" href="#"></a>' +
+                                
+                                '<div id="tinZoektIn">' +
+                                        '<ul>' +
+                                                '<li class="first">U zoekt in</li>' +
+                                                '<li>Theaterbibliotheek</li>' +
+                                                '<li>Museumcollectie</li>' +
+                                                '<li>Mediatheek</li>' +
+                                                '<li>Archieven</li>' +
+                                                '<li>Ad Lib</li>' +
+                                        '</ul>' +
+                                '</div>' +
 
                                 '<ul id="define_search" style="display: none;">' +
                                         '<li><input type="radio" value=" AND " name="tinSearchOr" class="tinSearchOr"/><label>Bevat alle woorden</label></li>' +

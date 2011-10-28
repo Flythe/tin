@@ -54,26 +54,18 @@ div#nav ul li a {
         text-decoration: none;
 }
 div.navtabs {
-        margin-left: 350px;
+        margin-left: 340px;
         width: 240px;
         height: 34px;
 }
-.navtabs a.tab1, .navtabs a.tab2 {
+.navtabs a.tab {
         float: left;
         display: block;
-        width: 148px;
         height: 34px;
-        background: url('../images/preview.jpg') 0 0 no-repeat;
-}
-.navtabs a.tab2 {
-        margin-left: 15px;
         width: 77px;
         background: url('../images/vintage.jpg') 0 0 no-repeat;
 }
-.navtabs a.tab1:hover {
-        background: url('../images/preview_over.jpg') 0 0 no-repeat;
-}
-.navtabs a.tab2:hover {
+.navtabs a.tab:hover {
         background: url('../images/vintage_over.jpg') 0 0 no-repeat;
 }
 div.tinSearchSidebar
@@ -84,14 +76,14 @@ div.tinSearchSidebar
 	font-family: Georgia,"Times New Roman",Times,serif;
 	min-height: 600px;
 }
-div.tinSearchSidebar h4
+div.tinSearchSidebar h4, div.tinSearchSidebar h4 a
 {
 	color: #999999;
-        font-size: 12px;
+    font-size: 12px;
 	font-weight: normal;
-        text-decoration: underline;
+    text-decoration: underline;
 	margin: 9px 0 42px 2px;
-        cursor: pointer;
+    cursor: pointer;
 }
 div.tinSearchSidebar div.tabs
 {
@@ -100,20 +92,33 @@ div.tinSearchSidebar div.tabs
 div.tinSearchSidebar div.tinSearchMenu
 {
 	width: 276px;
-	border-right: 1px black solid;
+}
+div#tinZoektIn {
+    color: #666666;
+    font-size: 13px;
+    font-style: italic;
+    margin: 0 17px 0 0;
+    text-align: right;
+    border-bottom: 1px solid #999999;
+}
+div#tinZoektIn ul {
+    list-style-type: none;
+}
+div#tinZoektIn ul li.first {
+    font-weight: bold;
 }
 div.tinSearchSidebar input.tinSearchInput
 {
 	font-family: Georgia,"Times New Roman",Times,serif;
 	border: 4px solid #93238E; 
 	color: #93238E;
-        font-size: 16px;
-        font-weight: normal;
-        height: 20px;  
-        padding: 4px 0 0 0;
-        margin: 0;
-        text-indent: 10px;
-        width: 259px;
+    font-size: 16px;
+    font-weight: normal;
+    height: 20px;  
+    padding: 4px 0 0 0;
+    margin: 0;
+    text-indent: 10px;
+    width: 259px;
 }
 ul#define_search
 {
@@ -217,7 +222,11 @@ div.tinSearchFacets div li
 }
 div.tinSearchFacets div li.facet_toggle {
         text-align: left;
-        border-bottom: 1px dotted #CCC;
+        border-bottom: thin dashed #CCCCCC;
+        margin-top: -15px;
+}
+div.tinSearchFacets div li.facet_toggle a {
+        color: #999999;
 }
 
 .tinSearchNumberOfResults h1 {

@@ -76,8 +76,7 @@ if($ip == '127.0.0.1')
                                 </ul>
                         </div> 
                         <div class="navtabs">
-                                <a class="tab1" href="http://catalogus.tin.nl"></a>
-                                <a class="tab2" href="<?php echo $tinUrl; ?>"></a>
+                                <a class="tab" href="<?php echo $tinUrl; ?>"></a>
                         </div>
                         <!--faq en info buttons-->
                         
