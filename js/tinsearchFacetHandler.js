@@ -88,7 +88,6 @@ function parseFacets(container, jsonObject, facets)
 
         var extra_facets = '';
         var shown_facets = false;
-        var used_facets = false;
 
         if(params) {
                 if (params.tinFilter) {
@@ -100,31 +99,20 @@ function parseFacets(container, jsonObject, facets)
                 }
         }
         
-        for (k = 0; k < jsonObject.facets.length; k++) {
+        for (var k = 0; k < jsonObject.facets.length; k++) {
                 var facet = jsonObject.facets[k].field;
                 var i;
                 var total = 0;
-                var facets_html = '';
-                var advsearch_html;
-
-                var cur = null;
-
-                /*if (!options.disableAdvanced) {
-                        if ($('select.tinSearchAdvanced_' + facet, container).length) {
-                                cur = $('select.tinSearchAdvanced_' + facet, container).val();
-                        }
-
-                        $('div.tinSearchAdvancedWrapper_' + facet, container).remove();
-                        advsearch_html = '<option value="*" ' + (cur == null ? ' selected="selected"' : '') + '>Maak een keuze</option>';
-                }*/
+                var facets_html = '', attr_current = '';
+                var selected_facets = true, drop_facet = false;
 
                 for (i = 0; i < jsonObject.facets[k].facets.length; i++) {
                         if (!parseInt(jsonObject.facets[k].facets[i].value)) {
                                 continue;
                         }
-                        var attr_selected = '';
-                        var attr_current = '';
-                        var selected_facets = true
+                        
+                        attr_current = '';
+                        selected_facets = true
 
                         var f = jsonObject.facets[k].facets[i].title;
                         var facet_title = options.facetTranslations[f] ? options.facetTranslations[f] : f;
@@ -132,13 +120,11 @@ function parseFacets(container, jsonObject, facets)
                                 facet_title = ucfirst(facet_title);
                         
                         if (extra_facets.match(jsonObject.facets[k].facets[i].title)) {
-                                //attr_selected = ' selected="selected"';
                                 attr_current = ' class="current"';
                                 selected_facets = false;
+                                drop_facet = true;
                         }
 
-                        /*advsearch_html += '<option' + attr_selected + ' value="' + f + '">'
-                                + facet_title + '&nbsp;&nbsp;('  + jsonObject.facets[k].facets[i].value + ')</option>';*/
                         facets_html += 
                                 '<li' + attr_current + '>' +
                                         '<a href="#tinFilter=' + facet + ':' + f + ((selected_facets) ? extra_facets : '') +'&parseFacets=1" class="tinSearchAddFacet">' + facet_title + '&nbsp; <span class="number">(' + jsonObject.facets[k].facets[i].value + ')</span></a>' +
@@ -151,33 +137,38 @@ function parseFacets(container, jsonObject, facets)
                 }
 
                 if (!$('ul.tinSearchCollapser_' + facet, container).length && total > 0) {
-					if(total != 0) {
-                        //$('div.tinSearchFacets', container).append('<ul class="' + (!options.disableCollapsedFacets ? 'collapser ' : '') + 'tinSearchCollapser_' + facet + '"><li><a href="#tinFilter=' + facet + '">' + ucfirst(options.facetTranslations[facet] ? options.facetTranslations[facet] : facet) +
-                                //'&nbsp;('  + total + ')</a><ul>' + facets_html + '</ul></ul>');
-                        $('div.tinSearchFacets', container).append('<div class="hideFacet_' + facet + '">' +
-                                '<h2>' + ucfirst(options.facetTranslations[facet] ? options.facetTranslations[facet] : facet) + '&nbsp;<span class="number">(' + total + ')</span></h2>' +
-                                '<ul>' + facets_html + '</ul>');
-								
-						// Add more button to te filter in the left hand side
-						$('.hideFacet_' + facet + ' ul').each(function(){
-							$('li:gt(2)', this).hide();
-							if ($(this, 'li').children().length > 3) {
-								$(this, ':last').append('<li><a href="javascript:void(0);" class="tr_more">More...</a></li>');
-							}
-						});
-						$('.tr_more').toggle(function(){
-							$(this).closest('li').siblings().show();
-							$(this).attr('class', 'tr_less').text("Less...");
-						}, function(){
-							$(this).closest('ul').children('li:gt(2):not(:last)').hide();
-							var curr_ul_y_pos = $(this).closest('ul').prev().offset().top;
-							$('html:not(:animated), body:not(:animated)').animate({
-								scrollTop: curr_ul_y_pos-5
-							}, 'normal');
-							$(this).attr('class', 'tr_more').text("More...");
-						});
-						}
-				}
+                        $('div.tinSearchFacets', container).append(
+                                '<div class="hideFacet_' + facet + '">' +
+                                    '<h2>' + ucfirst(options.facetTranslations[facet] ? options.facetTranslations[facet] : facet) + '&nbsp;<span class="number">(' + total + ')</span></h2>' +
+                                    '<ul>' + facets_html + '</ul>' +
+                                '</div>'
+                        );
+
+                        // Add more button to te filter in the left hand side
+                        $('.hideFacet_' + facet + ' ul').each(function(){
+                                $('li:gt(2)', this).hide();
+                                if ($(this, 'li').children().length > 3) {
+                                        $(this, ':last').append('<li class="facet_toggle"><a href="javascript:void(0);" class="tr_more">Meer...</a></li>');
+                                }
+                                
+                                if(drop_facet) {
+                                    $('li:gt(2)', this).show();
+                                    $(this).children().last().html('');
+                                }
+                        });
+                        
+                        $('.tr_more').toggle(function(){
+                                $(this).closest('li').siblings().show();
+                                $(this).attr('class', 'tr_less').text("Minder...");
+                        }, function(){
+                                $(this).closest('ul').children('li:gt(2):not(:last)').hide();
+                                /*var curr_ul_y_pos = $(this).closest('ul').prev().offset().top;
+                                $('html:not(:animated), body:not(:animated)').animate({
+                                        scrollTop: curr_ul_y_pos-5
+                                }, 'normal');*/
+                                $(this).attr('class', 'tr_more').text("Meer...");
+                        });
+                }
 
                 if (!options.disableCollapsedFacets) {
                         // Facets handling
@@ -192,12 +183,12 @@ function parseFacets(container, jsonObject, facets)
         }
 }
 
-function filterByFacet(container, facet_parent, facet, url, noresults)
+/*function filterByFacet(container, facet_parent, facet, url, noresults)
 {
         var params = $.deparam( url );
         var data = $(container).data('tinSearch');
         var options = data.options;
-
+        console.log('infacet');
         // Temporary single facet hack
         shown_facets = data.shownFacets;
         //shown_facets = [];
@@ -249,4 +240,4 @@ function filterByFacet(container, facet_parent, facet, url, noresults)
                         parseTagCloud(container, jsonObject);
                 }
         });
-}
+}*/

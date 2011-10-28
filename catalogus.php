@@ -5,7 +5,7 @@ $ip=$_SERVER['REMOTE_ADDR'];
 $intern = 'false';
 $tinUrl = 'http://vintagecatalogus.tin.nl';
 
-if($ip == '188.205.194.154') {
+if($ip == '188.205.194.154' || $ip == '127.0.0.1') {
         $tinUrl = 'http://tin-as-01/catalogus';
         $intern = 'true';
 }
