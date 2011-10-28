@@ -33,11 +33,14 @@
 		}
 
 	    var pagenav = '';
-	    if (page_nr > 1) {
-	    	pagenav += '<span class="tinPageNavPrev">'
-	    		+ opts.prevPageHtml.replace(/\{URL\}/, '#tinPage=' + (page_nr - 1) + '&tinSlide=1').replace(/\{PREVARR\}/, opts.prevPageArrow)
-	        	+ '</span> ';
-	    }
+        
+        pagenav += '<span class="tinPageNavPrev">&nbsp;';
+        
+        if (page_nr > 1) {
+            pagenav += opts.prevPageHtml.replace(/\{URL\}/, '#tinPage=' + (page_nr - 1) + '&tinSlide=1').replace(/\{PREVARR\}/, opts.prevPageArrow)
+        }
+        
+        pagenav += '</span> ';
 
 	    var el = total_pages < 9 ? total_pages : 9;
 	    var shown_elements = el;
@@ -103,14 +106,14 @@ function gotoPage(container, pnmbr)
 
         pnmbr = parseInt(pnmbr);
         var start = pnmbr * options.resultsPerPage;
-        shown_facets = data.shownFacets;
+        var shown_facets = data.shownFacets;
         var facet_query_parts = [];
         var facet_parents_parts = [];
         var facet_query = '';
         var facet_parents = '';
 
-        for (ft in shown_facets) {
-                for (f in shown_facets[ft]) {
+        for (var ft in shown_facets) {
+                for (var f in shown_facets[ft]) {
                         facet_query_parts.push(ft + ':' + f);
                         facet_parents_parts.push(ft);
                 }
