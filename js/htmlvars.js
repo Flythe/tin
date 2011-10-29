@@ -65,12 +65,9 @@ function getMenus(opts)
                                 
                                 '<div id="tinZoektIn">' +
                                         '<ul>' +
-                                                '<li class="first">U zoekt in</li>' +
-                                                '<li>Theaterbibliotheek</li>' +
-                                                '<li>Museumcollectie</li>' +
-                                                '<li>Mediatheek</li>' +
-                                                '<li>Archieven</li>' +
-                                                '<li>Ad Lib</li>' +
+                                                '<li class="first">Met bovenstaande zoekfunctie zoekt u in</li>' +
+                                                '<li>de Theaterbibliotheek, de Museumcollectie,</li>' +
+                                                '<li>de Mediatheek, de Archieven en Ad Lib</li>' +
                                         '</ul>' +
                                 '</div>' +
 

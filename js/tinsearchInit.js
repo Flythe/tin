@@ -155,14 +155,14 @@
 	switch (burl) {
                 case 'http://127.0.0.1/tinsearch/':
                 case 'http://127.0.0.1/TINsearch/':
-		case 'http://dev.lucene.nl/':
-		case 'http://src.tin.nl/zoek/':
-		case 'http://src.tin.nl/test/':
-		case 'http://src.tin.nl/search/':
+                case 'http://dev.lucene.nl/':
+                case 'http://src.tin.nl/zoek/':
+                case 'http://src.tin.nl/test/':
+                case 'http://src.tin.nl/search/':
                 case 'http://src.tin.nl/devtest/':
-			break;
-		default:
-			burl = 'http://catalogus.tin.nl/';
+                    break;
+                default:
+                    burl = 'http://catalogus.tin.nl/';
 	}
         
         $.fn.tinSearch.defaults = 
@@ -190,7 +190,7 @@
                 resetLinkLabel: 'Reset',
                 searchMenuPosition: 'right',
                 useFacets: [/*'type',*/ 'materialtype', 'casttotal', 'castamounts', 'year'],
-                defaultInput: 'zoeknaam hier',
+                defaultInput: '...',
                 mediaserver: 'http://mediaserver.tin.nl/img/',
                 mediaserversrc: 'http://src.tin.nl/devtest/images/',
                 facetTranslations: {

@@ -74,7 +74,6 @@ div.tinSearchSidebar
 	float: left;
 	margin: 0 63px 0 0;
 	font-family: Georgia,"Times New Roman",Times,serif;
-	min-height: 600px;
 }
 div.tinSearchSidebar h4, div.tinSearchSidebar h4 a
 {
@@ -95,13 +94,14 @@ div.tinSearchSidebar div.tinSearchMenu
 }
 div#tinZoektIn {
     color: #666666;
-    font-size: 13px;
+    font-size: 12px;
     font-style: italic;
     margin: 0 17px 0 0;
     text-align: right;
     border-bottom: 1px solid #999999;
 }
 div#tinZoektIn ul {
+    padding: 0;
     list-style-type: none;
 }
 div#tinZoektIn ul li.first {

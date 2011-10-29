@@ -105,9 +105,9 @@ function parseFacets(container, jsonObject, facets)
                 var facet = jsonObject.facets[k].field;
                 var i;
                 var total = 0;
-                var facets_html = '', attr_current = '';
-                var selected_facets = true, drop_facet = false;
-
+                var facets_html = '', attr_current = '', title = '';
+                var selected_facets = true, drop_facet = false, initTooltip = false;
+                
                 for (i = 0; i < jsonObject.facets[k].facets.length; i++) {
                         if (!parseInt(jsonObject.facets[k].facets[i].value)) {
                                 continue;
@@ -140,18 +140,24 @@ function parseFacets(container, jsonObject, facets)
                         total += parseInt(jsonObject.facets[k].facets[i].value);
                 }
 
-                if ($('ul.tinSearchCollapser_' + facet, container).length) {
-                        $('ul.tinSearchCollapser_' + facet, container).remove();
-                }
-
-                if (!$('ul.tinSearchCollapser_' + facet, container).length && total > 0) {
+                if (total > 0) {
+                        if (jsonObject.facets[k].field == 'castamounts') {
+                            title = 'Rolbezetting is de onderverdeling in mannen- en vrouwenrollen in een theatertekst of –productie. Mannenrollen worden aangeduid met h, vrouwenrollen met d. Een stuk met 2 mannen en 5 vrouwen heeft dus de rolbezetting 2h\\5d';
+                            initTooltip = true;
+                        } else if (jsonObject.facets[k].field == 'casttotal') {
+                            title = 'Aantal rollen is het totaal van het aantal mannen- en vrouwenrollen in een theatertekst of –productie';
+                            initTooltip = true;
+                        }
+                            
                         $('div.tinSearchFacets', container).append(
                                 '<div class="hideFacet_' + facet + '">' +
-                                    '<h2>' + ucfirst(options.facetTranslations[facet] ? options.facetTranslations[facet] : facet) + '&nbsp;<span class="number">(' + total + ')</span></h2>' +
+                                    '<h2 class="tooltipEl_' + facet + '" title="' + title + '">' + ucfirst(options.facetTranslations[facet] ? options.facetTranslations[facet] : facet) + '&nbsp;<span class="number">(' + total + ')</span></h2>' +
                                     '<ul>' + facets_html + '</ul>' +
                                 '</div>'
                         );
-
+                        
+                        
+                        
                         // Add more button to the facets
                         $('.hideFacet_' + facet + ' ul').each(function(){
                                 $('li:gt(2)', this).hide();
@@ -172,6 +178,10 @@ function parseFacets(container, jsonObject, facets)
                                 $(this).closest('ul').children('li:gt(2):not(:last)').hide();
                                 $(this).attr('class', 'tr_more').text("(Meer)");
                         });
+                        
+                        if(initTooltip) {
+                            $('.tooltipEl_' + facet).qtip();
+                        }
                 }
 
                 if (!options.disableCollapsedFacets) {
