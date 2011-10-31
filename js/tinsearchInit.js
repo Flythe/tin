@@ -36,13 +36,11 @@
                                 // bind triggers to detect changes in each widget
                                 console.log('in');
                                 if (!$.fn.tinSearch.initialized) {
-                                        $(window).hashchange(function() {
-                                                console.log('call');
+                                        $(window).bind('hashchange',function() {
                                                 // Iterate over all search widgets
-                                                //for(var k = 0; k < $('.tinSearch').length; k++) {
-                                                  //      widgetHashChange($('.tinSearch')[k]);
-                                                //};
-                                                //console.log('processing');
+                                                for(var k = 0; k < $('.tinSearch').length; k++) {
+                                                        widgetHashChange($('.tinSearch')[k]);
+                                                };
                                         });
 
                                         $.fn.tinSearch.initialized = true;
