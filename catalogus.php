@@ -22,7 +22,7 @@ if($ip == '127.0.0.1')
                 <link href="css/thesaurus.css" rel="stylesheet" type="text/css"/>
                 <link href="css/autocomplete.css" rel="stylesheet" type="text/css"/>
                 <link href="css/navigation.css" rel="stylesheet" type="text/css"/>
-                <link href="css/jquery.qtip.css" rel="stylesheet" type="text/css"/>
+                <link href="css/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
 
                 <title>TIN Zoekmachine</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -40,7 +40,7 @@ if($ip == '127.0.0.1')
                 <script type="text/javascript" src="js/tinsearchFuncs.js"></script>
                 <script type="text/javascript" src="js/htmlvars.js"></script>
                 <script type="text/javascript" src="js/tinsearchInit.js"></script>
-                <script type="text/javascript" src="jquery/tooltip/jquery.qtip.js"></script>
+                <script type="text/javascript" src="jquery/tooltip/jquery.qtip.min.js"></script>
                 
                 <script type="text/javascript">
                         jQuery(document).ready(function() {
