@@ -4,49 +4,58 @@
         {
                 tinsearchInit: function(override_opts)
                 {
-                        dbg('init() ' + $(this).attr('id'));
                         var opts = $.extend({}, $.fn.tinSearch.defaults, override_opts),
                         obs = this;
 
-                        //append default css
-                        /*if (!opts.disableDefaultCss && !$('#tinSearchCss').length) {
-                                dbg('Inserting tinsearch.css... ', true);
+                        // append css
+                        for(var k = 0; k < opts.css.length; k++) {
                                 $('<link>').appendTo('head').attr({
-                                        id: 'tinSearchCss',
                                         rel:  'stylesheet',
                                         type: 'text/css',
-                                        href: $.fn.tinSearch.defaults.baseUrl + opts.css,
+                                        href: $.fn.tinSearch.defaults.baseUrl + 'css/' + opts.css[k],
                                         media: 'screen, projection'
-                            });
-                        }*/
-
-                        //bind triggers to detect changes in each widget
-                        if (!$.fn.tinSearch.initialized) {
-                                $(window).bind('hashchange', function() {
-                                        dbg('hashchange event called');
-                                        // Iterate over all search widgets
-                                        $('.tinSearch').each(function() {
-                                                widgetHashChange(this);
-                                        });
-                                });
-
-                                $.fn.tinSearch.initialized = true;
+                                });                        
                         }
 
                         $.when(
+                                // append jquery/js scripts
                                 $.getScript($.fn.tinSearch.defaults.baseUrl + 'jquery/jquery.easing.js'),
                                 $.getScript($.fn.tinSearch.defaults.baseUrl + 'jquery/jquery.collapse.js'),
-                                //$.getScript($.fn.tinSearch.defaults.baseUrl + 'jquery/jquery.autocomplete.js'),
-                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'jquery/jquery.ba-bbq.min.js'))
-                        .then(function(result) {
-                                dbg('init() ' + $.map(obs, function(ob, i) { return $(ob).attr('id'); }).join(',') + ': ajax completed');
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'jquery/jquery.autocomplete.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'jquery/jquery.ba-bbq.min.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'jquery/tooltip/jquery.qtip.min.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'js/debug.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'js/htmlvars.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'js/tinsearchFacetHandler.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'js/tinsearchFuncs.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'js/tinsearchNavigation.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'js/tinsearchSearchHandlers.js'),
+                                $.getScript($.fn.tinSearch.defaults.baseUrl + 'js/tinsearchTheSaurusHandlers.js')
+                        )
+                        .then(function() {
+                                // bind triggers to detect changes in each widget
+                                console.log('in');
+                                if (!$.fn.tinSearch.initialized) {
+                                        $(window).hashchange(function() {
+                                                console.log('call');
+                                                // Iterate over all search widgets
+                                                //for(var k = 0; k < $('.tinSearch').length; k++) {
+                                                  //      widgetHashChange($('.tinSearch')[k]);
+                                                //};
+                                                //console.log('processing');
+                                        });
+
+                                        $.fn.tinSearch.initialized = true;
+                                }
+                                
                                 obs.each(function() {
-                                        //append searchwidgets
+                                        // append searchwidgets
                                         if (!$(this).data('tinSearch')) {
                                             initContinue(this, opts);
                                         }
                                 });
 
+                                // attach trigger for hashchange (url change)
                                 $(window).trigger('hashchange');
                         });
 
@@ -137,7 +146,6 @@
 
 	$.fn.tinSearch = function(method)
 	{
-		dbg('tinSearch() ' + $.map(this, function(ob, i) { return $(ob).attr('id'); }).join(','));
 		if (methods[method]) {
 			methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
 		} else if (typeof method === 'object' || ! method) {
@@ -153,12 +161,7 @@
 
 	var burl = unescape(window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1));
 	switch (burl) {
-                case 'http://127.0.0.1/tinsearch/':
-                case 'http://127.0.0.1/TINsearch/':
-                case 'http://dev.lucene.nl/':
-                case 'http://src.tin.nl/zoek/':
-                case 'http://src.tin.nl/test/':
-                case 'http://src.tin.nl/search/':
+                case 'http://127.0.0.1/develop/':
                 case 'http://src.tin.nl/devtest/':
                     break;
                 default:
@@ -316,14 +319,13 @@ function initContinue(ob, opts)
                 
                 if($(this).hasClass('normalSearch')){
                         params.tinSearchType = "normal";
-						$("img.normalSearch").attr("src", "images/button_alles.jpg");
-						$("img.thumbSearch").attr("src", "images/button_afbeeldingen.jpg");
-
+                        $("img.normalSearch").attr("src", "images/buttons/button_alles.jpg");
+                        $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen.jpg");
                 } else {
-						$("img.normalSearch").attr("src", "images/button_alles_disable.jpg");
-						$("img.thumbSearch").attr("src", "images/button_afbeeldingen_enable.jpg");
+                        $("img.normalSearch").attr("src", "images/buttons/button_alles_disable.jpg");
+                        $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen_enable.jpg");
                         params.tinSearchType = "thumbs";
-				}
+                }
                 
                 $('a.hiddenUpdater', ob).fragment($.param( params ));
                 $('a.hiddenUpdater', ob).click();
@@ -473,19 +475,11 @@ function initContinue(ob, opts)
                         $(ob).css('border-top', 0);
                 }
         }
-
-        //setTimeout("jQuery('input.tinSearchInput').each(function() { jQuery(this).width(Math.floor(jQuery(this).width())); });", 100);
-
-        if (opts.css) {
-                for (var i = 0; i < opts.css.length; i++) {
-                        $.rule(opts.css[i]).appendTo('style');
-                }
-        }
-
+        
         // Handle initial search (?tinSearchInput=search+words)
         var q = getSearchParams(ob);
         
-        if (q.tinSearchInput) {                
+        if (q.tinSearchInput) {   
                 $('input.tinSearchInput', ob).val(q.tinSearchInput);
                 
                 if(q.tinSearchAdlibSearchfield)

@@ -1,4 +1,4 @@
-        <?php
+<?php
 /**
  * TIN search proxy
  *
@@ -11,16 +11,7 @@
  * @copyright  2011 Theater Instituut Nederland
  */
 
-/*
- * Handle autocomplete queries from tinScriptIncluder.js
- */
-
-//$host = 'http://test.searchtest.tin.nl/';
-$host = 'http://rest.tin.nl/';
-$ip=$_SERVER['REMOTE_ADDR'];
-
-if($ip == '188.205.194.154' || $ip = '127.0.0.1')
-        $intern = '&intern=TIN';
+include('vars.php');
 
 ////print_r($_GET); exit;
 if (isset($_GET['query'])) {
@@ -67,7 +58,6 @@ if (isset($_GET['query'])) {
 	exit;
 }
 
-/* Edit:23-09 By: Allard, fixed for title instead of id */
 if (isset($_GET['getthesaurus'])) {        
 	$handle = curl_init();
         curl_setopt($handle, CURLOPT_URL, ($call = $host . 'rest/thesaurus/title/' . urlencode($_GET['getthesaurus'])));
@@ -82,7 +72,6 @@ if (isset($_GET['getthesaurus'])) {
 /*
  * Handle audio status "ping" from tinScriptIncluder.js
  */
-
 if (isset($_GET['getstatus'])) {
      //echo "http://mediaserver.tin.nl/getstatus.php?q=" . urlencode($_GET['getstatus']);
      //exit;
@@ -94,7 +83,6 @@ if (isset($_GET['getstatus'])) {
 /*
  * Handle search actions from tinScriptIncluder.js
  */
-
 $poststr = '';
 foreach ($_POST as $fldname => $fldval) {   
         if ($fldname == 'fq' && $fldval != '') {
@@ -118,9 +106,9 @@ foreach ($_POST as $fldname => $fldval) {
 	}
 }
 
-$results = curl_get_uri($host . 'rest/search?' . $poststr . '&tagcloud=true' . (isset($intern) ? $intern : ''));
+$results = curl_get_uri($host . 'rest/search?' . $poststr . '&tagcloud=true' . ($intern ? '&intern=TIN' : ''));
 
-if ($_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '188.205.194.154') {
+if (!$intern) {
 	$results = str_replace('"weburl"', '"weburlIntern"', $results);
 	$results = str_replace('"weburlExtern"', '"weburl"', $results);
 }

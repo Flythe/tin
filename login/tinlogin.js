@@ -45,7 +45,7 @@ function showLoggedInMenu(){
 
 function tinsearchInit()
 {
-	/* TWITTER STYLEE */
+	/* TWITTER STYLE */
 		/* sign in and change password */
 		$("#signin").click(function(e) 
 		{

@@ -4,7 +4,7 @@ function getMainStruc(opts) {
         return '<div class="tinSearchSidebar">' +
                         '<h4 class="tinUitgebreid">Of zoek uitgebreid</h4>' +
                         '<h4 class="tinSimpel" style="display:none;"><a href="" class="eenvoudigZoeken">Eenvoudig zoeken</a></h4>' +
-                        '<div class="headImg" style="display: none;">' + insertImg('Catalogus uitgebreid') + '</div>' +
+                        '<div class="headImg">' + insertImg('Catalogus eenvoudig', 'catalogusImg') + '</div>' +
                         '<div class="tabs">' +
                                 insertImg('Alles', 'normalSearch') +
                                 insertImg('Afbeeldingen', 'thumbSearch') +
@@ -17,27 +17,28 @@ function getMainStruc(opts) {
                         '<div class="tinSearchResults"></div>' +
                         '<div class="tinClear"></div>' +
                         '<div class="tinPageNav"></div>' +
-                '</div>' + 
+                '</div>' +
                 '<div class="tinClear"></div>' +
                 
                 '<div class="tinSearchThesaurus" style="display: none;">' +
                         '<a href="#tinSearchThesaurus=0" class="tinButton tinCloseButton tinSearchToggleThesaurus" title="Sluit theater thesaurus"></a>' +
                         '<div class="tinSearchThesaurusBroader">' +
-                                '<img width="73" height="25" src="images/thesaurus_breed.png">' +
+                                insertImg('Thesaurus breed') +
                                 '<ul></ul>' +
                         '</div>' +
 
                         '<div class="tinSearchThesaurusMiddle">' +
-                                '<img src="images/thesaurus_theatertermenhulp.png"><br>' +
+                                insertImg('Thesaurus hulp') +
+                                '<br>' +
                                 '<input type="text" class="tinSearchThesaurusInput" name="tinSearchThesaurusInput" maxlength="550"><button class="tinSearchThesaurusOk">ok</button><br>' +
                                 '<div class="tinSearchThesaurusSimilar">' +
-                                        '<img width="226" height="29" src="images/thesaurus_gelijksoortig.png">' +
+                                        insertImg('Thesaurus gelijk') +
                                         '<ul></ul>' +
                                 '</div>' +
                         '</div>' +
 
                         '<div class="tinSearchThesaurusNarrower">' +
-                                '<img width="103" height="25" src="images/thesaurus_specifiek.png">' +
+                                insertImg('Thesaurus specifiek') +
                                 '<ul></ul>' +
                         '</div>' +
                 '</div>';
@@ -45,11 +46,15 @@ function getMainStruc(opts) {
 
 function insertImg(imgName, className) {
         var imageArray = {
-                'Catalogus uitgebreid':'TIN_Catalogus_uitgebreid.jpg',
-                'Alles':'button_alles.jpg',
-                'Afbeeldingen':'button_afbeeldingen.jpg',
+                'Catalogus eenvoudig':'TIN_Catalogus_eenvoudig.jpg',
+                'Alles':'buttons/button_alles.jpg',
+                'Afbeeldingen':'buttons/button_afbeeldingen.jpg',
                 'field_search':'zoekspecifiekveld.jpg',
-                'thesaurus':'thesaurus.jpg'
+                'thesaurus':'thesaurus/thesaurus.jpg',
+                'Thesaurus breed':'thesaurus/thesaurus_breed.png',
+                'Thesaurus hulp':'thesaurus/thesaurus_theatertermenhulp.png',
+                'Thesaurus gelijk':'thesaurus/thesaurus_gelijksoortig.png',
+                'Thesaurus specifiek':'thesaurus/thesaurus_specifiek.png'
         };
         
         className = className != null ? className : '';
