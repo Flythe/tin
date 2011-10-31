@@ -5,7 +5,7 @@ $ip=$_SERVER['REMOTE_ADDR'];
 $intern = 'false';
 $tinUrl = 'http://vintagecatalogus.tin.nl';
 
-if($ip == '188.205.194.154') {
+if($ip == '188.205.194.154' || $ip == '127.0.0.1') {
         $tinUrl = 'http://tin-as-01/catalogus';
         $intern = 'true';
 }
@@ -22,6 +22,7 @@ if($ip == '127.0.0.1')
                 <link href="css/thesaurus.css" rel="stylesheet" type="text/css"/>
                 <link href="css/autocomplete.css" rel="stylesheet" type="text/css"/>
                 <link href="css/navigation.css" rel="stylesheet" type="text/css"/>
+                <link href="css/jquery.qtip.min.css" rel="stylesheet" type="text/css"/>
 
                 <title>TIN Zoekmachine</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -39,6 +40,8 @@ if($ip == '127.0.0.1')
                 <script type="text/javascript" src="js/tinsearchFuncs.js"></script>
                 <script type="text/javascript" src="js/htmlvars.js"></script>
                 <script type="text/javascript" src="js/tinsearchInit.js"></script>
+                <script type="text/javascript" src="jquery/tooltip/jquery.qtip.min.js"></script>
+                
                 <script type="text/javascript">
                         jQuery(document).ready(function() {
                                 jQuery('#tinCatalogus').tinSearch({
@@ -76,8 +79,7 @@ if($ip == '127.0.0.1')
                                 </ul>
                         </div> 
                         <div class="navtabs">
-                                <a class="tab1" href="http://catalogus.tin.nl"></a>
-                                <a class="tab2" href="<?php echo $tinUrl; ?>"></a>
+                                <a class="tab" href="<?php echo $tinUrl; ?>"></a>
                         </div>
                         <!--faq en info buttons-->
                         

@@ -155,14 +155,14 @@
 	switch (burl) {
                 case 'http://127.0.0.1/tinsearch/':
                 case 'http://127.0.0.1/TINsearch/':
-		case 'http://dev.lucene.nl/':
-		case 'http://src.tin.nl/zoek/':
-		case 'http://src.tin.nl/test/':
-		case 'http://src.tin.nl/search/':
+                case 'http://dev.lucene.nl/':
+                case 'http://src.tin.nl/zoek/':
+                case 'http://src.tin.nl/test/':
+                case 'http://src.tin.nl/search/':
                 case 'http://src.tin.nl/devtest/':
-			break;
-		default:
-			burl = 'http://catalogus.tin.nl/';
+                    break;
+                default:
+                    burl = 'http://catalogus.tin.nl/';
 	}
         
         $.fn.tinSearch.defaults = 
@@ -190,7 +190,7 @@
                 resetLinkLabel: 'Reset',
                 searchMenuPosition: 'right',
                 useFacets: [/*'type',*/ 'materialtype', 'casttotal', 'castamounts', 'year'],
-                defaultInput: 'zoeknaam hier',
+                defaultInput: '...',
                 mediaserver: 'http://mediaserver.tin.nl/img/',
                 mediaserversrc: 'http://src.tin.nl/devtest/images/',
                 facetTranslations: {
@@ -332,12 +332,13 @@ function initContinue(ob, opts)
         
         // Handle search input field
         $('input.tinSearchInput', ob).live('keyup', function(e) {
+                var params = getSearchParams(ob);
+                var data = $(ob).data( 'tinSearch' );
+            
                 if(e.which == 13) {
                         e.preventDefault();
                         dbg('input.tinSearchInput: ENTER pressed.');
                         
-                        var params = getSearchParams(ob);
-                        var data = $(ob).data( 'tinSearch' );
                         data.enter = true;
                         
                         params.tinSearchInput = $(this).val();
@@ -345,8 +346,6 @@ function initContinue(ob, opts)
                         search(ob, $.param(params));
                         return false;
                 } else {
-						var params = getSearchParams(ob);
-                        var data = $(ob).data( 'tinSearch' );
                         data.enter = true;
                         
                         params.tinSearchInput = $(this).val();
@@ -449,7 +448,6 @@ function initContinue(ob, opts)
                         }
                 }
                 
-                //alert($.param( params ));
                 state[ id ] = $.param( params );
 
                 dbg('new state url=[' + state[id] + ']');

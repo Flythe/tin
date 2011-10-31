@@ -430,8 +430,6 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
         while (i < docs.length) {
                 if (photodisp) {
                         str_html += getSearchPhoto(docs[i], options, i);
-                /*} else if (options.jukebox) {
-                        str_html += getSearchAudio(docs[i], options);*/
                 } else {
                         str_html += getSearchEntry(docs[i], options);
                 }
@@ -455,19 +453,7 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
         
         if (suggestion) {
                 $('div.tinSearchNumberOfResults', container).after(suggestion_str);
-        }
-
-        /*if (true === slide) {
-                $('div.tinSearchResults', container).slideUp('slow', function() {
-                        $(this).html(str_html);
-                        $(this).slideDown('slow');
-                        $('html, body').animate({scrollTop:0}, 'slow');
-                });
-                if (docs.length || false === suggestion) {
-                        $('div.tinPageNav', container).tinPageNav(pnmbr + 1, nmbrOfResults, navoptions);
-                }
-        } else {*/
-        
+        }        
        
         $('div.tinSearchResults', container).html(str_html);
         if (docs.length || false === suggestion) {
@@ -486,7 +472,6 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
 
 function getResultsHeader(container, jsonObj, pnmbr)
 {
-        //dbg('getResultsHeader ' + $(container).attr('id'));
         var data = $(container).data('tinSearch');
         var options = data.options;
         var nmbrOfResults = jsonObj.numResults;
@@ -518,7 +503,7 @@ function getResultsHeader(container, jsonObj, pnmbr)
                                 + '</em> <a href="#" class="tinButton tinCloseButton tinRemoveTheSaurus" title="Reset zoekwoorden" value="' + theSaurus + '"></a></span>');
         }
 
-        var facet_parent, facet, shown_facets;
+        var facet, shown_facets;
 
         if (!options.disableFacets) {
                 var url = $.bbq.getState( $(container).attr( 'id' ) ) || '';
@@ -580,7 +565,6 @@ function getSearchPhoto(entry, options, count)
         var disciplines = !entry.discipline ? '' : 'Disciplines: ' + entry.discipline.join(', ') + '<br />';
         var type = !entry.type ? '' : 'Bron: ' + (options.facetTranslations[entry.type] ? options.facetTranslations[entry.type] : entry.type) + '<br />';
         var year = !entry.year || 'onbekend' === entry.year ? '' : 'Jaartal: ' + entry.year + '<br />';
-		// New variable added to show year and disciplines in the image (without hover)
         var year_only = !entry.year || '' === entry.year ? '' : '' + entry.year ;
         var disciplines_only = !entry.discipline ? '' : '' + entry.discipline.join(', ') + '';
 
@@ -615,7 +599,7 @@ function getSearchPhoto(entry, options, count)
                         var lastItem = '';
                         var media = entry.images[index];
                         if (media.type == 'photo') {
-                                if (media.webExclusion == false)
+                                if (media.webExclusion == false || options.isIntern == true)
                                         media.url += '&b=190';
                                 if ((count + 1)%3 == 0)
                                         lastItem = 'lastPhoto';
@@ -632,76 +616,6 @@ function getSearchPhoto(entry, options, count)
                         }
                         index++;
                 }
-        }
-
-        return str_html;
-}
-
-function getSearchAudio(entry, options)
-{
-        var str_html = '';
-        var title = !entry.title ? '' : entry.title;
-        var description = !entry.description ? '' : (entry.description.length < 100 ? entry.description : entry.description.substring(0, 100) + '&hellip;') + '<br />';
-        var apiuri = !entry.apiuri ? '' : entry.apiuri;
-        var weburl = !entry.weburl ? '' : entry.weburl;
-        var url = !entry.url ? '' : entry.url;
-        var keywords = !entry.keywords ? '' : 'Tags: ' + (typeof(entry.keywords) != 'object' ? entry.keywords.split(',') : entry.keywords).join(', ') + '<br />';
-        var disciplines = !entry.discipline ? '' : 'Disciplines: ' + entry.discipline.join(', ') + '<br />';
-        var creators = (!entry.creators || entry.creators.length < 2 ? 'Uitvoerend artiest: ' + (!entry.creators || !entry.creators.length ? 'onbekend' : entry.creators[0]) : 'Uitvoerende artiesten: ' + entry.creators.join(', ')) + '<br />';
-        var type = !entry.type ? '' : 'Bron: ' + (options.facetTranslations[entry.type] ? options.facetTranslations[entry.type] : entry.type) + '<br />';
-        var year = !entry.year || 'onbekend' === entry.year ? '' : 'Jaartal: ' + entry.year + '<br />';
-        var listingUrl = '';
-        var priref = apiuri.substring(apiuri.lastIndexOf('priref=') + 7);
-        if (url) {
-                listingUrl = url;
-        } else {
-                switch (entry.type) {
-                        case 'ChoiceCollect':
-                                listingUrl = $.fn.tinSearch.defaults.baseUrl + 'detail.php?collection=' + priref;
-                                break;
-                        case 'ChoiceFullCatalogue':
-                                listingUrl = $.fn.tinSearch.defaults.baseUrl + 'detail.php?object=' + priref;
-                                break;
-                        case 'ChoiceProductions':
-                                listingUrl = $.fn.tinSearch.defaults.baseUrl + 'detail.php?production=' + priref;
-                                break;
-                        case 'ChoicePeople':
-                                listingUrl = $.fn.tinSearch.defaults.baseUrl + 'detail.php?person=' + priref;
-                                break;
-                        default:
-                                listingUrl = apiuri ? $.fn.tinSearch.defaults.baseUrl + 'detail.php?apiuri=' + escape(apiuri) : 0;
-                                break;
-                }
-        }
-
-        if(entry.audio && entry.audio.length){
-                var numaudio = entry.audio.length;
-                var index = 0;
-                var play_buttons = '';
-                str_html = '<div class="tinSearchResultAudio">';
-                while (index < numaudio) {
-                        var media = entry.audio[index];
-                        if (media.type == 'audio') {
-                                if (media.webExclusion == false && 0) {
-                                        str_html += "todo";
-                                } else {
-                                        play_buttons += '<button type="button" class="tinButton tinSmallButton tinPlayButton" title="Afspelen" value="' + media.url + '.mp3"><strong>Afspelen &#x25BA;</strong><input name="mp3' + index + '" type="hidden" class="tinInputHidden" value="' + media.url + '.mp3" /></button>';
-
-                                        //	+ '<embed type="application/x-shockwave-flash" flashvars="audioUrl=' + media.url + '.mp3" src="http://www.google.com/reader/ui/3523697345-audio-player.swf" width="300" height="27" quality="best"></embed>';
-                                        if (index == numaudio - 1) {
-                                                play_buttons = '<div class="tinSearchAudioPlay">' + play_buttons + '</div>';
-                                                str_html += '<div class="tinSearchAudioInfo"><h1>' + (options.disableTitleLink ? '<span>' + title + '</span>': '<a href="' + (listingUrl ? listingUrl : weburl) + '" target="_blank" class="apiuri">' + title + '</a>') + '</h1>'
-                                                        + (listingUrl && !options.disableCatalogusLink ? '<a href="' + weburl + '" target="_blank" class="tinSeeAlso">catalogus</a>' : '')
-                                                        + '<p>' + description + type + creators + disciplines + year + keywords + '</p></div>'
-                                                        + play_buttons;
-                                        }
-                                }
-
-
-                        }
-                        index++;
-                }
-                str_html += "</div><div class=\"tinClear\"></div>\n";
         }
 
         return str_html;
@@ -738,7 +652,7 @@ function getSearchEntry(entry, options)
         
         //add images
         
-        if(entry.images && entry.images.length){ //fotos
+        if(entry.images && entry.images.length){ //FOTOS
                 var numimages = entry.images.length;
                 var index = 0;
                 while (index < numimages && index < 3) {
@@ -755,14 +669,15 @@ function getSearchEntry(entry, options)
                         
                         index++;
                 }
-        } else if(entry.audio && entry.audio.length) { // audio
+        } else if(entry.audio && entry.audio.length) { //AUDIO
                 var numaudio = entry.audio.length;
                 index = 0;
                 var play_buttons = '';
                 str_html = '<div class="tinSearchResultAudio">';
-                if(numaudio > 1) {
+                
+                if(numaudio > 1) { //1 item, show playbutton
                         audiostr = '<div class="tinSearchAudioPlayText">Beluister op detailpagina</div>'
-                } else {
+                } else { //multiple items, dont show playbuttons
                         var audioMedia = entry.audio[0];
 
                         if (audioMedia.type == 'audio') {

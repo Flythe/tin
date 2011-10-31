@@ -132,12 +132,16 @@ function showMenu(ob) {
         $('h4.tinSimpel', ob).show();
         $('h4.tinUitgebreid', ob).hide();
         $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd, div.headImg', ob).show();
+        $('div.tinSearchMenu', ob).css('border-right', '1px solid black');
 }
 
 function hideMenu(ob) {
         $('h4.tinSimpel').hide();
         $('h4.tinUitgebreid', ob).show();
         $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd, div.headImg', ob).hide();
+        $('select.tinSearchAdlibSearchfield', ob).val('*');
+        $('input.tinSearchOr[value=" "]', ob).prop('checked', true);
+        $('div.tinSearchMenu', ob).css('border-right', 'none');
 }
 
 /*

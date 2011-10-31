@@ -67,7 +67,7 @@ function curl_get_uri($uri, $method = 'GET', $data = NULL, $accept = 'applicatio
         
         $ip = $_SERVER['REMOTE_ADDR'];
         
-        if($ip == '188.205.194.154' || $ip == '127.0.0.1')
+        if($ip == '188.205.194.154')
                 $uri = $uri."?intern=TIN";
         
 	$handle = curl_init();

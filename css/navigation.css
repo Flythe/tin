@@ -1,19 +1,15 @@
 div.tinPageNav {
-	position: absolute;
-	bottom: 0;
 	margin: 0;
 	color: #5A447A;
-	border: dashed 1px #8B8178;
-	border-bottom: 0;
 	padding: 0.9em 0 .7em;
 	display: none;
 	text-align: center;
-	width: 70%;
 }
 
 	div.tinPageNavMiddle {
 		position: relative;
 		margin: 0 7em 0 5.5em;
+        float: left;
 	}
 
 	div.tinPageNav a {
@@ -31,20 +27,11 @@ div.tinPageNav {
 		font-weight: bold;
 	}
 
-	div.tinPageNav span.tinPageNavPrev {
-		position: absolute;
-		left: 0;
-		top: 0.9em;
-		padding: 0 0 0 .8em;
-		height: auto;
-	}
-
-	div.tinPageNav span.tinPageNavNext {
-		position: absolute;
-		right: 0;
-		top: 0.9em;
+	div.tinPageNav span.tinPageNavNext, div.tinPageNav span.tinPageNavPrev {
 		padding: 0 .8em 0 0;
 		height: auto;
+        min-width: 80px;
+        float: left;
 	}
 
 	div.tinPageNav span.tinPageNavPrev a,

@@ -54,26 +54,18 @@ div#nav ul li a {
         text-decoration: none;
 }
 div.navtabs {
-        margin-left: 350px;
+        margin-left: 340px;
         width: 240px;
         height: 34px;
 }
-.navtabs a.tab1, .navtabs a.tab2 {
+.navtabs a.tab {
         float: left;
         display: block;
-        width: 148px;
         height: 34px;
-        background: url('../images/preview.jpg') 0 0 no-repeat;
-}
-.navtabs a.tab2 {
-        margin-left: 15px;
         width: 77px;
         background: url('../images/vintage.jpg') 0 0 no-repeat;
 }
-.navtabs a.tab1:hover {
-        background: url('../images/preview_over.jpg') 0 0 no-repeat;
-}
-.navtabs a.tab2:hover {
+.navtabs a.tab:hover {
         background: url('../images/vintage_over.jpg') 0 0 no-repeat;
 }
 div.tinSearchSidebar
@@ -82,16 +74,15 @@ div.tinSearchSidebar
 	float: left;
 	margin: 0 63px 0 0;
 	font-family: Georgia,"Times New Roman",Times,serif;
-	min-height: 600px;
 }
-div.tinSearchSidebar h4
+div.tinSearchSidebar h4, div.tinSearchSidebar h4 a
 {
 	color: #999999;
-        font-size: 12px;
+    font-size: 12px;
 	font-weight: normal;
-        text-decoration: underline;
+    text-decoration: underline;
 	margin: 9px 0 42px 2px;
-        cursor: pointer;
+    cursor: pointer;
 }
 div.tinSearchSidebar div.tabs
 {
@@ -100,20 +91,34 @@ div.tinSearchSidebar div.tabs
 div.tinSearchSidebar div.tinSearchMenu
 {
 	width: 276px;
-	border-right: 1px black solid;
+}
+div#tinZoektIn {
+    color: #666666;
+    font-size: 12px;
+    font-style: italic;
+    margin: 0 17px 0 0;
+    text-align: right;
+    border-bottom: 1px solid #999999;
+}
+div#tinZoektIn ul {
+    padding: 0;
+    list-style-type: none;
+}
+div#tinZoektIn ul li.first {
+    font-weight: bold;
 }
 div.tinSearchSidebar input.tinSearchInput
 {
 	font-family: Georgia,"Times New Roman",Times,serif;
 	border: 4px solid #93238E; 
 	color: #93238E;
-        font-size: 16px;
-        font-weight: normal;
-        height: 20px;  
-        padding: 4px 0 0 0;
-        margin: 0;
-        text-indent: 10px;
-        width: 259px;
+    font-size: 16px;
+    font-weight: normal;
+    height: 20px;  
+    padding: 4px 0 0 0;
+    margin: 0;
+    text-indent: 10px;
+    width: 259px;
 }
 ul#define_search
 {
@@ -135,37 +140,37 @@ ul#define_search input
 }
 div.tinSearchSidebar div#field_search
 {
-	margin: 0 20px 0 3px;
-	border-bottom: solid 1px #999;
-	padding-bottom: 12px;
+        margin: 0 20px 0 3px;
+        border-bottom: solid 1px #999;
+        padding-bottom: 12px;
 }
 div.tinSearchSidebar div#field_search img
 {
-	margin: 3px 0 0 -4px;
+        margin: 3px 0 0 -4px;
 }
 div.tinSearchSidebar div#field_search select
 {
-	float: right;
-	margin-top: 17px;
+        float: right;
+        margin-top: 17px;
 }
 div.tinSearchSidebar div#tinSearchThesaurusAdd
 {
-	margin: 0 20px 0 3px;
-	border-bottom: solid 1px #999;
-	padding-bottom: 10px;
+        margin: 0 20px 0 3px;
+        border-bottom: solid 1px #999;
+        padding-bottom: 10px;
 }
 div.tinSearchSidebar div#tinSearchThesaurusAdd img
 {
-	margin: 8px 0 0 -6px;
+        margin: 8px 0 0 -6px;
 }
 div.tinSearchSidebar div.tinSearchFacets
 {
-	color: #666666;
-    font-family: Arial,Helvetica,sans-serif;
-    font-size: 11px;
-	margin: 0 17px 0 0;
-	padding: 18px 0 0 0;
-	text-align: right;
+        color: #666666;
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 11px;
+        margin: 0 17px 0 0;
+        padding: 18px 0 0 0;
+        text-align: right;
 }
 .tinSearchContainer {
         margin-top: 6px;
@@ -178,22 +183,22 @@ div.tinSearchFacets li.current a{
 }
 div.tinSearchFacets div h2
 {
-	line-height: 21px;
-	font-size: 11px;
-    text-transform: uppercase;
-	margin: 5px 0 2px 0;
+        line-height: 21px;
+        font-size: 11px;
+        text-transform: uppercase;
+        margin: 5px 0 2px 0;
 }
 div.tinSearchFacets div h2.closed
 {
-	border-bottom: thin dashed #CCCCCC;
+        border-bottom: thin dashed #CCCCCC;
 }
 div.tinSearchFacets div h2.closed span.meer
 {
-	float:left;
-	font-size: 10px;
-	color: #999;
-	text-transform: none;
-	font-weight: normal;
+        float:left;
+        font-size: 10px;
+        color: #999;
+        text-transform: none;
+        font-weight: normal;
 }
 div.tinSearchFacets div a 
 {
@@ -202,18 +207,26 @@ div.tinSearchFacets div a
 }
 div.tinSearchFacets div a.number
 {
-	color: #CCC;
-	font-weight: normal;
+        color: #CCC;
+        font-weight: normal;
 }
 div.tinSearchFacets div ul
 {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+        margin: 0;
+        padding: 0;
+        list-style: none;
 }
 div.tinSearchFacets div li
 {
-	margin: 0 0 3px 0;
+        margin: 0 0 3px 0;
+}
+div.tinSearchFacets div li.facet_toggle {
+        text-align: left;
+        border-bottom: thin dashed #CCCCCC;
+        margin-top: -15px;
+}
+div.tinSearchFacets div li.facet_toggle a {
+        color: #999999;
 }
 
 .tinSearchNumberOfResults h1 {
@@ -225,10 +238,10 @@ div.tinSearchFacets div li
 }
 .tinSearchNumberOfResults h1 a.tinButton {
         background: url('../images/tinCloseBtn.jpg') 0 0 no-repeat;
-	width: 13px;
-	height: 13px;
+        width: 13px;
+        height: 13px;
         display: inline-block;
-	margin: 0 0 -1px 0;
+        margin: 0 0 -1px 0;
         cursor: pointer;
 }
 .tinSearchSuggestion {
