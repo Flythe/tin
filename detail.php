@@ -49,13 +49,14 @@
 	<div class="search-result">
 	
 <?php
-//$host = 'http://test.searchtest.tin.nl/';
-$host = 'http://rest.tin.nl/';
+include('vars.php');
 
 date_default_timezone_set('Europe/Amsterdam');
 
 function curl_get_uri($uri, $method = 'GET', $data = NULL, $accept = 'application/json', $contentType = 'application/json')
 {
+        include('vars.php');
+        
 	$headers = array(
 		'Accept: ' . $accept,
 		'Content-Type: ' . $contentType
@@ -65,10 +66,9 @@ function curl_get_uri($uri, $method = 'GET', $data = NULL, $accept = 'applicatio
 		$data = json_encode($data);
 	}
         
-        $ip = $_SERVER['REMOTE_ADDR'];
-        
-        if($ip == '188.205.194.154')
-                $uri = $uri."?intern=TIN";
+        if($intern) {
+                $uri = $uri.'?intern=TIN';
+        }
         
 	$handle = curl_init();
 	curl_setopt($handle, CURLOPT_URL, $uri);
@@ -103,8 +103,10 @@ function curl_get_uri($uri, $method = 'GET', $data = NULL, $accept = 'applicatio
 	return $response;
 }
 
-function showPoster(&$record)
+function showPoster($record)
 {
+        include('vars.php');
+        
 	if (!isset($record['affiche'])) {
 		return;
 	}
@@ -126,6 +128,8 @@ function showPoster(&$record)
 
 function displayReview($review)
 {
+        include('vars.php');
+        
 	echo '<div class="tinReview">'
 		. '<div class="tinReviewRating">' . str_repeat('<span class="tinReviewStar">*</span>', (int)$review->rating) . '</div>'
 		. '<div class="tinReviewTitle">' . $review->title . '</div>'
@@ -447,6 +451,8 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
 <?php
 function objectsIntoArray($arrObjData, $arrSkipIndices = array())
 {
+    include('vars.php');    
+        
     $arrData = array();
 
     // if input is object, convert into array
@@ -470,6 +476,8 @@ function objectsIntoArray($arrObjData, $arrSkipIndices = array())
 
 function list_characters1($characters)
 {
+        include('vars.php');
+        
 	echo '<dt>Characters</dt><dd>';
 	foreach ($characters as $ch) {
 		if (!empty($ch['characters.performer'])) {
@@ -496,6 +504,8 @@ function list_characters1($characters)
 
 function list_characters2($characters)
 {
+        include('vars.php');
+        
 	echo '<dt>Characters</dt><dd>';
 
 	if (isset($characters['description'])) {
@@ -560,11 +570,7 @@ function list_characters2($characters)
 
 function list_node_image($node, $parentKey = false, $isList = false)
 {
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $intern = false;
-        
-        if($ip == '188.205.194.154' || $ip == '127.0.0.1')
-                $intern = true;
+        include('vars.php');
         
         $element = $node["media"];
         

@@ -9,7 +9,7 @@ div.tinPageNav {
 	div.tinPageNavMiddle {
 		position: relative;
 		margin: 0 7em 0 5.5em;
-        float: left;
+                float: left;
 	}
 
 	div.tinPageNav a {
@@ -30,8 +30,8 @@ div.tinPageNav {
 	div.tinPageNav span.tinPageNavNext, div.tinPageNav span.tinPageNavPrev {
 		padding: 0 .8em 0 0;
 		height: auto;
-        min-width: 80px;
-        float: left;
+                min-width: 70px;
+                float: left;
 	}
 
 	div.tinPageNav span.tinPageNavPrev a,

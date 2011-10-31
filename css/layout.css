@@ -63,10 +63,10 @@ div.navtabs {
         display: block;
         height: 34px;
         width: 77px;
-        background: url('../images/vintage.jpg') 0 0 no-repeat;
+        background: url('../images/catalogusTabs/vintage.jpg') 0 0 no-repeat;
 }
 .navtabs a.tab:hover {
-        background: url('../images/vintage_over.jpg') 0 0 no-repeat;
+        background: url('../images/catalogusTabs/vintage_over.jpg') 0 0 no-repeat;
 }
 div.tinSearchSidebar
 {
@@ -237,7 +237,7 @@ div.tinSearchFacets div li.facet_toggle a {
         font-weight: bold;
 }
 .tinSearchNumberOfResults h1 a.tinButton {
-        background: url('../images/tinCloseBtn.jpg') 0 0 no-repeat;
+        background: url('../images/buttons/tinCloseBtn.jpg') 0 0 no-repeat;
         width: 13px;
         height: 13px;
         display: inline-block;
@@ -265,7 +265,7 @@ h3.terug {
         cursor: pointer;
 }
 div.faq {
-        background: url('../images/faq_info.jpg') 0 0 no-repeat;
+        background: url('../images/buttons/faq_info.jpg') 0 0 no-repeat;
         position: absolute;
         top: 109px;
         right: 0px;
