@@ -1,59 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    	<title>TIN Zoekresultaten</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <link href="css/layout.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="css/detail.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="css/tindetail.css" rel="stylesheet" type="text/css" media="screen" />
-        <script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript" src="js/tinlogin.js"></script>
-        <script type="text/javascript" src="js/jwplayer/swfobject.js"></script>
-        
-        <script type="text/javascript">
-                var count = 1;
-                
-        	$(function()
-			{
-				$('#tinLogin').tinLogin({
-					login: function() {
-						window.location.reload();
-					},
-					logout: function() {
-						window.location.reload();
-					}
-				});
-			});
-                        
-                function initPlayer(url, height, title) {
-                          //plaats swfobject in html van image-here
-                          $('div.image-here').html($('div.image-here').html() + '<h4>' + title + ' ' + count + '</h4><div id="container1">Loading the player ... </div><br/>');
-                          //verwijder grijze background
-                          $('div.image-here').css('background', 'none');
-                          
-                          var flashvars = { file:url, autostart:'false' };
-                          var params = { allowfullscreen:'true', allowscriptaccess:'always' };
-                          var attributes = { id:'player1', name:'player1' };
-                          
-                          swfobject.embedSWF('js/jwplayer/player.swf','container1','640',height,'9.0.115','false', flashvars, params, attributes);
-                          
-                          count += 1;
-                }
-		</script>
-    </head>
-    <body>
-
-	<!--zoekresultaat-->
-        <div class="image-here"></div>
-	<div class="search-result">
-	
 <?php
 include('vars.php');
 
 date_default_timezone_set('Europe/Amsterdam');
 
-function curl_get_uri($uri, $method = 'GET', $data = NULL, $accept = 'application/json', $contentType = 'application/json')
+function curl_get_uri($uri, $method = 'GET', $calldata = NULL, $accept = 'application/json', $contentType = 'application/json')
 {
         include('vars.php');
         
@@ -62,8 +12,8 @@ function curl_get_uri($uri, $method = 'GET', $data = NULL, $accept = 'applicatio
 		'Content-Type: ' . $contentType
 	);
 
-	if (is_array($data)) {
-		$data = json_encode($data);
+	if (is_array($calldata)) {
+		$calldata = json_encode($calldata);
 	}
         
         if($intern) {
@@ -82,11 +32,11 @@ function curl_get_uri($uri, $method = 'GET', $data = NULL, $accept = 'applicatio
 			break;
 		case 'POST':
 			curl_setopt($handle, CURLOPT_POST, true);
-			curl_setopt($handle, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($handle, CURLOPT_POSTFIELDS, $calldata);
 			break;
 		case 'PUT':
 			curl_setopt($handle, CURLOPT_CUSTOMREQUEST, 'PUT');
-			curl_setopt($handle, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($handle, CURLOPT_POSTFIELDS, $calldata);
 			break;
 		case 'DELETE':
 			curl_setopt($handle, CURLOPT_CUSTOMREQUEST, 'DELETE');
@@ -107,39 +57,218 @@ function showPoster($record)
 {
         include('vars.php');
         
+        $affiches = array();
+        
 	if (!isset($record['affiche'])) {
-		return;
+		return $affiches;
 	}
 	if (!is_array($record['affiche'])) {
 		$record['affiche'] = array($record['affiche']);
 	}
         
-        if($intern)
-                foreach ($record['affiche'] as $e) {
-                        echo '<img src="' . $e . '" class="affiche" />';
-                }
-        else
-                foreach ($record['affiche'] as $e) {
-                        echo '<img src="'. $stdImg .'" class="affiche" />';
-                }
+        foreach ($record['affiche'] as $e) {
+                array_push($affiches, '<img src="' . $e . '" class="affiche" />');
+        }
 
-	unset($record['affiche']);
+	return $affiches;
 }
 
 function displayReview($review)
 {
         include('vars.php');
         
-	echo '<div class="tinReview">'
-		. '<div class="tinReviewRating">' . str_repeat('<span class="tinReviewStar">*</span>', (int)$review->rating) . '</div>'
-		. '<div class="tinReviewTitle">' . $review->title . '</div>'
-		. '<div class="tinReviewContent">' . $review->content . '</div>'
-		. '<div class="tinReviewAuthor">' . $review->sender . ' | ' . date('d-m-Y | H:i', strtotime($review->created)) . '</div>'
-		. '</div>';
+        $data->review->rating = str_repeat('<span class="tinReviewStar">*</span>', (int)$review->rating);
+        $data->review->title = $review->title;
+        $data->review->content = $review->content;
+        $data->review->sender = $review->sender;
+        $data->review->date = $review->created;
 }
 
+function list_characters1($characters)
+{
+        print_r('in');
+        include('vars.php');
+        
+	echo '<dt>Characters</dt><dd>';
+	foreach ($characters as $ch) {
+		if (!empty($ch['characters.performer'])) {
+			if (!empty($ch['characters.performer_function'])) {
+				echo ucfirst($ch['characters.performer_function']) . ': ';
+				unset($ch['characters.performer_function']);
+			}
+			$ch_link_start = $ch_link_end = '';
+			if (!empty($ch['characters.performer.lref'])) {
+				$ch_link_start = '<a href="detail.php?person=' . $ch['characters.performer.lref'] . '">';
+				$ch_link_end = '</a>';
+				unset($ch['characters.performer.lref']);
+			}
+			echo $ch_link_start . $ch['characters.performer'] . $ch_link_end . '<br />';
+			unset($ch['characters.performer']);
+		}
+		foreach ($ch as $k => $ch_detail) {
+			if (!empty($ch_detail)) {
+				echo ucfirst(str_replace('characters.', '', $k)) . ': ' . $ch_detail . '<br />';
+			}
+		}
+	}
+}
+
+function list_characters2($characters)
+{
+        print_r('in');
+        include('vars.php');
+        
+	echo '<dt>Characters</dt><dd>';
+
+	if (isset($characters['description'])) {
+
+		$characters = array($characters);
+	}
+
+	echo '<table cellpadding="3" cellspacing="0" class="characters">';
+	$odd = false;
+	$first = 'first ';
+	foreach ($characters as $ch) {
+
+		echo '<tr class="' . $first . 'character ' . ($odd ? 'odd' : 'even') . '">';
+		$first = '';
+		//echo '<pre>';var_dump($ch); echo '#'; continue;
+
+		echo '<td class="character_img" valign="top">';
+		if (!empty($ch['image']) && $intern) {
+			echo '<img src="' . $ch['image'] . '">';
+			unset($ch['image']);
+		} else if(!empty($ch['image'])) {
+                        echo '<img src="' . $stdImg . '">';
+			unset($ch['image']);
+                }
+		echo '</td>';
+		if (!empty($ch['performer'])) {
+			$ch_link_start = $ch_link_end = '';
+			if (!empty($ch['performerid'])) {
+				$ch_link_start = '<a href="detail.php?person=' . $ch['performerid'] . '">';
+				$ch_link_end = '</a>';
+				unset($ch['performerid']);
+			}
+			echo '<td class="performer_name" valign="top">' . $ch_link_start . $ch['performer'] . $ch_link_end . '</td>';
+			unset($ch['performer']);
+			if (!empty($ch['function'])) {
+				echo '<td class="performer_function" valign="top">' . ucfirst($ch['function']) . '</td>';
+				unset($ch['function']);
+			}
+		}
+
+		echo '<td class="character_name" valign="top">';
+		if (!empty($ch['name'])) {
+			echo $ch['name'];
+			unset($ch['name']);
+		}
+		echo '</td>';
+
+		$details = array();
+		foreach ($ch as $k => $ch_detail) {
+			if (!empty($ch_detail)) {
+				$details[] = ucfirst($k) . ': ' . $ch_detail . '<br />';
+			}
+		}
+		if (count($details)) {
+			echo '<td class="character_details" valign="top">' . implode('&nbsp;| ', $details) . '</td>';
+		}
+		echo '</tr>';
+		$odd = !$odd;
+	}
+	echo '</table>';
+}
+
+function disp_media($element, $parentKey = false, $isList = false)
+{
+        include('vars.php');
+        
+        $media = array();
+        
+        if(!empty($element) && '' != $element) {
+                foreach ($element as $e) {
+                        //webexcluded, intern gebruik
+                        if(($e['webExclusion'] == true && $intern) || $e['webExclusion'] == false) {
+                                if($e['photo']) {
+                                        array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
+                                } elseif($e['video']) {
+                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.flv') . '", "350", "Videofragment");</script>');
+                                } elseif($e['audio']) {
+                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>');
+                                }
+                        //webexcluded, geen intern gebruik
+                        } elseif ($e['webExclusion'] == true && !$intern) {
+                                array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
+                        }
+                }
+        }
+        
+        return $media;
+}
+
+function list_node($node, $data, $parentKey = false, $isList = false)
+{
+	foreach ($node as $k => $element) {
+		if(!empty($element) && '' != $element){
+                        if (is_array($element)) {
+                                if ($parentKey === 'Edit') {
+                                        $data->edit = $element['edit.date'] . ' ' . $element['edit.time'] . ' by ' . $element['edit.name'] . ' from ' . $element['edit.source'];
+                                } elseif ($k === 'value') {
+                                        list_node($element, $data, $k, true);
+                                } elseif ($k === 'character') {
+                                        list_characters1($element);
+                                } elseif ($k === 'characters') {
+                                        list_characters2($element);
+                                } elseif ($k === 'material') {
+                                        $data->material->label = display_label($k);
+
+                                        $materials = array();
+                                        foreach ($element as $e) {
+                                                $materials[] = '<a href="detail.php?object=' . $e . '">' . $e . '</a>';
+                                        }
+                                        
+                                        $data->material->materials = implode(', ', $materials);
+                                } elseif ($isList) {
+                                        $data->value->label = display_label($parentKey);
+                                        list_node($element, $data, $k);
+                                } else {
+                                        $data->leftover->label = display_label($k);
+                                        list_node($element, $data, $k);
+                                }
+                        } else {
+                                if ($isList) {
+                                        $data->noarraylist->data = $element;
+                                } else {
+                                        $data->noarraynolist->label = display_label($k);
+                                        $data->noarraynolist->data = $element;
+                                }
+                        }
+                }
+	}
+}
+
+function display_label($label)
+{
+	//return $label;
+	$label = ucfirst(str_replace(array('.', '_'), ' ', $label));
+	switch ($label) {
+		case 'Edit':
+			return 'Edits';
+		case 'Input date':
+			return 'Input by';
+		default:
+			return $label;
+	}
+}
+
+
+
+//start working
 $loggedIn = false;
 $isEditor = false;
+
+//get loggedin user data
 if (isset($_COOKIE['emailaddress']) && isset($_COOKIE['password'])) {
 	$json = curl_get_uri($host . 'rest/users/login', 'POST', $x = 'userid=' . urlencode($_COOKIE['emailaddress']) . '&pw=' . urlencode($_COOKIE['password']), 'application/json', 'application/x-www-form-urlencoded');
 	echo $json;
@@ -154,6 +283,7 @@ if (isset($_COOKIE['emailaddress']) && isset($_COOKIE['password'])) {
 
 $xmluri = false;
 
+//select right source
 if (isset($_GET['apiuri'])) {
 	$xmluri = str_replace('http://172.16.1.20/catalogus/', 'http://catalogus.tin.nl/', urldecode($_GET['apiuri']));
 } elseif (isset($_GET['production'])) {
@@ -165,60 +295,23 @@ if (isset($_GET['apiuri'])) {
 } elseif (isset($_GET['collection'])) {
 	$xmluri = $host . 'rest/collection/' . (int)$_GET['collection'];
 } else {
-	exit;
+	exit();
 }
 
-/*****
- * 
- * 
- * 
- * 
- * DEVVING
- * 
- * 
- * 
- * 
- */
-
-
-
-//print_r(curl_get_uri($xmluri));
-
-
-
-/*****
- * 
- * 
- * 
- * 
- * DEVVING
- * 
- * 
- * 
- * 
- */
-
-if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true))) {
-	if (!empty($record['collection'])) {
-		unset($record['collection']);
-	}
-        
+$data = new stdClass();
+print_r(curl_get_uri($xmluri));
+//start selecting
+if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true))) {        
 	if (isset($record['input.date']) || isset($record['input.time']) || isset($record['input.name']) || isset($record['input.source'])) {
-		$record['input.date'] = $record['input.date'] . ' ' . $record['input.time'] . ' by ' . $record['input.name'] . ' from ' . $record['input.source'] . '<br />';
-		unset($record['input.time']);
-		unset($record['input.name']);
-		unset($record['input.source']);
+		$data->input_date = $record['input.date'] . ' ' . $record['input.time'] . ' by ' . $record['input.name'] . ' from ' . $record['input.source'];
 	}
 
 	if (isset($record['company']) && isset($record['company.lref'])) {
-		$record['company'] = '<a href="detail.php?person=' . $record['company.lref'] . '">' . $record['company'] . '</a>';
-		unset($record['company.lref']);
+		$data->company = '<a href="detail.php?person=' . $record['company.lref'] . '">' . $record['company'] . '</a>';
 	}
 
-	$title = '<i>Geen titel</i>';
 	if (!empty($record['title'])) {
-		$title = $record['title'];
-		unset($record['title']);
+		$data->title = $record['title'];
 	}
 
 	if (!empty($record['companies'])) {
@@ -226,35 +319,22 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
 		foreach ($record['companies'] as $company) {
 			$companies[] = '<a href="detail.php?person=' .$company['id'] . '">' .$company['title'] . '</a>';
 		}
-		$record['companies'] = implode(', ', $companies);
+		$data->companies = implode(', ', $companies);
 	}
-
-	showPoster($record);
         
-        list_node_image($record);
+        if(!empty($record['media'])) {
+                $data->images = disp_media($record['media']);
+        }
 
-	echo '<h1>' . $title .'</h1>';
-
-	if (!empty($record['discipline'])) {
-		echo '<div class="disciplines">';
-		for ($i = 0; $i < count($record['discipline']); $i++) {
-			$record['discipline'][$i] = '<a href="?q=' . urlencode(strtolower($record['discipline'][$i])) . '">' . $record['discipline'][$i] . '</a>';
-		}
-		echo implode('&nbsp;| ', $record['discipline']);
-		unset($record['discipline']);
-		echo '</div>';
-	}
+	$data->affiches = showPoster($record);
 
 	if (!empty($record['characters'])) {
-		echo '<dl>';
-		list_characters2($record['characters']);
-		echo '</dl>';
-		unset($record['characters']);
+		$data->characters = $record['characters'];
 	}
 
-	list_node($record);
+	list_node($record, $data);
 
-	if (!empty($record['id'])) {
+	/*if (!empty($record['id'])) {
 		$reviewErrors = array();
 		if ($loggedIn) {
 			$user = curl_get_uri($host . 'rest/users/' . $loggedIn->id, 'GET');
@@ -440,232 +520,8 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
 			echo '<a href="reviewadmin.php" class="tinReviewsAdmin" target="_blank">Recensiebeheer</a>';
 		}
 		echo '</div>';
-	}
+	}*/
 }
 
-?>
-
-	</div> <!--eind zoek resultaten-->
-    </body>
-</html>
-<?php
-function objectsIntoArray($arrObjData, $arrSkipIndices = array())
-{
-    include('vars.php');    
-        
-    $arrData = array();
-
-    // if input is object, convert into array
-    if (is_object($arrObjData)) {
-        $arrObjData = get_object_vars($arrObjData);
-    }
-
-    if (is_array($arrObjData)) {
-        foreach ($arrObjData as $index => $value) {
-            if (is_object($value) || is_array($value)) {
-                $value = objectsIntoArray($value, $arrSkipIndices); // recursive call
-            }
-            if (in_array($index, $arrSkipIndices)) {
-                continue;
-            }
-            $arrData[$index] = $value;
-        }
-    }
-    return $arrData;
-}
-
-function list_characters1($characters)
-{
-        include('vars.php');
-        
-	echo '<dt>Characters</dt><dd>';
-	foreach ($characters as $ch) {
-		if (!empty($ch['characters.performer'])) {
-			if (!empty($ch['characters.performer_function'])) {
-				echo ucfirst($ch['characters.performer_function']) . ': ';
-				unset($ch['characters.performer_function']);
-			}
-			$ch_link_start = $ch_link_end = '';
-			if (!empty($ch['characters.performer.lref'])) {
-				$ch_link_start = '<a href="detail.php?person=' . $ch['characters.performer.lref'] . '">';
-				$ch_link_end = '</a>';
-				unset($ch['characters.performer.lref']);
-			}
-			echo $ch_link_start . $ch['characters.performer'] . $ch_link_end . '<br />';
-			unset($ch['characters.performer']);
-		}
-		foreach ($ch as $k => $ch_detail) {
-			if (!empty($ch_detail)) {
-				echo ucfirst(str_replace('characters.', '', $k)) . ': ' . $ch_detail . '<br />';
-			}
-		}
-	}
-}
-
-function list_characters2($characters)
-{
-        include('vars.php');
-        
-	echo '<dt>Characters</dt><dd>';
-
-	if (isset($characters['description'])) {
-
-		$characters = array($characters);
-	}
-
-	echo '<table cellpadding="3" cellspacing="0" class="characters">';
-	$odd = false;
-	$first = 'first ';
-	foreach ($characters as $ch) {
-
-		echo '<tr class="' . $first . 'character ' . ($odd ? 'odd' : 'even') . '">';
-		$first = '';
-		//echo '<pre>';var_dump($ch); echo '#'; continue;
-
-		echo '<td class="character_img" valign="top">';
-		if (!empty($ch['image']) && $intern) {
-			echo '<img src="' . $ch['image'] . '">';
-			unset($ch['image']);
-		} else if(!empty($ch['image'])) {
-                        echo '<img src="' . $stdImg . '">';
-			unset($ch['image']);
-                }
-		echo '</td>';
-		if (!empty($ch['performer'])) {
-			$ch_link_start = $ch_link_end = '';
-			if (!empty($ch['performerid'])) {
-				$ch_link_start = '<a href="detail.php?person=' . $ch['performerid'] . '">';
-				$ch_link_end = '</a>';
-				unset($ch['performerid']);
-			}
-			echo '<td class="performer_name" valign="top">' . $ch_link_start . $ch['performer'] . $ch_link_end . '</td>';
-			unset($ch['performer']);
-			if (!empty($ch['function'])) {
-				echo '<td class="performer_function" valign="top">' . ucfirst($ch['function']) . '</td>';
-				unset($ch['function']);
-			}
-		}
-
-		echo '<td class="character_name" valign="top">';
-		if (!empty($ch['name'])) {
-			echo $ch['name'];
-			unset($ch['name']);
-		}
-		echo '</td>';
-
-		$details = array();
-		foreach ($ch as $k => $ch_detail) {
-			if (!empty($ch_detail)) {
-				$details[] = ucfirst($k) . ': ' . $ch_detail . '<br />';
-			}
-		}
-		if (count($details)) {
-			echo '<td class="character_details" valign="top">' . implode('&nbsp;| ', $details) . '</td>';
-		}
-		echo '</tr>';
-		$odd = !$odd;
-	}
-	echo '</table>';
-}
-
-function list_node_image($node, $parentKey = false, $isList = false)
-{
-        include('vars.php');
-        
-        $element = $node["media"];
-        
-        if(!empty($element) && '' != $element) {
-                foreach ($element as $e) {
-                        //webexcluded, intern gebruik
-                        if($e['webExclusion'] == true && $intern) {
-                                if($e['photo']) {
-                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                } elseif($e['video']) {
-                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.flv') . '", "350", "Videofragment");</script>';
-                                } elseif($e['audio']) {
-                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>';
-                                }
-                        //niet webexcluded
-                        } elseif ($e['webExclusion'] == false) {
-                                if($e['photo']) {
-                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                } elseif($e['video']) {
-                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=false', '', $e['url'].'.flv') . '", "350", "Videofragment");</script>';
-                                } elseif($e['audio']) {
-                                        echo '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=false', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>';
-                                }
-                        //webexcluded, geen intern gebruik
-                        } elseif ($e['webExclusion'] == true && !$intern) {
-                                if($e['photo']) {
-                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                } elseif($e['video']) {
-                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                } elseif($e['audio']) {
-                                        echo '<img src="' . $e['url'] . '" class="adlibimg" />';
-                                }
-                        }
-                }
-        }
-}
-
-function list_node($node, $parentKey = false, $isList = false)
-{
-	echo '<dl>';
-	foreach ($node as $k => $element) {
-		if(!empty($element) && '' != $element){
-		if (is_array($element)) {
-			if ($parentKey === 'Edit') {
-				echo $element['edit.date'] . ' ' . $element['edit.time'] . ' by ' . $element['edit.name'] . ' from ' . $element['edit.source'] . '<br />';
-                        } elseif ($k === 'media' || $k === 'image') {
-                                continue;
-			} elseif ($k === 'value') {
-				list_node($element, $k, true);
-			} elseif ($k === 'character') {
-				list_characters1($element);
-			} elseif ($k === 'characters') {
-				list_characters2($element);
-			} elseif ($k === 'material') {
-				echo '<dt>' . display_label($k) . '</dt><dd>';
-
-				$materials = array();
-				foreach ($element as $e) {
-					$materials[] = '<a href="detail.php?object=' . $e . '">' . $e . '</a>';
-				}
-				echo implode(', ', $materials) . '</dd><br />';
-			} elseif ($isList) {
-				echo '<dt>' . display_label($parentKey) . '</dt><dd>';
-				list_node($element, $k);
-				echo '</dd>';
-			} else {
-				echo '<dt>' . display_label($k) . '</dt><dd>';
-				list_node($element, $k);
-				echo '</dd>';
-			}
-		} else {
-			if ($isList) {
-				echo $element . '<br />';
-			} else {
-				echo '<dt>' . display_label($k) . '</dt><dd>' . $element . '</dd><br />';
-			}
-		}
-
-	}
-	}
-
-	echo '</dl>';
-}
-
-function display_label($label)
-{
-	//return $label;
-	$label = ucfirst(str_replace(array('.', '_'), ' ', $label));
-	switch ($label) {
-		case 'Edit':
-			return 'Edits';
-		case 'Input date':
-			return 'Input by';
-		default:
-			return $label;
-	}
-}
+include('detailView.php');
 ?>

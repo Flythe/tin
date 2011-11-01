@@ -9,7 +9,7 @@ $debugIp = '127.0.0.1';
 $internIp = '188.205.194.154';
 
 if($thisIp == $debugIp) {
-        $debug = true;
+        //$debug = true;
 }
 // end IP vars
 
@@ -27,7 +27,7 @@ if($thisIp == $debugIp) {
 // set internal or external access
 $intern = false;
 
-if($thisIp == $internIp || $thisIp == $debugIp) {
+if(($thisIp == $internIp || $thisIp == $debugIp) && $debug) {
         $tinUrl = 'http://tin-as-01/catalogus';
         $intern = true;
 }
