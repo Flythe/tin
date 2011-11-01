@@ -9,7 +9,7 @@ $debugIp = '127.0.0.1';
 $internIp = '188.205.194.154';
 
 if($thisIp == $debugIp) {
-        //$debug = true;
+        $debug = true;
 }
 // end IP vars
 
