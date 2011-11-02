@@ -34,7 +34,6 @@
                         )
                         .then(function() {
                                 // bind triggers to detect changes in each widget
-                                console.log('in');
                                 if (!$.fn.tinSearch.initialized) {
                                         $(window).bind('hashchange',function() {
                                                 // Iterate over all search widgets

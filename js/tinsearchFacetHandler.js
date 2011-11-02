@@ -167,7 +167,7 @@ function parseFacets(container, jsonObject, facets)
                                 
                                 if(drop_facet) {
                                     $('li:gt(2)', this).show();
-                                    $(this).children().last().html('');
+                                    $(this).children().last().remove()
                                 }
                         });
                         

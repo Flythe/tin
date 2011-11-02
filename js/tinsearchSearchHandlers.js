@@ -401,12 +401,12 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
         }
         
         if (!jsonObj.docs || !jsonObj.docs.length || nmbrOfResultsHtml === false) {
-                dbg('reset ... ', true);
                 $('div.tinSearchNumberOfResults', container).html(nmbrOfResultsHtml == false ? '' : '<h1>' + nmbrOfResultsHtml + '</h1>');
                 $('div.tinSearchSuggestion').remove();
                 $('div.tinSearchResults', container).html('');
                 $('div.tinTagCloud', container).html('');
                 $('div.tinPageNav', container).html('').hide();
+                nmbrOfResultsHtml == false ? $('div.welcome', container).show() : $('div.welcome', container).hide();
 
                 if (suggestion) {
                         $('.tinSearchNumberOfResults', container).after(suggestion_str);
@@ -414,7 +414,7 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
 
                 return;
         } else {
-                dbg('showing ... ', true);
+                $('div.welcome', container).hide();
                 $('.tinSearchNumberOfResults', container).html('<h1>' + nmbrOfResultsHtml + '</h1>');
         }
 
