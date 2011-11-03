@@ -214,10 +214,11 @@
 
 function initContinue(ob, opts)
 {
-        dbg('initContinue() ' + $(ob).attr('id'));
         if (opts.changeResultsOnType) {
                 $('input.tinSearchInput', ob).live('keyup', function(e) {
-                        changeResultsOnType(ob, $('.tinSearchAdlibSearchfield').val() !== '*');
+                        if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) {
+                                changeResultsOnType(ob, $('.tinSearchAdlibSearchfield').val() !== '*');
+                        }
                 });
         }        
 
@@ -252,13 +253,13 @@ function initContinue(ob, opts)
                 }
         });
 
-        $('div.tinSearchDetail', ob).live('mouseleave', function() {
+        /*$('div.tinSearchDetail', ob).live('mouseleave', function() {
                 $(this).hide();
                 if ($.fn.tinSearch.hoverdelay) {
                         clearTimeout($.fn.tinSearch.hoverdelay);
                         $.fn.tinSearch.hoverdelay = null;
                 }
-        });
+        });*/
 
         $('button.tinPlayButton', ob).live('click', function() {
                 var button = $(this);
@@ -330,7 +331,7 @@ function initContinue(ob, opts)
         });
         
         // Handle search input field
-        $('input.tinSearchInput', ob).live('keyup', function(e) {
+        /*$('input.tinSearchInput', ob).live('keyup', function(e) {
                 var params = getSearchParams(ob);
                 var data = $(ob).data( 'tinSearch' );
             
@@ -349,8 +350,8 @@ function initContinue(ob, opts)
                         
                         params.tinSearchInput = $(this).val();
                         search(ob, $.param(params));
-				}
-        });
+                }
+        });*/
         
         // Handle searchfield change
         $('select.tinSearchAdlibSearchfield', ob).change(function(){

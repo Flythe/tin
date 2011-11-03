@@ -129,7 +129,7 @@ function search(ob, url)
         if(params.tinSearchInput == undefined || params.tinSearchInput === options.defaultInput)
                 params.tinSearchInput = '';
 
-        data.q = params.tinSearchInput;
+        data.q = $.trim(params.tinSearchInput);
         data.searchField = params.tinSearchAdlibSearchfield;
         data.combineSearch = params.combineSearch;
         data.theSaurus = params.theSaurus;
@@ -635,6 +635,7 @@ function getSearchEntry(entry, options)
         var copyNumber = !entry.copyNumber || 0 == entry.copyNumber ? '' : 'Kopienummer: ' + entry.copyNumber + '<br/>';
         var shelfMark = !entry.shelfMark || 0 == entry.shelfMark ? '' : 'Lokatiecode: ' + entry.shelfMark + '<br/>';
         var loanStatus = !entry.loanStatus || 0 == entry.loanStatus ? '' : 'Uitleenstatus: ' + entry.loanStatus + '<br/>';
+        var copyright = !entry.copyright ? '' : 'Copyright: ' + entry.copyright;
         //var keywords = !entry.keywords ? '' : 'Tags: ' + (typeof(entry.keywords) != 'object' ? entry.keywords.split(',') : entry.keywords) + '<br />';
         //var disciplines = !entry.discipline ? '' : 'Disciplines: ' + entry.discipline.join(', ') + '<br />';
         //var type = !entry.type ? '' : 'Bron: ' + (options.facetTranslations[entry.type] ? options.facetTranslations[entry.type] : entry.type) + '<br />';
@@ -720,14 +721,15 @@ function getSearchEntry(entry, options)
                                 '<p>' +
                                         year +
                                         materialType +
-                                '</p>' +
-                                '<p class="pHidden">' +
                                         description +
                                         creators +
+                                '</p>' +
+                                '<p class="pHidden">' +
                                         publisher +
                                         copyNumber +
-                                        shelfMark +
+                                        copyright +
                                         loanStatus +
+                                        shelfMark +
                                 '</p>' +
                                 '<div class="tinClear"></div>' +
                         '</div>';

@@ -70,5 +70,8 @@
                         
                         echo 'omschrijving: ';
                         loop($data->omschrijving);
+                        
+                        echo 'copyright: ';
+                        echo $data->copyright;
                 ?>
         </div>

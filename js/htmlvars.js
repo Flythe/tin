@@ -52,7 +52,7 @@ function insertImg(imgName, className) {
                 'Alles':'buttons/button_alles.jpg',
                 'Afbeeldingen':'buttons/button_afbeeldingen.jpg',
                 'field_search':'zoekspecifiekveld.jpg',
-                'thesaurus':'thesaurus/thesaurus_animatie.gif',
+                'thesaurus':'thesaurus/thesaurus.jpg',
                 'Thesaurus breed':'thesaurus/thesaurus_breed.png',
                 'Thesaurus hulp':'thesaurus/thesaurus_theatertermenhulp.png',
                 'Thesaurus gelijk':'thesaurus/thesaurus_gelijksoortig.png',

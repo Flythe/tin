@@ -307,10 +307,6 @@ div.tinSearchResults div img:first-child {
         margin: 0;
 	float: left;
 }
-/*div.tinSearchResults div img.tinSearchResultImg {
-        margin: 0;
-        float: left;
-}*/
 div.tinSearchResults div img {
         margin: 4px 0px 6px 15px;
 	float: right;
@@ -342,6 +338,7 @@ div.tinSearchResult
 {
 	border-top: thin dashed #CCCCCC;
 	display: inline-block;
+        zoom:1; *display: inline; _height: 10px;
 	width: 589px;
 	padding-top: 8px;
 }
@@ -534,6 +531,7 @@ ul.search-result li
 {
 	border-bottom: thin dashed #CCCCCC;
 	display: inline-block;
+        zoom:1; *display: inline; _height: 10px;
 	width: 589px;
 	height: 82px;
 	margin: 0 0 0 -2px;
@@ -564,6 +562,7 @@ div.search-result
 {
 	border-top: thin dashed #CCCCCC;
 	display: inline-block;
+        zoom:1; *display: inline; _height: 10px;
 	width: 589px;
 	padding-top: 8px;
 }

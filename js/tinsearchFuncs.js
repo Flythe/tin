@@ -75,6 +75,7 @@ function messageQuery(q, cont, combine)
                 return q;
         
         q = q.toLowerCase();
+        //q = $.trim(q);
         
         if(combine && combine != 'exact' && cont == '*') {
                 q = q.split(' ');
@@ -128,6 +129,7 @@ function removeDefault(el) {
                 el.val('');
 }
 
+// uitgebreid zoeken
 function showMenu(ob) {
         $('h4.tinSimpel', ob).show();
         $('h4.tinUitgebreid', ob).hide();
@@ -136,6 +138,7 @@ function showMenu(ob) {
         $('img.catalogusImg', ob).attr('src', 'images/TIN_Catalogus_uitgebreid.jpg');
 }
 
+// eenvoudig zoeken
 function hideMenu(ob) {
         $('h4.tinSimpel').hide();
         $('h4.tinUitgebreid', ob).show();
