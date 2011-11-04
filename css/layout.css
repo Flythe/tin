@@ -63,10 +63,10 @@ div.navtabs {
         display: block;
         height: 34px;
         width: 77px;
-        background: url('../images/vintage.jpg') 0 0 no-repeat;
+        background: url('../images/catalogusTabs/vintage.jpg') 0 0 no-repeat;
 }
 .navtabs a.tab:hover {
-        background: url('../images/vintage_over.jpg') 0 0 no-repeat;
+        background: url('../images/catalogusTabs/vintage_over.jpg') 0 0 no-repeat;
 }
 div.tinSearchSidebar
 {
@@ -93,8 +93,9 @@ div.tinSearchSidebar div.tinSearchMenu
 	width: 276px;
 }
 div#tinZoektIn {
+    font-family: 'Times new roman';
     color: #666666;
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
     margin: 0 17px 0 0;
     text-align: right;
@@ -228,7 +229,11 @@ div.tinSearchFacets div li.facet_toggle {
 div.tinSearchFacets div li.facet_toggle a {
         color: #999999;
 }
-
+.tinSearchContainer div.welcome {
+        margin: 106px 0 0 0;
+        color: #666666;
+        font: italic 14px 'Times new roman';
+}
 .tinSearchNumberOfResults h1 {
         margin: 80px 0 0 0;
         color: #A40084;
@@ -237,7 +242,7 @@ div.tinSearchFacets div li.facet_toggle a {
         font-weight: bold;
 }
 .tinSearchNumberOfResults h1 a.tinButton {
-        background: url('../images/tinCloseBtn.jpg') 0 0 no-repeat;
+        background: url('../images/buttons/tinCloseBtn.jpg') 0 0 no-repeat;
         width: 13px;
         height: 13px;
         display: inline-block;
@@ -265,7 +270,7 @@ h3.terug {
         cursor: pointer;
 }
 div.faq {
-        background: url('../images/faq_info.jpg') 0 0 no-repeat;
+        background: url('../images/buttons/faq_info.jpg') 0 0 no-repeat;
         position: absolute;
         top: 109px;
         right: 0px;
@@ -302,10 +307,6 @@ div.tinSearchResults div img:first-child {
         margin: 0;
 	float: left;
 }
-/*div.tinSearchResults div img.tinSearchResultImg {
-        margin: 0;
-        float: left;
-}*/
 div.tinSearchResults div img {
         margin: 4px 0px 6px 15px;
 	float: right;
@@ -337,6 +338,7 @@ div.tinSearchResult
 {
 	border-top: thin dashed #CCCCCC;
 	display: inline-block;
+        zoom:1; *display: inline; _height: 10px;
 	width: 589px;
 	padding-top: 8px;
 }
@@ -529,6 +531,7 @@ ul.search-result li
 {
 	border-bottom: thin dashed #CCCCCC;
 	display: inline-block;
+        zoom:1; *display: inline; _height: 10px;
 	width: 589px;
 	height: 82px;
 	margin: 0 0 0 -2px;
@@ -559,6 +562,7 @@ div.search-result
 {
 	border-top: thin dashed #CCCCCC;
 	display: inline-block;
+        zoom:1; *display: inline; _height: 10px;
 	width: 589px;
 	padding-top: 8px;
 }

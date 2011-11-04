@@ -37,10 +37,12 @@
 		this.ignoreValueChange = false;
 		this.serviceUrl = options.serviceUrl;
 		this.isLocal = false;
+                this.timeKill = true;
 		var autoparams = { };
 		//if (options.fq) autoparams.fq = options.fq;
 		if (options.thesaurus) autoparams.thesaurus = options.thesaurus;
 		this.options = {
+                        timeout: 6000,
 			autoSubmit: false,
 			minChars: 1,
 			maxHeight: 300,
@@ -70,7 +72,7 @@
 			uid = Math.floor(Math.random() * 0x100000).toString(16);
 			autocompleteElId = 'Autocomplete_' + uid;
 
-			this.killerFn = function(e) {
+			this.killerFn = function(e) {                                
 				if ($(e.target).parents('.tinAutocomplete').size() === 0) {
 					me.killSuggestions();
 					me.disableKillerFn();
@@ -82,9 +84,6 @@
                         this.el.after('<div id="' + this.mainContainerId + '" style="position:relative; z-index:9999">'
 				+ '<div class="tinAutocompleteWrapper"><div class="tinAutocomplete" id="' + autocompleteElId
 				+ '" style="display:none; width:300px"></div></div></div>')
-			/*$('<div id="' + this.mainContainerId + '" style="position:relative; z-index:9999">'
-				+ '<div class="tinAutocompleteWrapper"><div class="tinAutocomplete" id="' + autocompleteElId
-				+ '" style="display:none; width:300px"></div></div></div>').appendTo(this.el.parent());*/
 
 			this.container = $('#' + autocompleteElId);
 			this.fixPosition();
@@ -151,6 +150,18 @@
     stopKillSuggestions: function() {
       window.clearInterval(this.intervalId);
     },
+    
+    timeKillFn: function(timeKillInt) {
+      var me = this;
+      
+      if(me.timeKill) {
+        window.clearInterval(timeKillInt);
+        me.killSuggestions();
+        me.disableKillerFn();
+      } else {
+        me.timeKill = true;
+      }
+    },
 
     onKeyPress: function(e) {
       if (this.disabled || !this.enabled) { return; }
@@ -188,6 +199,7 @@
       switch (e.keyCode) {
         case 38: //KEY_UP:
         case 40: //KEY_DOWN:
+          this.timeKill = false;
           return;
       }
       clearInterval(this.onChangeInterval);
@@ -264,7 +276,7 @@
         if(field.length > 0)
                 me.options.params.field = field;
         
-        $.get(this.serviceUrl, me.options.params, function(txt) { if(enableJsonDebug && !txt) alert('json krijgt geen antwoord'); me.processResponse(txt); }, 'text');
+        $.get(this.serviceUrl, me.options.params, function(txt) {me.processResponse(txt); }, 'text');
       }
     },
 
@@ -285,21 +297,24 @@
 
 
     suggest: function() {
-
       this.mouseMoved = false;
       if (this.suggestions.length === 0) {
         this.hide();
         return;
       }
-
-      var me, len, div, f, v, i, s, mOver, mClick;
+      
+      var me, len, div, f, v, i, s, mOver, mClick, mOut, timeKillInt;
       me = this;
       len = this.suggestions.length;
       f = this.options.fnFormatResult;
       v = this.getQuery(this.currentValue);
-
-      mOver = function(xi) { return function() { me.activate(xi); }; };
+      mOver = function(xi) { return function() { me.activate(xi); me.timeKill = false; window.clearInterval(timeKillInt); }; };
       mClick = function(xi) { return function() { me.select(xi); }; };
+      mOut = function() { return function() { 
+          me.timeKill = true; 
+          timeKillInt = window.setInterval( function(){ me.timeKillFn(timeKillInt); }, me.options.timeout); }; 
+      };
+      
       this.container.hide().empty();
 
       for (i = 0; i < len; i++) {
@@ -307,10 +322,13 @@
         div = $((me.selectedIndex === i ? '<div class="selected"' : '<div') + ' title="' + s + '">' + f('' + s,this.data[i], v) + '</div>');
         div.mouseover(mOver(i));
         div.click(mClick(i));
+        div.mouseout(mOut());
 
         this.container.append(div);
       }
-
+      
+      timeKillInt = window.setInterval( function(){ me.timeKillFn(timeKillInt); }, me.options.timeout);
+      
       this.enabled = true;
       this.container.show();
     },

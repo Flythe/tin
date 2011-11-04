@@ -75,6 +75,7 @@ function messageQuery(q, cont, combine)
                 return q;
         
         q = q.toLowerCase();
+        //q = $.trim(q);
         
         if(combine && combine != 'exact' && cont == '*') {
                 q = q.split(' ');
@@ -128,20 +129,24 @@ function removeDefault(el) {
                 el.val('');
 }
 
+// uitgebreid zoeken
 function showMenu(ob) {
         $('h4.tinSimpel', ob).show();
         $('h4.tinUitgebreid', ob).hide();
-        $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd, div.headImg', ob).show();
+        $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd', ob).show();
         $('div.tinSearchMenu', ob).css('border-right', '1px solid black');
+        $('img.catalogusImg', ob).attr('src', 'images/TIN_Catalogus_uitgebreid.jpg');
 }
 
+// eenvoudig zoeken
 function hideMenu(ob) {
         $('h4.tinSimpel').hide();
         $('h4.tinUitgebreid', ob).show();
-        $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd, div.headImg', ob).hide();
+        $('ul#define_search, div#field_search, div#tinSearchThesaurusAdd', ob).hide();
         $('select.tinSearchAdlibSearchfield', ob).val('*');
         $('input.tinSearchOr[value=" "]', ob).prop('checked', true);
         $('div.tinSearchMenu', ob).css('border-right', 'none');
+        $('img.catalogusImg', ob).attr('src', 'images/TIN_Catalogus_eenvoudig.jpg');
 }
 
 /*

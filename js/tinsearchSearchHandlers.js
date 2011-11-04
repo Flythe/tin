@@ -30,6 +30,7 @@ function checkAutocomplete(ob, opts, url)
 
 function widgetHashChange(ob)
 {
+        //console.log('change');
         var $ob = $(ob),
         
         // Get the stored data for this .bbq widget.
@@ -37,19 +38,14 @@ function widgetHashChange(ob)
         options = data.options,
         
         // Get the url for this .bbq widget from the hash, based on the
-        // appropriate id property. In jQuery 1.4, you should use e.getState()
-        // instead of $.bbq.getState().
+        // appropriate id property.
         url = $.bbq.getState( $ob.attr( 'id' ) ) || '';
         var params = $.deparam( url );
         
-        dbg('widgetHashChange() ' + $ob.attr('id') + ': data.url=[' + data.url + '] url=[' + url + '] tinSearchInput: [' + params.tinSearchInput + '] ... ', true);
         // If the url hasn't changed, do nothing and skip to the next .bbq widget.
         if ( data.url === url ) {
-                dbg('no url change, done.');
                 return;
         }
-        
-        dbg('url changed ', true);
 
         // Store the url for the next time around.
         var prevparams = data.url ? $.deparam(data.url) : {};
@@ -58,14 +54,11 @@ function widgetHashChange(ob)
 
         // Todo: cache
         if ( 0 && data.bbq.cache[ url ] ) {
-                dbg('(in cache)');
                 // Since the widget is already in the cache, it doesn't need to be
                 // created, so instead of creating it again, let's just show it!
                 
                 data.bbq.cache[ url ].show();
         } else {
-                //dbg('(not in cache) ... ', true);
-
                 var isEmpty = true;
                 for (var prop in params) {
                     if (params.hasOwnProperty(prop)) {
@@ -89,7 +82,6 @@ function widgetHashChange(ob)
                         }
                         $('input.tinSearchInput', ob).focus();
                 } else {
-                        /*if ((params.tinSearchInput && params.tinSearchInput != prevparams.tinSearchInput) || (prevparams.tinSearchInput != params.tinSearchInput) || (params.tinPage && params.tinPage != prevparams.tinPage) || (params.tinFilter && params.tinFilter != prevparams.tinFilter) || (prevparams.tinFilter != params.tinFilter)) {*/
                         if ( prevparams.tinPage != params.tinPage 
                                 || prevparams.tinFilter != params.tinFilter 
                                 || prevparams.tinSearchAdlibSearchfield != params.tinSearchAdlibSearchfield 
@@ -119,10 +111,6 @@ function widgetHashChange(ob)
                                         params.tinSearchThesaurus = '1';
                                 }
                         }
-                        
-                        dbg('fragment a.tinSearchToggleAdvanced url=[' + $.param( params )+ ']');
-                        //if (typeof params.parseFacets != 'undefined') delete params.parseFacets;
-                        //$('a.tinSearchToggleAdvanced,a.tinSearchToggleAdlib,a.tinSearchToggleThesaurus', ob).fragment( $.param( params ) );
                 }
         }
 
@@ -135,10 +123,13 @@ function search(ob, url)
         var data = $(ob).data('tinSearch');
         var options = data.options;
         
-        if(params.tinSearchInput === options.defaultInput)
+        if(!params.tinSearchInput)
+                params.tinSearchInput = '';
+        
+        if(params.tinSearchInput == undefined || params.tinSearchInput === options.defaultInput)
                 params.tinSearchInput = '';
 
-        data.q = params.tinSearchInput;
+        data.q = $.trim(params.tinSearchInput);
         data.searchField = params.tinSearchAdlibSearchfield;
         data.combineSearch = params.combineSearch;
         data.theSaurus = params.theSaurus;
@@ -165,7 +156,7 @@ function search(ob, url)
         
         if (!options.facet && !params.tinFilter) {
                 var facets = $.fn.tinSearch.defaults.def_facets;
-                for (k = 0; k < facets.length; k++) {
+                for (var k = 0; k < facets.length; k++) {
                         facet_names.push(facets[k].name);
                 }
         } else {
@@ -192,22 +183,26 @@ function search(ob, url)
 
         if (facet_query == 'type:undefined') facet_query = '';
 
+        // manage autocoplete params
         if ($(ob).data('autocomplete') && facet_query) {
                 $(ob).data('autocomplete').options.params.fq = facet_query;
         }
         
-        if(data.theSaurus)
+        // add thesaurus query
+        if(data.theSaurus) {
+                if(facet_query != '') {
                         facet_query += ',keywords:' + data.theSaurus;
-                
-        //if ($(ob).data('autocomplete_thesaurus')) {
-                //$(ob).data('autocomplete_thesaurus').options.params.fq = facet_query + '&thesaurus=1';
-        //}
-        
-        dbg('search(): url=[' + url + '] q=[' + data.q + '] ... ');
+                } else {
+                        facet_query += 'keywords:' + data.theSaurus;
+                }
+        }
 
-        if(data.prevCall)
+        // delete old calls
+        if(data.prevCall) {
                 data.prevCall.abort();
+        }
         
+        // display loading.gif
         $('input.tinSearchInput', ob).addClass('loading');
         
         data.prevCall = $.ajax({
@@ -227,9 +222,8 @@ function search(ob, url)
                 }),
                 success: function(responseText) {
                         var jsonObject = eval('(' + responseText + ')');
-                        // render search results
-                        dbg('calling displaySearchResults ... ');
                         
+                        // render search results                        
                         displaySearchResults(ob, jsonObject, params.tinPage ? params.tinPage - 1 : 0, params.tinSlide ? true : false, params.tinSearchType == "thumbs" ? true : false);
                         
                         var data = $(ob).data('tinSearch');
@@ -244,9 +238,11 @@ function search(ob, url)
                         
                         parseParams(ob, params);
                         
-                        if($('input.tinSearchInput', ob).val() == '')
+                        /*if($('input.tinSearchInput', ob).val() == '') {
                                 $('input.tinSearchInput', ob).val(data.q);
+                        }*/
                         
+                        // remove loading.gif
                         $('input.tinSearchInput', ob).removeClass('loading');
                 }
         });
@@ -372,7 +368,7 @@ function changeResultsOnType(ob)
         if($('input.tinSearchInput', ob).val())
                 params.tinSearchInput = $('input.tinSearchInput', ob).val();
         else
-                delete params.tinSearchInput;
+                params.tinSearchInput = '';
 
         if(!params.tinFilter)
                 delete params.tinFilter;
@@ -405,12 +401,12 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
         }
         
         if (!jsonObj.docs || !jsonObj.docs.length || nmbrOfResultsHtml === false) {
-                dbg('reset ... ', true);
                 $('div.tinSearchNumberOfResults', container).html(nmbrOfResultsHtml == false ? '' : '<h1>' + nmbrOfResultsHtml + '</h1>');
                 $('div.tinSearchSuggestion').remove();
                 $('div.tinSearchResults', container).html('');
                 $('div.tinTagCloud', container).html('');
                 $('div.tinPageNav', container).html('').hide();
+                nmbrOfResultsHtml == false ? $('div.welcome', container).show() : $('div.welcome', container).hide();
 
                 if (suggestion) {
                         $('.tinSearchNumberOfResults', container).after(suggestion_str);
@@ -418,7 +414,7 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
 
                 return;
         } else {
-                dbg('showing ... ', true);
+                $('div.welcome', container).hide();
                 $('.tinSearchNumberOfResults', container).html('<h1>' + nmbrOfResultsHtml + '</h1>');
         }
 
@@ -639,6 +635,7 @@ function getSearchEntry(entry, options)
         var copyNumber = !entry.copyNumber || 0 == entry.copyNumber ? '' : 'Kopienummer: ' + entry.copyNumber + '<br/>';
         var shelfMark = !entry.shelfMark || 0 == entry.shelfMark ? '' : 'Lokatiecode: ' + entry.shelfMark + '<br/>';
         var loanStatus = !entry.loanStatus || 0 == entry.loanStatus ? '' : 'Uitleenstatus: ' + entry.loanStatus + '<br/>';
+        var copyright = !entry.copyright ? '' : 'Copyright: ' + entry.copyright;
         //var keywords = !entry.keywords ? '' : 'Tags: ' + (typeof(entry.keywords) != 'object' ? entry.keywords.split(',') : entry.keywords) + '<br />';
         //var disciplines = !entry.discipline ? '' : 'Disciplines: ' + entry.discipline.join(', ') + '<br />';
         //var type = !entry.type ? '' : 'Bron: ' + (options.facetTranslations[entry.type] ? options.facetTranslations[entry.type] : entry.type) + '<br />';
@@ -646,12 +643,7 @@ function getSearchEntry(entry, options)
         var imgstr = '';
         var audiostr = '';
         
-        /** DEV **/
-        //options.isIntern = true;
-        /** DEV **/
-        
         //add images
-        
         if(entry.images && entry.images.length){ //FOTOS
                 var numimages = entry.images.length;
                 var index = 0;
@@ -686,7 +678,7 @@ function getSearchEntry(entry, options)
                                 audiostr = '<div class="tinSearchAudioPlay">' + play_buttons + '</div>';
                         }               
                 }
-        } else if(entry.video && entry.video.length) { // video
+        } else if(entry.video && entry.video.length) { // VIDEO
                 if(options.isIntern == true) {
                         imgstr += ''; //intern dus plaatje hier maken
                 } else if(entry.video.webExclusion === false) {
@@ -729,14 +721,15 @@ function getSearchEntry(entry, options)
                                 '<p>' +
                                         year +
                                         materialType +
-                                '</p>' +
-                                '<p class="pHidden">' +
                                         description +
                                         creators +
+                                '</p>' +
+                                '<p class="pHidden">' +
                                         publisher +
                                         copyNumber +
-                                        shelfMark +
+                                        copyright +
                                         loanStatus +
+                                        shelfMark +
                                 '</p>' +
                                 '<div class="tinClear"></div>' +
                         '</div>';
