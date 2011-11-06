@@ -54,24 +54,24 @@
         </div>
 	<div class="search-result">
                 <?php  
-                        echo 'titel: '.$data->titel.'<br/><br/>';
+                        disp($data->titel);
                         
-                        echo 'genre: ';
                         loop($data->genre);
                         
-                        echo 'jaar: ';
-                        echo $data->jaar.'<br/><br/>';
+                        disp($data->jaar);
                         
-                        echo 'makers: ';
                         loop($data->makers);
                         
-                        echo 'materiaal: ';
+                        echo 'Materiaal: <br/>';
                         loop($data->materials);
+                        echo '<br/>';
                         
-                        echo 'omschrijving: ';
+                        echo 'Uitleen: <br/>';
+                        loop($data->location);
+                        echo '<br/>';
+                        
                         loop($data->omschrijving);
                         
-                        echo 'copyright: ';
-                        echo $data->copyright;
+                        disp($data->copyright);
                 ?>
         </div>

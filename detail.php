@@ -56,26 +56,50 @@ function getArray($element) {
         return $array;
 }
 
-function loop($el) {
+function loop($el, $indent = false) {
         if($el == '') {
-                echo '<br/><br/>';
                 return;
         }
         
-        echo '<br/>';
-        
-        foreach($el as $key => $e) {
-                if(is_numeric($key)) {
-                        $key = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                } else {
-                        $key = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$key.': ';
-                        $key = str_replace('_', ' ', $key);
+        if(!isset($el->title)) {
+                foreach($el as $e) {
+                       loop($e, true);
                 }
                 
-                echo $key.$e.'<br/>';
+                return;
+        }
+        
+        $add = '';
+        
+        if($indent) {
+                $add = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        }
+        
+        echo $add.$el->title;
+        
+        if($el->content == '') {
+                return;
+        }
+        
+        if(is_array($el->content)) {
+                foreach($el->content as $e) {                        
+                        echo $e.'<br/>';                    
+                }
+        } else {
+                echo $el->content;
         }
         
         echo '<br/>';
+}
+
+function disp($el) {
+        if($el == '') {
+            return;
+        }
+        
+        echo $el->title.$el->content;
+        
+        echo '<br/><br/>';
 }
 
 
@@ -134,74 +158,86 @@ $data = new stdClass();
  */
 if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true))) {    
         if (!empty($record['discipline'])) {                
-                $data->genre = getArray($record['discipline']);
+                $data->genre->title = 'Genre: ';
+                $data->genre->content = getArray($record['discipline']);
         } else {
                 $data->genre = '';
         }
         
         if (!empty($record['year'])) {
-                $data->jaar = $record['year'];
+                $data->jaar->title = 'Jaar: ';
+                $data->jaar->content = $record['year'];
         } else {
                 $data->jaar = '';
         }
         
         if (!empty($record['creatorNames'])) {
-                $data->makers = getArray($record['creatorNames']);
+                $data->makers->title = 'Makers: ';
+                $data->makers->content = getArray($record['creatorNames']);
         } else {
                 $data->makers = '';
         }
         
         if (!empty($record['materialType'])) {
-                $data->materials->materiaal_type = $record['materialType'];
+                $data->materials->materiaal_type->title = 'Materiaaltype: ';
+                $data->materials->materiaal_type->content = $record['materialType'];
         } else {
                 $data->materials->materiaal_type = '';
         }
         
         if (!empty($record['materialSubType'])) {
-                $data->materials->materiaal_subtype = $record['materialSubType'];
+                $data->materials->materiaal_subtype->title = 'Materiaal subtype: ';
+                $data->materials->materiaal_subtype->content = $record['materialSubType'];
         } else {
                 $data->materials->materiaal_subtype = '';
         }
         
         if (!empty($record['titles'])) {
-                $data->omschrijving = getArray($record['titles']);
+                $data->omschrijving->title = 'Omschrijving: ';
+                $data->omschrijving->content = getArray($record['titles']);
         } else {
                 $data->omschrijving = '';
         }
         
         if (!empty($record['copyright'])) {
-                $data->copyright = $record['copyright'];
+                $data->copyright->title = 'Copyright: ';
+                $data->copyright->content = $record['copyright'];
         } else {
                 $data->copyright = '';
         }
         
-        if (!empty($record['copynumber'])) {
-                $data->location->kopienummer = $record['copynumber'];
+        if (!empty($record['copyNumber'])) {
+                $data->location->kopienummer->title = 'Kopienummer: ';
+                $data->location->kopienummer->content = $record['copyNumber'];
         } else {
                 $data->location->kopienummer = '';
         }
         
         if (!empty($record['shelfMark'])) {
-                $data->location->lokatiecode = $record['shelfMark'];
+                $data->location->lokatiecode->title = 'Lokatiecode: ';
+                $data->location->lokatiecode->content = $record['shelfMark'];
         } else {
                 $data->location->lokatiecode = '';
         }
         
         if (!empty($record['loanStatus'])) {
-                $data->location->uitleenstatus = $record['loanStatus'];
+                $data->location->uitleenstatus->title = 'Uitleenstatus: ';
+                $data->location->uitleenstatus->content = $record['loanStatus'];
         } else {
                 $data->location->uitleenstatus = '';
         }
-
-	if (!empty($record['title'])) {
-		$data->titel = $record['title'];
-	} else {
-                $data->titel = '';
+        
+        if (!empty($record['title'])) {
+                $data->titel->title = 'Titel: ';
+                $data->titel->content = $record['title'];
+        } else {
+                    $data->titel = '';
         }
         
         //add images
         if(!empty($record['media'])) {
-                $data->media = disp_media($record['media'], $data);
+                $data->media->title = '';
+                $data->media->content = disp_media($record['media'], $data);
         } else {
                 $data->media = '';
         }
