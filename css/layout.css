@@ -307,6 +307,12 @@ div.tinSearchResults div img:first-child {
         margin: 0;
 	float: left;
 }
+/* IE fix for style above */
+div.tinSearchResults div img.tinSearchResultImg {
+        margin: 0;
+        float: left;
+        z-index: 100;
+}
 div.tinSearchResults div img {
         margin: 4px 0px 6px 15px;
 	float: right;
@@ -343,6 +349,7 @@ div.tinSearchResult
 	padding-top: 8px;
 }
 div.tinSearchResult p.pHidden {
+        font-weight: bold;
         font-size: 10px;
         font-style: italic;
         line-height: 13px;
@@ -363,10 +370,9 @@ div.tinSearchResultPhoto {
 	margin-bottom: 15px;
 	line-height: 17px;
 	float: left;
-	min-width: 10em;
-	text-align: center;
+	text-align: left;
 	height: 190px;
-	width: 190px;
+        width: 190px;
 	margin:0 20px 20px 0;
 }
 
@@ -403,6 +409,7 @@ div.lastPhoto {
 		opacity:0.8;
 		position: absolute;
 		bottom: 5px;
+                left: 0;
 		color:white;
 		text-align:left;
 		font-size:11px;
