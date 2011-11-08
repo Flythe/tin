@@ -20,8 +20,10 @@ if (isset($_GET['query'])) {
                 $searchField = $_GET['field'];
         }
         if(isset($_GET['fq'])){
-                $fq = $_GET['fq'];
-        }
+                $fq = $_GET['fq'].',source:adlib';
+        } else {
+				$fq = 'source:adlib';
+		}
         
 	$handle = curl_init();
 	curl_setopt($handle, CURLOPT_URL, ($call = $host . 'rest/' . (isset($_GET['thesaurus']) ? 'thesaurus' : 'search') . '/autocomplete?term=' . urlencode($searchFragment) . '&rows=10'
