@@ -65,7 +65,7 @@ if (isset($_GET['getthesaurus'])) {
         curl_setopt($handle, CURLOPT_URL, ($call = $host . 'rest/thesaurus/title/' . urlencode($_GET['getthesaurus'])));
 	curl_setopt($handle, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
 	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        
+		
 	$rawResponse = curl_exec($handle);
 	echo $rawResponse;
 	exit;
@@ -87,19 +87,23 @@ if (isset($_GET['getstatus'])) {
  */
 $poststr = '';
 foreach ($_POST as $fldname => $fldval) {   
-        if ($fldname == 'fq' && $fldval != '') {
-		$facet_fields = explode(',', $fldval);
-                $poststr .= 'fq=';
-                $i = 0;
-		foreach ($facet_fields as $facet_field) {
-                        $addon = ',';
-                        
-                        if ($facet_field != '')
-                                $poststr .= urlencode($facet_field) . $addon;
-                        $i++;
-                }
-                        
-                $poststr .= '&';
+        if ($fldname == 'fq') {
+			if($fldval != '') {
+				$facet_fields = explode(',', $fldval);
+						$poststr .= 'fq=';
+						$i = 0;
+				foreach ($facet_fields as $facet_field) {
+						$addon = ',';
+						
+						if ($facet_field != '')
+								$poststr .= urlencode($facet_field) . $addon;
+						$i++;
+				}
+								
+				$poststr .= 'source:adlib&';
+			} else {
+					$poststr .= 'fq=source:adlib&';
+			}
 	} else {
                 if($fldval != '') {
                         $fldval = stripslashes($fldval);
