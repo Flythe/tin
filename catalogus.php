@@ -64,8 +64,7 @@ include('vars.php');
                         <!--faq en info buttons-->
                         
                         <div class="faq">
-                                <a href="faq.html"></a>
-                                <a href="info.html"></a>
+                                <a href="faq.php"></a>
                         </div>
                         <!--end nav-->
 

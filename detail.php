@@ -1,125 +1,9 @@
 <?php
 include('vars.php');
 include('curlMethod.php');
+include('detailFuncs.php');
 
 date_default_timezone_set('Europe/Amsterdam');
-
-function disp_media($elements, $parentKey = false, $isList = false)
-{
-        include('vars.php');
-        
-        $media = array();
-        
-        //loop through mediaelements
-        if(!empty($elements) && '' != $elements) {
-                foreach ($elements as $e) {
-                        //webexcluded, intern gebruik
-                        if(($e['webExclusion'] == true && $intern) || $e['webExclusion'] == false) {
-                                if($e['photo']) {
-                                        array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
-                                } elseif($e['video']) {
-                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.flv') . '", "350", "Videofragment");</script>');
-                                } elseif($e['audio']) {
-                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>');
-                                }
-                        //webexcluded, geen intern gebruik
-                        } elseif ($e['webExclusion'] == true && !$intern) {
-                                array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
-                        }
-                }
-        }
-        
-        return $media;
-}
-
-function display_label($label)
-{
-	//return $label;
-	$label = ucfirst(str_replace(array('.', '_'), ' ', $label));
-	switch ($label) {
-		case 'Edit':
-			return 'Edits';
-		case 'Input date':
-			return 'Input by';
-		default:
-			return $label;
-	}
-}
-
-function getArray($element) {
-        $array = array();
-        
-        foreach($element as $el) {
-                array_push($array, $el);
-        }
-        
-        return $array;
-}
-
-function loop($el, $indent = false) {
-        if($el == '') {
-                return;
-        }
-        
-        if(!isset($el->title)) {
-                foreach($el as $e) {
-                       loop($e, true);
-                }
-                
-                return;
-        }
-        
-        $add = '';
-        
-        if($indent) {
-                $add = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-        }
-        
-        echo $add.$el->title;
-        
-        if($el->content == '') {
-                return;
-        }
-        
-        if(is_array($el->content)) {
-                foreach($el->content as $e) {                        
-                        echo $e.'<br/>';                    
-                }
-        } else {
-                echo $el->content;
-        }
-        
-        echo '<br/>';
-}
-
-function disp($el) {
-        if($el == '') {
-            return;
-        }
-        
-        echo $el->title.$el->content;
-        
-        echo '<br/><br/>';
-}
-
-
-
-//start working
-$loggedIn = false;
-$isEditor = false;
-
-//get loggedin user data
-if (isset($_COOKIE['emailaddress']) && isset($_COOKIE['password'])) {
-	$json = curl_get_uri($host . 'rest/users/login', 'POST', $x = 'userid=' . urlencode($_COOKIE['emailaddress']) . '&pw=' . urlencode($_COOKIE['password']), 'application/json', 'application/x-www-form-urlencoded');
-	echo $json;
-	$jsonObj = json_decode($json);
-	if ($jsonObj->result) {
-		$loggedIn = $jsonObj;
-		if ($loggedIn->roles && in_array('ROLE_EDITOR', $loggedIn->roles)) {
-			$isEditor = true;
-		}
-	}
-}
 
 $xmluri = false;
 
@@ -139,8 +23,7 @@ if (isset($_GET['apiuri'])) {
 }
 
 $data = new stdClass();
-//print_r(curl_get_uri($xmluri));
-//start selecting
+
 /*
  * puts the following into a stdClass, then includes detailView.php to display results
  * 
@@ -221,10 +104,18 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         }
         
         if (!empty($record['loanStatus'])) {
+                $adlibEnglish = array('Use:', 'Used for:', 'List of', 'recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available');
+                $adlibDutch = array('Gebruik:', 'Gebruikt voor:', 'Overzicht van', 'teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar');
+
+                $record['loanStatus'] = str_replace($adlibEnglish, $adlibDutch, $record['loanStatus']);
                 $data->location->uitleenstatus->title = 'Uitleenstatus: ';
                 $data->location->uitleenstatus->content = $record['loanStatus'];
         } else {
                 $data->location->uitleenstatus = '';
+        }
+        
+        if($data->location->kopienummer == '' && $data->location->lokatiecode == '' && $data->location->uitleenstatus == '') {
+                $data->location = '';
         }
         
         if (!empty($record['title'])) {

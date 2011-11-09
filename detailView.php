@@ -1,5 +1,9 @@
-<!DOCTYPE html>
-<html>
+<?php
+include('vars.php');
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
     	<title>TIN Zoekresultaten</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -41,37 +45,67 @@
 		</script>
     </head>
     <body>
+        <div id="wrapper">
+                <div id="top">
+                        <img id="logo" src="images/headers/tin_logo.jpg" alt="logo" />
+                        <div id="caroussel"><img src="<?php echo $imgUrl; ?>" width="792" height="70" alt="caroussel" /></div> 
+                </div>
+                
+                <div id="nav">
+                        <ul>
+                                <li><a href="<?php echo $tinExternalUrl ?>mediatheek-educatie/openingstijden-route">Contact</a></li>
+                                <li><a href="<?php echo $tinExternalUrl ?>mediatheek-educatie">Mediatheek</a></li>
+                                <li><a href="<?php echo $tinExternalUrl ?>theatererfgoed/collectie">Collectie</a></li>
+                                <li><a href="<?php echo $tinExternalUrl ?>over-tin">Over TIN</a></li>
+                        </ul>
+                </div>
+                
+                <div class="navtabs">
+                        <a class="tab" href="<?php echo $tinUrl; ?>"></a>
+                </div>
+                
+                <div class="faq"><a href="faq.php"></a></div>
+                
+                <h3 class="terug"><a href="">Terug naar resultaten</a></h3>
+                
+                <!--zoekresultaat-->
+                <div class="search-result">
+                        <div class="image-here">
+                                <?php
+                                        if(count($data->media) > 1 && !$intern) {
+                                                echo($data->media[0]);
+                                        } else {
+                                                loop($data->media);
+                                        }
+                                ?>
+                        </div>
+                        
+                        <div class="result-data">
+                                <h2><?php echo $data->titel->content; ?></h2>
+                                
+                                <p>
+                                        <?php  
+                                                loop($data->genre);
 
-	<!--zoekresultaat-->
-        <div class="image-here">
-                <?php
-                        if(count($data->media) > 1 && !$intern) {
-                                echo($data->media[0]);
-                        } else {
-                                loop($data->media);
-                        }
-                ?>
-        </div>
-	<div class="search-result">
-                <?php  
-                        disp($data->titel);
-                        
-                        loop($data->genre);
-                        
-                        disp($data->jaar);
-                        
-                        loop($data->makers);
-                        
-                        echo 'Materiaal: <br/>';
-                        loop($data->materials);
-                        echo '<br/>';
-                        
-                        echo 'Uitleen: <br/>';
-                        loop($data->location);
-                        echo '<br/>';
-                        
-                        loop($data->omschrijving);
-                        
-                        disp($data->copyright);
-                ?>
+                                                disp($data->jaar);
+
+                                                loop($data->makers);
+
+                                                if($data->materials != '') {
+                                                        echo 'Materiaal: <br/>';
+                                                        loop($data->materials);
+                                                }
+
+                                                if($data->location != '') {
+                                                        echo 'Uitleen: <br/>';
+                                                        loop($data->location);
+                                                }
+
+                                                loop($data->omschrijving);
+
+                                                disp($data->copyright);
+                                        ?>
+                                </p>
+                        </div>
+                </div>
         </div>

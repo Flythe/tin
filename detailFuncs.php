@@ -1,0 +1,85 @@
+<?php
+function disp_media($elements, $parentKey = false, $isList = false)
+{
+        include('vars.php');
+        
+        $media = array();
+        
+        //loop through mediaelements
+        if(!empty($elements) && '' != $elements) {
+                foreach ($elements as $e) {
+                        //webexcluded, intern gebruik
+                        if(($e['webExclusion'] == true && $intern) || $e['webExclusion'] == false) {
+                                if($e['photo']) {
+                                        array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
+                                } elseif($e['video']) {
+                                        array_push($media, '<a href="http://'.$e['url'].'">Video</a><br/>');
+                                } elseif($e['audio']) {
+                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>');
+                                }
+                        //webexcluded, geen intern gebruik
+                        } elseif ($e['webExclusion'] == true && !$intern) {
+                                array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
+                        }
+                }
+        }
+        
+        return $media;
+}
+
+function getArray($element) {
+        $array = array();
+        
+        foreach($element as $el) {
+                array_push($array, $el);
+        }
+        
+        return $array;
+}
+
+function loop($el, $indent = false) {
+        if($el == '') {
+                return;
+        }
+        
+        if(!isset($el->title)) {
+                foreach($el as $e) {
+                       loop($e, true);
+                }
+                
+                return;
+        }
+        
+        $add = '';
+        
+        if($indent) {
+                $add = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        }
+        
+        echo $add.$el->title;
+        
+        if($el->content == '') {
+                return;
+        }
+        
+        if(is_array($el->content)) {
+                foreach($el->content as $e) {                        
+                        echo $e;                    
+                }
+        } else {
+                echo $el->content;
+        }
+        
+        echo '<br/>';
+}
+
+function disp($el) {
+        if($el == '' || $el->content == '') {
+            return;
+        }
+        
+        echo $el->title.$el->content;
+        
+        echo '<br/>';
+}
+?>

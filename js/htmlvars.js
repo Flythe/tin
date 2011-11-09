@@ -100,6 +100,8 @@ function getMenus(opts)
                                 '</div>' +
                                 
                                 '<div class="tinSearchFacets"></div>' +
+                                
+                                '<div class="tinTagCloud"><div class="tinTagCloudInner"></div></div>' +
                         '</div>';
          
          return mainsearchMenu;
