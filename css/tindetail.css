@@ -6,9 +6,9 @@ body
 }	
 div#wrapper
 {
+        margin: 0 auto;
 	width: 957px;
 	position: relative;
-	margin: 0px 0 0 67px;
 }
 div#top
 {
@@ -40,106 +40,50 @@ div#nav ul
 	margin: 0;
 	padding: 8px 0 0 0;
 	list-style: none;
-	color: #FFFFFF;
-    font-family: Verdana,Geneva,sans-serif;
-    font-size: 10px;
-    font-weight: bold;
+        font-family: Verdana,Geneva,sans-serif;
+        font-size: 10px;
+        font-weight: bold;
 }
 div#nav ul li
 {
 	display: inline;
 	margin: 0 30px 0 30px;
 }
-
-div#sidebar
-{
-	width: 278px;
-	float: left;
-	margin: 0 63px 0 0;
-	font-family: Georgia,"Times New Roman",Times,serif;
-	min-height: 600px;
+div#nav ul li a {
+        color: #FFFFFF;
+        text-decoration: none;
 }
-div#sidebar h4
-{
-	color: #999999;
-    font-size: 12px;
-	font-weight: normal;
-    text-decoration: underline;
-	margin: 9px 0 12px 2px;
+div.navtabs {
+        margin-left: 340px;
+        width: 240px;
+        height: 34px;
 }
-div#sidebar div.tabs
-{
-	margin: 2px 0 0 -2px;
+.navtabs a.tab {
+        float: left;
+        display: block;
+        height: 34px;
+        width: 77px;
+        background: url('../images/catalogusTabs/vintage.jpg') 0 0 no-repeat;
 }
-div#sidebar div#border
-{
-	width: 276px;
-	border-right: 1px black solid;
+.navtabs a.tab:hover {
+        background: url('../images/catalogusTabs/vintage_over.jpg') 0 0 no-repeat;
 }
-div#sidebar input.zoek
-{
-	font-family: Georgia,"Times New Roman",Times,serif;
-	border: 4px solid #93238E;    
-	color: #93238E;
-        font-size: 16px;
-        font-weight: normal;
-        height: 20px;  
-        padding-top: 4px;
-        margin: 0;
-        text-indent: 10px;
-        width: 259px;
+div.faq {
+        background: url('../images/buttons/faq_info.jpg') 0 0 no-repeat;
+        position: absolute;
+        top: 109px;
+        right: 0px;
+        height: 58px;
+        width: 92px;
+        z-index: 20;
 }
-ul#define_search
-{
-	margin: 16px 20px 0 3px;
-	padding: 0 0 9px 0;
-	list-style: none;
-	border-bottom: solid 1px #999;
-}
-ul#define_search li
-{
-	color: #666666;
-        font-size: 12px;
-        font-style: italic;
-        line-height: 24px;
-}
-ul#define_search input
-{
-	margin: 0 10px 0 6px;
-}
-div#sidebar div#field_search
-{
-	margin: 0 20px 0 3px;
-	border-bottom: solid 1px #999;
-	padding-bottom: 12px;
-}
-div#sidebar div#field_search img
-{
-	margin: 3px 0 0 -4px;
-}
-div#sidebar div#field_search select
-{
-	float: right;
-	margin-top: 17px;
-}
-div#sidebar div#thesaurus
-{
-	margin: 0 20px 0 3px;
-	border-bottom: solid 1px #999;
-	padding-bottom: 10px;
-}
-div#sidebar div#thesaurus img
-{
-	margin: 8px 0 0 -6px;
-}
-div#sidebar div#category_search
-{
-	color: #666666;
-        font-family: Arial,Helvetica,sans-serif;
-        font-size: 11px;
-	margin: 0 17px 0 0;
-	padding: 18px 0 0 0;
-	text-align: right;
+div.faq a {
+        z-index: 50;
+        margin-top: 14px;
+        cursor: pointer;
+        display: block;
+        height: 36px;
+        width: 72px;
 }
 div#category_search h2
 {
@@ -175,27 +119,12 @@ div#category_search li
 {
 	margin: 0 0 3px 0;
 }
-h1#resultaat {
-	margin: 37px 0 0 0;
-        color: #A40084;
-        font-family: Arial,Helvetica,sans-serif;
-        font-size: 14px;
-        font-weight: bold;
-}
-h1#resultaat img.cross {
-	width: 13px;
-	height: 13px;
-	margin: 0 0 -1px 18px;
-}
-h3.alternatief {
-	margin: 10px 0 10px 0;
-        color: #666666;
-        font-family: arial;
-        font-size: 12px;
-        font-style: italic;
-	font-weight: normal;
-}
 h3.terug {
+        margin: 15px 20px 0 20px;;
+        border-bottom: thin dashed #CCCCCC;
+}
+h3.terug a {
+        text-decoration: none;
 	margin: 8px 0 10px 0;
         color: #666666;
         font-family: Georgia,"Times New Roman",Times,serif;
@@ -204,71 +133,21 @@ h3.terug {
 	font-weight: normal;
 	letter-spacing: 0.5px;
 }
-img#faqinfo {
-	 position: absolute;
-	 top: 109px;
-	 right: 0px;
-}
-.search-result
-{
-	color: #666666;
-        font-family: Arial,Helvetica,sans-serif;
-}
-ul.search-result
-{
-	margin: 0;
-	padding: 8px 0 0 0;
-	list-style: none;
-	padding: 2px 0 0 0;
-}
-ul.search-result li:first-child
-{
-	border-top: thin dashed #CCCCCC;
-}
-ul.search-result li
-{
-	border-bottom: thin dashed #CCCCCC;
-	display: inline-block;
-	width: 589px;
-	height: 82px;
-	margin: 0 0 0 -2px;
-}
-ul.search-result li img:first-child
-{
-	margin: 4px 15px 6px 1px;
-	float: left;
-}
-ul.search-result li img
-{
-	margin: 4px 0px 6px 15px;
-	float: right;
-}
-ul.search-result li h2
-{
-    font-size: 13px;
-    margin: 7px 0 0 0;
-}
-ul.search-result li p
-{
-    font-size: 10px;
-    font-style: italic;
-    line-height: 13px;
-	margin: 1px 0 0 0;
-}
 div.search-result
 {
-	border-top: thin dashed #CCCCCC;
-	border-top: none;
+        color: #666666;
+        font-family: Arial,Helvetica,sans-serif;
 	padding-top: 8px;
-	margin:30px
+        margin: 10px 40px 0 40px;
 }
-div.search-result img, div.search-result, div.image-here
+div.search-result img, div.search-result, div.image-here, div.result-data
 {
         float: left;
 	margin-right: 16px;
 }
-div.image-here {
-        padding: 20px;
+div.result-data {
+        margin-top: 10px;
+        width: 450px;
 }
 div.search-result h2, div.search-result h1
 {
@@ -280,32 +159,4 @@ div.search-result p, .disciplines
 	font-size: 12px;
 	line-height: 18px;
 	margin: 1px 0 18px 0;
-}
-div.search-result dd, div.search-result dt{
-	font-size: 12px;
-	line-height: 18px;
-}
-div.search-result p:last-child
-{
-	font-size: 12px;
-	line-height: 18px;
-	margin: 36px 0 0 0;
-	
-}
-dd, dt, dl{
-	display:inline;
-	margin:0;
-	padding:0;
-}
-dt {
-	font-weight:bold
-}
-dd dd{
-	margin:0 0 0 5px;
-	-moz-margin-start: 5px;
-}
-dl {
-}
-#tinReviews{
-	display:none;
 }

@@ -3,7 +3,7 @@ function parseTagCloud(container, jsonObject)
         var data = $(container).data('tinSearch');
         var options = data.options;
 
-        if (options.disableTagCloud || !jsonObject.tagCloud) {
+        if (!jsonObject.tagCloud) {
                 return;
         }
 

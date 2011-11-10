@@ -281,11 +281,10 @@ div.faq {
 div.faq a {
         z-index: 50;
         margin-top: 14px;
-        float: left;
         cursor: pointer;
         display: block;
         height: 36px;
-        width: 36px;
+        width: 72px;
 }
 .tinSearchResults {
 	color: #666666;
@@ -306,6 +305,12 @@ div.tinSearchResults .tinSearchResult {
 div.tinSearchResults div img:first-child {
         margin: 0;
 	float: left;
+}
+/* IE fix for style above */
+div.tinSearchResults div img.tinSearchResultImg {
+        margin: 0;
+        float: left;
+        z-index: 100;
 }
 div.tinSearchResults div img {
         margin: 4px 0px 6px 15px;
@@ -343,6 +348,7 @@ div.tinSearchResult
 	padding-top: 8px;
 }
 div.tinSearchResult p.pHidden {
+        font-weight: bold;
         font-size: 10px;
         font-style: italic;
         line-height: 13px;
@@ -363,10 +369,9 @@ div.tinSearchResultPhoto {
 	margin-bottom: 15px;
 	line-height: 17px;
 	float: left;
-	min-width: 10em;
-	text-align: center;
+	text-align: left;
 	height: 190px;
-	width: 190px;
+        width: 190px;
 	margin:0 20px 20px 0;
 }
 
@@ -403,6 +408,7 @@ div.lastPhoto {
 		opacity:0.8;
 		position: absolute;
 		bottom: 5px;
+                left: 0;
 		color:white;
 		text-align:left;
 		font-size:11px;
@@ -588,4 +594,24 @@ div.search-result p:last-child
 	line-height: 18px;
 	margin: 36px 0 0 0;
 	
+}
+.tinTagCloud {
+    margin-top: 20px;
+    text-align: center;
+}
+.tinTagCloud a {
+    color: #9E9FA3;
+    text-decoration: none;
+}
+.tinTagCloud a.tagweight1 {
+    font-size: 30px;
+}
+.tinTagCloud a.tagweight2 {
+    font-size: 24px;
+}
+.tinTagCloud a.tagweight3 {
+    font-size: 18px;
+}
+.tinTagCloud a.tagweight4 {
+    font-size: 12px;
 }

@@ -1,101 +1,9 @@
 <?php
 include('vars.php');
 include('curlMethod.php');
+include('detailFuncs.php');
 
 date_default_timezone_set('Europe/Amsterdam');
-
-function disp_media($elements, $parentKey = false, $isList = false)
-{
-        include('vars.php');
-        
-        $media = array();
-        
-        //loop through mediaelements
-        if(!empty($elements) && '' != $elements) {
-                foreach ($elements as $e) {
-                        //webexcluded, intern gebruik
-                        if(($e['webExclusion'] == true && $intern) || $e['webExclusion'] == false) {
-                                if($e['photo']) {
-                                        array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
-                                } elseif($e['video']) {
-                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.flv') . '", "350", "Videofragment");</script>');
-                                } elseif($e['audio']) {
-                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>');
-                                }
-                        //webexcluded, geen intern gebruik
-                        } elseif ($e['webExclusion'] == true && !$intern) {
-                                array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
-                        }
-                }
-        }
-        
-        return $media;
-}
-
-function display_label($label)
-{
-	//return $label;
-	$label = ucfirst(str_replace(array('.', '_'), ' ', $label));
-	switch ($label) {
-		case 'Edit':
-			return 'Edits';
-		case 'Input date':
-			return 'Input by';
-		default:
-			return $label;
-	}
-}
-
-function getArray($element) {
-        $array = array();
-        
-        foreach($element as $el) {
-                array_push($array, $el);
-        }
-        
-        return $array;
-}
-
-function loop($el) {
-        if($el == '') {
-                echo '<br/><br/>';
-                return;
-        }
-        
-        echo '<br/>';
-        
-        foreach($el as $key => $e) {
-                if(is_numeric($key)) {
-                        $key = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                } else {
-                        $key = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$key.': ';
-                        $key = str_replace('_', ' ', $key);
-                }
-                
-                echo $key.$e.'<br/>';
-        }
-        
-        echo '<br/>';
-}
-
-
-
-//start working
-$loggedIn = false;
-$isEditor = false;
-
-//get loggedin user data
-if (isset($_COOKIE['emailaddress']) && isset($_COOKIE['password'])) {
-	$json = curl_get_uri($host . 'rest/users/login', 'POST', $x = 'userid=' . urlencode($_COOKIE['emailaddress']) . '&pw=' . urlencode($_COOKIE['password']), 'application/json', 'application/x-www-form-urlencoded');
-	echo $json;
-	$jsonObj = json_decode($json);
-	if ($jsonObj->result) {
-		$loggedIn = $jsonObj;
-		if ($loggedIn->roles && in_array('ROLE_EDITOR', $loggedIn->roles)) {
-			$isEditor = true;
-		}
-	}
-}
 
 $xmluri = false;
 
@@ -115,8 +23,7 @@ if (isset($_GET['apiuri'])) {
 }
 
 $data = new stdClass();
-//print_r(curl_get_uri($xmluri));
-//start selecting
+
 /*
  * puts the following into a stdClass, then includes detailView.php to display results
  * 
@@ -134,74 +41,94 @@ $data = new stdClass();
  */
 if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true))) {    
         if (!empty($record['discipline'])) {                
-                $data->genre = getArray($record['discipline']);
+                $data->genre->title = 'Genre: ';
+                $data->genre->content = getArray($record['discipline']);
         } else {
                 $data->genre = '';
         }
         
         if (!empty($record['year'])) {
-                $data->jaar = $record['year'];
+                $data->jaar->title = 'Jaar: ';
+                $data->jaar->content = $record['year'];
         } else {
                 $data->jaar = '';
         }
         
         if (!empty($record['creatorNames'])) {
-                $data->makers = getArray($record['creatorNames']);
+                $data->makers->title = 'Makers: ';
+                $data->makers->content = getArray($record['creatorNames']);
         } else {
                 $data->makers = '';
         }
         
         if (!empty($record['materialType'])) {
-                $data->materials->materiaal_type = $record['materialType'];
+                $data->materials->materiaal_type->title = 'Materiaaltype: ';
+                $data->materials->materiaal_type->content = $record['materialType'];
         } else {
                 $data->materials->materiaal_type = '';
         }
         
         if (!empty($record['materialSubType'])) {
-                $data->materials->materiaal_subtype = $record['materialSubType'];
+                $data->materials->materiaal_subtype->title = 'Materiaal subtype: ';
+                $data->materials->materiaal_subtype->content = $record['materialSubType'];
         } else {
                 $data->materials->materiaal_subtype = '';
         }
         
         if (!empty($record['titles'])) {
-                $data->omschrijving = getArray($record['titles']);
+                $data->omschrijving->title = 'Omschrijving: ';
+                $data->omschrijving->content = getArray($record['titles']);
         } else {
                 $data->omschrijving = '';
         }
         
         if (!empty($record['copyright'])) {
-                $data->copyright = $record['copyright'];
+                $data->copyright->title = 'Copyright: ';
+                $data->copyright->content = $record['copyright'];
         } else {
                 $data->copyright = '';
         }
         
-        if (!empty($record['copynumber'])) {
-                $data->location->kopienummer = $record['copynumber'];
+        if (!empty($record['copyNumber'])) {
+                $data->location->kopienummer->title = 'Kopienummer: ';
+                $data->location->kopienummer->content = $record['copyNumber'];
         } else {
                 $data->location->kopienummer = '';
         }
         
         if (!empty($record['shelfMark'])) {
-                $data->location->lokatiecode = $record['shelfMark'];
+                $data->location->lokatiecode->title = 'Lokatiecode: ';
+                $data->location->lokatiecode->content = $record['shelfMark'];
         } else {
                 $data->location->lokatiecode = '';
         }
         
         if (!empty($record['loanStatus'])) {
-                $data->location->uitleenstatus = $record['loanStatus'];
+                $adlibEnglish = array('Use:', 'Used for:', 'List of', 'recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available');
+                $adlibDutch = array('Gebruik:', 'Gebruikt voor:', 'Overzicht van', 'teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar');
+
+                $record['loanStatus'] = str_replace($adlibEnglish, $adlibDutch, $record['loanStatus']);
+                $data->location->uitleenstatus->title = 'Uitleenstatus: ';
+                $data->location->uitleenstatus->content = $record['loanStatus'];
         } else {
                 $data->location->uitleenstatus = '';
         }
-
-	if (!empty($record['title'])) {
-		$data->titel = $record['title'];
-	} else {
-                $data->titel = '';
+        
+        if($data->location->kopienummer == '' && $data->location->lokatiecode == '' && $data->location->uitleenstatus == '') {
+                $data->location = '';
+        }
+        
+        if (!empty($record['title'])) {
+                $data->titel->title = 'Titel: ';
+                $data->titel->content = $record['title'];
+        } else {
+                    $data->titel = '';
         }
         
         //add images
         if(!empty($record['media'])) {
-                $data->media = disp_media($record['media'], $data);
+                $data->media->title = '';
+                $data->media->content = disp_media($record['media'], $data);
         } else {
                 $data->media = '';
         }

@@ -20,8 +20,10 @@ if (isset($_GET['query'])) {
                 $searchField = $_GET['field'];
         }
         if(isset($_GET['fq'])){
-                $fq = $_GET['fq'];
-        }
+                $fq = $_GET['fq'].',source:adlib';
+        } else {
+				$fq = 'source:adlib';
+		}
         
 	$handle = curl_init();
 	curl_setopt($handle, CURLOPT_URL, ($call = $host . 'rest/' . (isset($_GET['thesaurus']) ? 'thesaurus' : 'search') . '/autocomplete?term=' . urlencode($searchFragment) . '&rows=10'
@@ -63,7 +65,7 @@ if (isset($_GET['getthesaurus'])) {
         curl_setopt($handle, CURLOPT_URL, ($call = $host . 'rest/thesaurus/title/' . urlencode($_GET['getthesaurus'])));
 	curl_setopt($handle, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
 	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        
+		
 	$rawResponse = curl_exec($handle);
 	echo $rawResponse;
 	exit;
@@ -85,19 +87,23 @@ if (isset($_GET['getstatus'])) {
  */
 $poststr = '';
 foreach ($_POST as $fldname => $fldval) {   
-        if ($fldname == 'fq' && $fldval != '') {
-		$facet_fields = explode(',', $fldval);
-                $poststr .= 'fq=';
-                $i = 0;
-		foreach ($facet_fields as $facet_field) {
-                        $addon = ',';
-                        
-                        if ($facet_field != '')
-                                $poststr .= urlencode($facet_field) . $addon;
-                        $i++;
-                }
-                        
-                $poststr .= '&';
+        if ($fldname == 'fq') {
+			if($fldval != '') {
+				$facet_fields = explode(',', $fldval);
+						$poststr .= 'fq=';
+						$i = 0;
+				foreach ($facet_fields as $facet_field) {
+						$addon = ',';
+						
+						if ($facet_field != '')
+								$poststr .= urlencode($facet_field) . $addon;
+						$i++;
+				}
+								
+				$poststr .= 'source:adlib&';
+			} else {
+					$poststr .= 'fq=source:adlib&';
+			}
 	} else {
                 if($fldval != '') {
                         $fldval = stripslashes($fldval);
@@ -112,6 +118,11 @@ if (!$intern) {
 	$results = str_replace('"weburl"', '"weburlIntern"', $results);
 	$results = str_replace('"weburlExtern"', '"weburl"', $results);
 }
+
+$adlibEnglish = array('Use:', 'Used for:', 'List of', 'recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available');
+$adlibDutch = array('Gebruik:', 'Gebruikt voor:', 'Overzicht van', 'teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar');
+
+$results = str_replace($adlibEnglish, $adlibDutch, $results);
 
 echo $results;
 

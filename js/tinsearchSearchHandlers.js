@@ -553,16 +553,16 @@ function getSearchPhoto(entry, options, count)
 {
         var str_html = '';
         var title = !entry.title ? '' : entry.title;
+        var creators = !entry.creators ? '' : entry.creators;
+        creators = creators.length > 1 ? creators.join(', ') : creators == '' ? '' : creators;
         var description = !entry.description ? '' : (entry.description.length < 100 ? entry.description : entry.description.substring(0, 100) + '&hellip;') + '<br />';
         var apiuri = !entry.apiuri ? '' : entry.apiuri;
         var weburl = !entry.weburl ? '' : entry.weburl;
         var url = !entry.url ? '' : entry.url;
         var keywords = !entry.keywords ? '' : 'Tags: ' + (typeof(entry.keywords) != 'object' ? entry.keywords.split(',') : entry.keywords) + '<br />';
-        var disciplines = !entry.discipline ? '' : 'Disciplines: ' + entry.discipline.join(', ') + '<br />';
         var type = !entry.type ? '' : 'Bron: ' + (options.facetTranslations[entry.type] ? options.facetTranslations[entry.type] : entry.type) + '<br />';
-        var year = !entry.year || 'onbekend' === entry.year ? '' : 'Jaartal: ' + entry.year + '<br />';
-        var year_only = !entry.year || '' === entry.year ? '' : '' + entry.year ;
-        var disciplines_only = !entry.discipline ? '' : '' + entry.discipline.join(', ') + '';
+        var year = !entry.year || 'onbekend' === entry.year || 0 == entry.year ? '' : entry.year;
+        var disciplines = !entry.discipline ? '' : '' + entry.discipline.join(', ') + '';
 
         var listingUrl = '';
         var priref = apiuri.substring(apiuri.lastIndexOf('priref=') + 7);
@@ -587,31 +587,47 @@ function getSearchPhoto(entry, options, count)
                                 break;
                 }
         }
-
-        if(entry.images && entry.images.length){
-                var numimages = entry.images.length;
-                var index = 0;
-                while (index < numimages) {
-                        var lastItem = '';
-                        var media = entry.images[index];
-                        if (media.type == 'photo') {
-                                if (media.webExclusion == false || options.isIntern == true)
-                                        media.url += '&b=190';
-                                if ((count + 1)%3 == 0)
-                                        lastItem = 'lastPhoto';
-                                str_html += '<div class="tinSearchResultPhoto ' + lastItem + '"><div class="tinSearchPhoto"><a href="' + listingUrl + '"><img class="tinSearchResultImg" src="' + media.url + '" alt="" /></a>'
-                                        + '<div class ="tinSearchResultTitle"><a href="' + listingUrl + '"><span class="title">' + title + '</span><br/><span class="info">' + disciplines_only + ' - ' + year_only + '</a></div></div>';
-                        
-                                if(entry.youtubeurl) {
-                                        var inclURL = entry.youtubeurl.split('?v=');
-                                        inclURL = inclURL[1].split('&');
-                                        inclURL = inclURL[0];
-                                        str_html += '<iframe width="425" height="349" src="http://www.youtube.com/embed/' + inclURL + '" frameborder="0" allowfullscreen></iframe>';
-                                }
-                                str_html += '</div>';
-                        }
-                        index++;
+        
+        var numimages;
+        var index = 0;
+        var missingImage = false;
+        
+        if(entry.images && entry.images.length) {
+                numimages = entry.images.length;
+        } else {
+                numimages = 1;
+                missingImage = true;
+        }
+        
+        while (index < numimages) {
+                var media = '';
+                var imageStr = '';
+                
+                if (!missingImage) {
+                        media = entry.images[index];
                 }
+                //if (media.type == 'photo') {
+                        if (missingImage) {
+                                imageStr = options.mediaserver + 'Itemnognietdigitaalbeschikbaar190x190.gif';
+                        } else if (media.webExclusion == false || options.isIntern == true) {
+                                imageStr = media.url + '&b=190';
+                        } else if (media.webExclusion == true && options.isIntern == false || 1) {
+                                imageStr = options.mediaserver + 'Itemaanwezigrechtennietvrijgegeven_190x190.gif';
+                        }
+                        
+                        str_html += '<div class="tinSearchResultPhoto"><div class="tinSearchPhoto"><a href="' + listingUrl + '"><img class="tinSearchResultImg" src="' + imageStr + '" alt="" /></a>'
+                                + '<div class ="tinSearchResultTitle"><a href="' + listingUrl + '"><span class="title">' + title + '</span><br/><span class="info">' + disciplines + ' - ' + creators + ' - ' + year + '</a></div></div>';
+
+                        if(entry.youtubeurl) {
+                                var inclURL = entry.youtubeurl.split('?v=');
+                                inclURL = inclURL[1].split('&');
+                                inclURL = inclURL[0];
+                                str_html += '<iframe width="425" height="349" src="http://www.youtube.com/embed/' + inclURL + '" frameborder="0" allowfullscreen></iframe>';
+                        }
+                        
+                        str_html += '</div>';
+                //}
+                index++;
         }
 
         return str_html;

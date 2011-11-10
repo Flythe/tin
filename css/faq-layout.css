@@ -1,26 +1,16 @@
-body
-{
-	margin: 0;
-        font-family: Verdana, Arial;
-        font-size: 0.8em;
+body {
+        margin: 0;
 }
-h1 {
-        color: #A40083;
+p {
         font-size: 12px;
-        margin-top: 15px;
-}
-h2 {    
-        color: #A40083;
-        font-size: 14px;
-}
-a, span {
-        color: #A40083;
+        color: #333333;
+        font-family: Arial, Helvetica, sans-serif;
 }
 div#wrapper
 {
 	width: 957px;
 	position: relative;
-	margin: 0 auto;
+    margin: 0 auto;
 }
 div#top
 {
@@ -65,6 +55,112 @@ div#nav ul li a {
         color: #FFFFFF;
         text-decoration: none;
 }
-div.content {
-        padding: 0 20px;
+#back
+{
+	float: left;
+	margin: 33px 0 0 0;
+	width: 73px;
+}
+#back h1
+{
+	padding: 38px 5px 100px 0;
+	margin: 0 6px 0 0;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+    font-family:ITCNewBaskervilleRegular;
+	color: #666;
+    font-size: 16px;
+	font-weight: normal;
+	letter-spacing: 0.5px;
+	text-align: right;
+}
+.twoCol
+{
+	float: left;
+	margin: 33px 0 0 0;
+	padding: 0 30px;
+}
+.twoCol ul, .twoCol ol
+{
+	margin: 0 0 0 12px;
+	padding: 0;
+	
+}
+.twoCol ul li, .twoCol ol li
+{
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+	margin: 0 0 6px 0;
+	color: #333;
+	
+}
+.twoCol p a
+{
+	text-decoration: none;
+	color: #A40084;
+}
+div#mainTwoCol
+{
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	width: 395px;
+}
+div#rightTwoCol
+{
+	width: 365px;
+}
+#mainTwoCol h1, #rightTwoCol h1
+{
+	font-family:ITCNewBaskervilleRegular;
+	font-weight: normal;
+	letter-spacing: 0.8px;
+	font-size: 24px;
+	margin: 0;
+	position: relative;
+}
+#mainTwoCol h1
+{
+	color: #666;
+}
+#rightTwoCol h1
+{
+	color: #A40084;
+}
+#mainTwoCol h1 a
+{
+	font-size: 16px;
+	color: #999;
+	position: absolute;
+	right: 20px;
+	bottom: 4px;
+	letter-spacing: 0.6px;
+}
+#mainTwoCol h2, #rightTwoCol h2
+{
+	color: white;
+	font-family:ITCNewBaskervilleRegular;
+	font-weight: normal;
+	padding: 6px 0 4px 12px;
+	letter-spacing: 0.8px;
+	font-size: 24px;
+}
+#mainTwoCol h2 { background: #818181; }
+#rightTwoCol h2 { background: #A40084; }
+#mainTwoCol h2.wide { width: 400px; }
+ul.faq li.a
+{
+	display: none;
+}
+ul.faq li.a_selected
+{
+	display: block;
+	line-height: 16px;
+	margin: 0 0 18px 0;
+}
+ul.faq li.q_selected
+{
+	list-style: none;
+	font-size: 16px;
+	border-bottom: 1px solid #999;
+	padding-bottom: 6px;
 }
