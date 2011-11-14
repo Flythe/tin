@@ -119,9 +119,6 @@ if (!$intern) {
 	$results = str_replace('"weburlExtern"', '"weburl"', $results);
 }
 
-$adlibEnglish = array('Use:', 'Used for:', 'List of', 'recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available');
-$adlibDutch = array('Gebruik:', 'Gebruikt voor:', 'Overzicht van', 'teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar');
-
 $results = str_replace($adlibEnglish, $adlibDutch, $results);
 
 echo $results;
