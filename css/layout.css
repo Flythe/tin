@@ -290,6 +290,12 @@ div.faq a {
 	color: #666666;
         font-family: Arial,Helvetica,sans-serif;
 }
+.tinSearchResults .no-result {
+        font-size: 14px;
+}
+.tinSearchResults .no-result a {
+        color: #A40084;
+}
 div.tinSearchResults {
         margin: 0;
         padding: 8px 0 0 0;       

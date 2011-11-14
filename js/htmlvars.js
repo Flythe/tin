@@ -74,7 +74,7 @@ function getMenus(opts)
                                         '<ul>' +
                                                 '<li class="first">Met bovenstaande zoekfunctie zoekt u in</li>' +
                                                 '<li>de Theaterbibliotheek, de Museumcollectie,</li>' +
-                                                '<li>de Mediatheek, de Archieven en AdLib</li>' +
+                                                '<li>de Mediatheek, de Archieven en Adlib</li>' +
                                         '</ul>' +
                                 '</div>' +
 

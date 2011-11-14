@@ -1,9 +1,6 @@
 function parseTagCloud(container, jsonObject)
 {
-        var data = $(container).data('tinSearch');
-        var options = data.options;
-
-        if (!jsonObject.tagCloud) {
+        if (!jsonObject.tagCloud || jsonObject.tagCloud == '') {
                 return;
         }
 
@@ -29,7 +26,7 @@ function parseTagCloud(container, jsonObject)
         }
         shuffle(arr_html);
 
-        $('div.tinTagCloud').html('<div class="tinTagCloudInner">' + arr_html.join('&nbsp; ') + '</div>');
+        $('div.tinTagCloud', container).html('<div class="tinTagCloudInner">' + arr_html.join('&nbsp; ') + '</div>');
 
 }
 

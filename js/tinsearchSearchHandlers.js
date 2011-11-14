@@ -238,14 +238,11 @@ function search(ob, url)
                         
                         parseParams(ob, params);
                         
-                        /*if($('input.tinSearchInput', ob).val() == '') {
-                                $('input.tinSearchInput', ob).val(data.q);
-                        }*/
-                        
                         // remove loading.gif
                         $('input.tinSearchInput', ob).removeClass('loading');
                 }
         });
+        
 }
 
 function parseParams(ob, params) {
@@ -403,7 +400,7 @@ function displaySearchResults(container, jsonObj, pnmbr, slide, photodisp)
         if (!jsonObj.docs || !jsonObj.docs.length || nmbrOfResultsHtml === false) {
                 $('div.tinSearchNumberOfResults', container).html(nmbrOfResultsHtml == false ? '' : '<h1>' + nmbrOfResultsHtml + '</h1>');
                 $('div.tinSearchSuggestion').remove();
-                $('div.tinSearchResults', container).html('');
+                $('div.tinSearchResults', container).html('<span class="no-result">Heeft u niet gevonden wat u zocht? e-mail ons dan: <a href="mailto:mediatheek@tin.nl">mediatheek@tin.nl</a></span>');
                 $('div.tinTagCloud', container).html('');
                 $('div.tinPageNav', container).html('').hide();
                 nmbrOfResultsHtml == false ? $('div.welcome', container).show() : $('div.welcome', container).hide();
