@@ -383,6 +383,7 @@
           f = this.el.parents('form');
           if (f.length > 0) { f.get(0).submit(); }
         }
+        updateHash(selectedValue);
         this.ignoreValueChange = true;
         this.hide();
         this.onSelect(i);

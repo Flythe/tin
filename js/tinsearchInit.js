@@ -313,64 +313,18 @@ function initContinue(ob, opts)
         
         //searchtype change
         $('img.normalSearch, img.thumbSearch', ob).live('click', function() {
-                var params = getSearchParams(ob);
-                
-                if($(this).hasClass('normalSearch')){
-                        params.tinSearchType = "normal";
-                        $("img.normalSearch").attr("src", "images/buttons/button_alles.jpg");
-                        $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen.jpg");
-                } else {
-                        $("img.normalSearch").attr("src", "images/buttons/button_alles_disable.jpg");
-                        $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen_enable.jpg");
-                        params.tinSearchType = "thumbs";
-                }
-                
-                $('a.hiddenUpdater', ob).fragment($.param( params ));
-                $('a.hiddenUpdater', ob).click();
+                changeSearchType($(this).hasClass('normalSearch'));
                 return false;
         });
         
-        // Handle search input field
-        /*$('input.tinSearchInput', ob).live('keyup', function(e) {
-                var params = getSearchParams(ob);
-                var data = $(ob).data( 'tinSearch' );
-            
-                if(e.which == 13) {
-                        e.preventDefault();
-                        dbg('input.tinSearchInput: ENTER pressed.');
-                        
-                        data.enter = true;
-                        
-                        params.tinSearchInput = $(this).val();
-                        
-                        search(ob, $.param(params));
-                        return false;
-                } else {
-                        data.enter = true;
-                        
-                        params.tinSearchInput = $(this).val();
-                        search(ob, $.param(params));
-                }
-        });*/
-        
         // Handle searchfield change
         $('select.tinSearchAdlibSearchfield', ob).change(function(){
-                var params = getSearchParams(ob);
-
-                params.tinSearchAdlibSearchfield = $(this).val();
-
-                $('a.hiddenUpdater', ob).fragment($.param( params ));
-                $('a.hiddenUpdater', ob).click();
+                updateHash('', $(this).val());
         });
         
         // Handle search or/and change
         $('input.tinSearchOr', ob).change(function() {
-                var params = getSearchParams(ob);
-
-                params.combineSearch = $(this).val();
-
-                $('a.hiddenUpdater', ob).fragment($.param( params ));
-                $('a.hiddenUpdater', ob).click();
+                updateHash('', '', '', $(this).val());
         });
         
         $('h4.tinUitgebreid', ob).live('click', function() {
@@ -475,23 +429,7 @@ function initContinue(ob, opts)
         }
         
         // Handle initial search (?tinSearchInput=search+words)
-        var q = getSearchParams(ob);
-        
-        if (q.tinSearchInput) {   
-                $('input.tinSearchInput', ob).val(q.tinSearchInput);
-                
-                if(q.tinSearchAdlibSearchfield)
-                        $('select.tinSearchAdlibSearchfield', ob).val(q.tinSearchAdlibSearchfield);
-                
-                if(q.theSaurus)
-                        $('input.tinSearchThesaurusValue', ob).val(q.theSaurus);
-                
-                if(q.tinSearchAdlibSearchfield || q.theSaurus)
-                        showMenu(ob);
-                        
-                $('a.hiddenUpdater', ob).fragment($.param( q ));
-                $('a.hiddenUpdater', ob).click();
-        }
+        initSearch(ob);
         
         if (opts.autoComplete) {
                 checkAutocomplete(ob, opts);

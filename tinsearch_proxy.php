@@ -22,9 +22,9 @@ if (isset($_GET['query'])) {
         if(isset($_GET['fq'])){
                 $fq = $_GET['fq'].',source:adlib';
         } else {
-				$fq = 'source:adlib';
-		}
-        
+                $fq = 'source:adlib';
+        }
+
 	$handle = curl_init();
 	curl_setopt($handle, CURLOPT_URL, ($call = $host . 'rest/' . (isset($_GET['thesaurus']) ? 'thesaurus' : 'search') . '/autocomplete?term=' . urlencode($searchFragment) . '&rows=10'
                 . (isset($searchField) ? ((strlen($searchField) > 0) ? '&field='.$searchField : '') : '')
@@ -118,9 +118,6 @@ if (!$intern) {
 	$results = str_replace('"weburl"', '"weburlIntern"', $results);
 	$results = str_replace('"weburlExtern"', '"weburl"', $results);
 }
-
-$adlibEnglish = array('Use:', 'Used for:', 'List of', 'recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available');
-$adlibDutch = array('Gebruik:', 'Gebruikt voor:', 'Overzicht van', 'teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar');
 
 $results = str_replace($adlibEnglish, $adlibDutch, $results);
 

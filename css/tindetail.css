@@ -53,25 +53,10 @@ div#nav ul li a {
         color: #FFFFFF;
         text-decoration: none;
 }
-div.navtabs {
-        margin-left: 340px;
-        width: 240px;
-        height: 34px;
-}
-.navtabs a.tab {
-        float: left;
-        display: block;
-        height: 34px;
-        width: 77px;
-        background: url('../images/catalogusTabs/vintage.jpg') 0 0 no-repeat;
-}
-.navtabs a.tab:hover {
-        background: url('../images/catalogusTabs/vintage_over.jpg') 0 0 no-repeat;
-}
 div.faq {
         background: url('../images/buttons/faq_info.jpg') 0 0 no-repeat;
         position: absolute;
-        top: 109px;
+        top: 138px;
         right: 0px;
         height: 58px;
         width: 92px;
@@ -144,10 +129,14 @@ div.search-result img, div.search-result, div.image-here, div.result-data
 {
         float: left;
 	margin-right: 16px;
+        
+}
+div.image-here {
+        max-width: 440px;
 }
 div.result-data {
         margin-top: 10px;
-        width: 450px;
+        max-width: 420px;
 }
 div.search-result h2, div.search-result h1
 {

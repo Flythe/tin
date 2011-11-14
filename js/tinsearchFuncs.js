@@ -1,17 +1,15 @@
 function parseTagCloud(container, jsonObject)
 {
-        var data = $(container).data('tinSearch');
-        var options = data.options;
-
-        if (!jsonObject.tagCloud) {
+        if (!jsonObject.tagCloud || jsonObject.tagCloud == '') {
                 return;
         }
-
+        
         var arr_html = [];
         var i;
         var maxoccurences = jsonObject.tagCloud[0].occurences;
-        var minoccurences = jsonObject.tagCloud[jsonObject.tagCloud.length - 1 < 9 ? jsonObject.tagCloud.length : 9].occurences;
+        var minoccurences = jsonObject.tagCloud[jsonObject.tagCloud.length - 1 < 9 ? jsonObject.tagCloud.length - 1 : 9].occurences;
         var scope = maxoccurences - minoccurences;
+        
         for (i = 0; i < jsonObject.tagCloud.length && i < 10; i++) {
                 var tag = jsonObject.tagCloud[i];
                 var css = '';
@@ -27,10 +25,10 @@ function parseTagCloud(container, jsonObject)
                 }
                 arr_html.push('<a href="#tinSearch=1&tinSearchInput=' + escape(tag.term) + '"' + (css == '' ? '' : ' class="' + css + '"') + '>' + tag.term + '</a>');
         }
+        
         shuffle(arr_html);
-
-        $('div.tinTagCloud').html('<div class="tinTagCloudInner">' + arr_html.join('&nbsp; ') + '</div>');
-
+        $('div.tinTagCloud', container).html('<div class="tinTagCloudInner">' + arr_html.join('&nbsp; ') + '</div>');
+        return;
 }
 
 function loginResults(resultsObj)
@@ -114,13 +112,13 @@ function checkQuotes(q) {
         return false;
 }
 
-function getSearchParams(ob) {
-        var url = $.bbq.getState( $(ob).attr('id') );
+function getSearchParams() {
+        var url = $.bbq.getState('tinCatalogus');
         var params = {};
 
         if(url)
                 params = $.deparam ( url );
-
+        
         return params;
 }
 
@@ -147,6 +145,77 @@ function hideMenu(ob) {
         $('input.tinSearchOr[value=" "]', ob).prop('checked', true);
         $('div.tinSearchMenu', ob).css('border-right', 'none');
         $('img.catalogusImg', ob).attr('src', 'images/TIN_Catalogus_eenvoudig.jpg');
+}
+
+function updateHash(searchInput, tinSearchAdlibSearchfield, theSaurus, combineSearch, tinSearchType) {
+        var q = getSearchParams();
+        
+        if(searchInput != '' && searchInput != undefined) {
+                q.tinSearchInput = searchInput;
+        }
+        
+        if(tinSearchAdlibSearchfield != '' && tinSearchAdlibSearchfield != undefined) {
+                q.tinSearchAdlibSearchfield = tinSearchAdlibSearchfield;
+        }
+        
+        if(theSaurus != '' && theSaurus != undefined) {
+                q.theSaurus = theSaurus;
+        }
+        
+        if(combineSearch != '' && combineSearch != undefined) {
+                q.combineSearch = combineSearch;
+        }
+        
+        if(tinSearchType != '' && tinSearchType != undefined) {
+                q.tinSearchType = tinSearchType;
+        }
+        
+        $('a.hiddenUpdater').fragment($.param( q ));
+        $('a.hiddenUpdater').click();
+}
+
+function changeSearchType(type) {
+        // normal search
+        if(type){
+                updateHash('', '', '', '', 'normal');
+                $("img.normalSearch").attr("src", "images/buttons/button_alles.jpg");
+                $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen.jpg");
+        // image search
+        } else {
+                updateHash('', '', '', '', 'thumbs');
+                $("img.normalSearch").attr("src", "images/buttons/button_alles_disable.jpg");
+                $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen_enable.jpg");
+        }
+}
+
+function initSearch(ob) {
+        var q = getSearchParams(ob);
+        
+        if (q.tinSearchInput) {   
+                $('input.tinSearchInput', ob).val(q.tinSearchInput);
+                
+                if(q.tinSearchAdlibSearchfield) {
+                        $('select.tinSearchAdlibSearchfield', ob).val(q.tinSearchAdlibSearchfield);
+                }
+                
+                if(q.theSaurus) {
+                        $('input.tinSearchThesaurusValue', ob).val(q.theSaurus);
+                }
+                
+                if(q.tinSearchAdlibSearchfield || q.theSaurus) {
+                        showMenu(ob);
+                }
+                
+                if(q.tinSearchType) {
+                        if(q.tinSearchType == 'normal') {
+                                changeSearchType(true);
+                        } else {
+                                changeSearchType(false);
+                        }
+                }
+                        
+                updateHash(q.tinSearchInput, q.tinSearchAdlibSearchfield, q.theSaurus);
+        }
 }
 
 /*

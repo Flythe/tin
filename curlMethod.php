@@ -46,6 +46,8 @@ function curl_get_uri($uri, $method = 'GET', $calldata = NULL, $accept = 'applic
 		return $response ? $response : $code;
 	}
         
+        $response = str_replace($adlibEnglish, $adlibDutch, $response);
+        
 	return $response;
 }
 ?>

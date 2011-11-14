@@ -60,13 +60,9 @@ include('vars.php');
                         </ul>
                 </div>
                 
-                <div class="navtabs">
-                        <a class="tab" href="<?php echo $tinUrl; ?>"></a>
-                </div>
-                
                 <div class="faq"><a href="faq.php"></a></div>
                 
-                <h3 class="terug"><a href="">Terug naar resultaten</a></h3>
+                <h3 class="terug"><a href="javascript:self.close();">Sluit venster</a></h3>
                 
                 <!--zoekresultaat-->
                 <div class="search-result">
@@ -88,7 +84,7 @@ include('vars.php');
                                                 loop($data->genre);
 
                                                 disp($data->jaar);
-
+                                                
                                                 loop($data->makers);
 
                                                 if($data->materials != '') {
@@ -109,3 +105,5 @@ include('vars.php');
                         </div>
                 </div>
         </div>
+    </body>
+</html>

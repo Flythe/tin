@@ -31,7 +31,11 @@ function getArray($element) {
         $array = array();
         
         foreach($element as $el) {
-                array_push($array, $el);
+                if(is_array($el)) {
+                        array_push($array, $el['title']);
+                } else {
+                        array_push($array, $el);
+                }
         }
         
         return $array;
@@ -63,6 +67,7 @@ function loop($el, $indent = false) {
         }
         
         if(is_array($el->content)) {
+                //var_dump($el);
                 foreach($el->content as $e) {                        
                         echo $e;                    
                 }
