@@ -84,7 +84,7 @@ include('vars.php');
                                                 loop($data->genre);
 
                                                 disp($data->jaar);
-
+                                                
                                                 loop($data->makers);
 
                                                 if($data->materials != '') {
@@ -105,3 +105,5 @@ include('vars.php');
                         </div>
                 </div>
         </div>
+    </body>
+</html>

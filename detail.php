@@ -40,6 +40,8 @@ $data = new stdClass();
  * - media
  */
 if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true))) {    
+        //var_dump($record);
+        //exit();
         if (!empty($record['discipline'])) {                
                 $data->genre->title = 'Genre: ';
                 $data->genre->content = getArray($record['discipline']);
@@ -54,9 +56,13 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
                 $data->jaar = '';
         }
         
-        if (!empty($record['creatorNames'])) {
+        if (!empty($record['creatorNames']) || !empty($record['authors'])) {
                 $data->makers->title = 'Makers: ';
-                $data->makers->content = getArray($record['creatorNames']);
+                if(!empty($record['creatorNames'])) {
+                        $data->makers->content = getArray($record['creator']);
+                } else {
+                        $data->makers->content = getArray($record['authors']);
+                }
         } else {
                 $data->makers = '';
         }
@@ -104,10 +110,6 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         }
         
         if (!empty($record['loanStatus'])) {
-                $adlibEnglish = array('Use:', 'Used for:', 'List of', 'recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available');
-                $adlibDutch = array('Gebruik:', 'Gebruikt voor:', 'Overzicht van', 'teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar');
-
-                $record['loanStatus'] = str_replace($adlibEnglish, $adlibDutch, $record['loanStatus']);
                 $data->location->uitleenstatus->title = 'Uitleenstatus: ';
                 $data->location->uitleenstatus->content = $record['loanStatus'];
         } else {
