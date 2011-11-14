@@ -481,8 +481,10 @@ function getResultsHeader(container, jsonObj, pnmbr)
                         input = input.split(' ');
                         
                         $.each(input, function(key, searchinput){
-                                nmbrOfResultsParts.push('<span class="inputFacet"><em>' + searchinput
-                                        + '</em> <a href="#" class="tinButton tinCloseButton tinRemoveSearchInput" title="Reset zoekwoorden" value="' + searchinput + '"></a></span>');
+                                if(searchinput != ' ' && searchinput != '') {
+                                        nmbrOfResultsParts.push('<span class="inputFacet"><em>' + searchinput
+                                                + '</em> <a href="#" class="tinButton tinCloseButton tinRemoveSearchInput" title="Reset zoekwoorden" value="' + searchinput + '"></a></span>');
+                                }
                         });
                 } else {
                         nmbrOfResultsParts.push('<span class="inputFacet"><em>' + searchField + input
