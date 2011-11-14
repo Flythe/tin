@@ -313,20 +313,7 @@ function initContinue(ob, opts)
         
         //searchtype change
         $('img.normalSearch, img.thumbSearch', ob).live('click', function() {
-                var params = getSearchParams(ob);
-                
-                if($(this).hasClass('normalSearch')){
-                        params.tinSearchType = "normal";
-                        $("img.normalSearch").attr("src", "images/buttons/button_alles.jpg");
-                        $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen.jpg");
-                } else {
-                        $("img.normalSearch").attr("src", "images/buttons/button_alles_disable.jpg");
-                        $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen_enable.jpg");
-                        params.tinSearchType = "thumbs";
-                }
-                
-                $('a.hiddenUpdater', ob).fragment($.param( params ));
-                $('a.hiddenUpdater', ob).click();
+                changeSearchType($(this).hasClass('normalSearch'));
                 return false;
         });
         
@@ -337,12 +324,7 @@ function initContinue(ob, opts)
         
         // Handle search or/and change
         $('input.tinSearchOr', ob).change(function() {
-                var params = getSearchParams(ob);
-
-                params.combineSearch = $(this).val();
-
-                $('a.hiddenUpdater', ob).fragment($.param( params ));
-                $('a.hiddenUpdater', ob).click();
+                updateHash('', '', '', $(this).val());
         });
         
         $('h4.tinUitgebreid', ob).live('click', function() {

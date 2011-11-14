@@ -147,7 +147,7 @@ function hideMenu(ob) {
         $('img.catalogusImg', ob).attr('src', 'images/TIN_Catalogus_eenvoudig.jpg');
 }
 
-function updateHash(searchInput, tinSearchAdlibSearchfield, theSaurus) {
+function updateHash(searchInput, tinSearchAdlibSearchfield, theSaurus, combineSearch, tinSearchType) {
         var q = getSearchParams();
         
         if(searchInput != '' && searchInput != undefined) {
@@ -162,8 +162,30 @@ function updateHash(searchInput, tinSearchAdlibSearchfield, theSaurus) {
                 q.theSaurus = theSaurus;
         }
         
+        if(combineSearch != '' && combineSearch != undefined) {
+                q.combineSearch = combineSearch;
+        }
+        
+        if(tinSearchType != '' && tinSearchType != undefined) {
+                q.tinSearchType = tinSearchType;
+        }
+        
         $('a.hiddenUpdater').fragment($.param( q ));
         $('a.hiddenUpdater').click();
+}
+
+function changeSearchType(type) {
+        // normal search
+        if(type){
+                updateHash('', '', '', '', 'normal');
+                $("img.normalSearch").attr("src", "images/buttons/button_alles.jpg");
+                $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen.jpg");
+        // image search
+        } else {
+                updateHash('', '', '', '', 'thumbs');
+                $("img.normalSearch").attr("src", "images/buttons/button_alles_disable.jpg");
+                $("img.thumbSearch").attr("src", "images/buttons/button_afbeeldingen_enable.jpg");
+        }
 }
 
 function initSearch(ob) {
@@ -183,11 +205,16 @@ function initSearch(ob) {
                 if(q.tinSearchAdlibSearchfield || q.theSaurus) {
                         showMenu(ob);
                 }
+                
+                if(q.tinSearchType) {
+                        if(q.tinSearchType == 'normal') {
+                                changeSearchType(true);
+                        } else {
+                                changeSearchType(false);
+                        }
+                }
                         
-                updateHash(q.tinSearchInput, q.tinSearchAdlibSearchfield, q.theSaurus);       
-                        
-                //$('a.hiddenUpdater', ob).fragment($.param( q ));
-                //$('a.hiddenUpdater', ob).click();
+                updateHash(q.tinSearchInput, q.tinSearchAdlibSearchfield, q.theSaurus);
         }
 }
 

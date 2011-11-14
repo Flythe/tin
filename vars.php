@@ -27,7 +27,7 @@ if($thisIp == $debugIp) {
 // set internal or external access
 $intern = false;
 
-if(($thisIp == $internIp || $thisIp == $debugIp) && $debug) {
+if($thisIp == $internIp || $thisIp == $debugIp) {
         $tinUrl = 'http://tin-as-01/catalogus';
         $intern = true;
 }
