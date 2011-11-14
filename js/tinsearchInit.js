@@ -330,37 +330,9 @@ function initContinue(ob, opts)
                 return false;
         });
         
-        // Handle search input field
-        /*$('input.tinSearchInput', ob).live('keyup', function(e) {
-                var params = getSearchParams(ob);
-                var data = $(ob).data( 'tinSearch' );
-            
-                if(e.which == 13) {
-                        e.preventDefault();
-                        dbg('input.tinSearchInput: ENTER pressed.');
-                        
-                        data.enter = true;
-                        
-                        params.tinSearchInput = $(this).val();
-                        
-                        search(ob, $.param(params));
-                        return false;
-                } else {
-                        data.enter = true;
-                        
-                        params.tinSearchInput = $(this).val();
-                        search(ob, $.param(params));
-                }
-        });*/
-        
         // Handle searchfield change
         $('select.tinSearchAdlibSearchfield', ob).change(function(){
-                var params = getSearchParams(ob);
-
-                params.tinSearchAdlibSearchfield = $(this).val();
-
-                $('a.hiddenUpdater', ob).fragment($.param( params ));
-                $('a.hiddenUpdater', ob).click();
+                updateHash('', $(this).val());
         });
         
         // Handle search or/and change
@@ -475,23 +447,7 @@ function initContinue(ob, opts)
         }
         
         // Handle initial search (?tinSearchInput=search+words)
-        var q = getSearchParams(ob);
-        
-        if (q.tinSearchInput) {   
-                $('input.tinSearchInput', ob).val(q.tinSearchInput);
-                
-                if(q.tinSearchAdlibSearchfield)
-                        $('select.tinSearchAdlibSearchfield', ob).val(q.tinSearchAdlibSearchfield);
-                
-                if(q.theSaurus)
-                        $('input.tinSearchThesaurusValue', ob).val(q.theSaurus);
-                
-                if(q.tinSearchAdlibSearchfield || q.theSaurus)
-                        showMenu(ob);
-                        
-                $('a.hiddenUpdater', ob).fragment($.param( q ));
-                $('a.hiddenUpdater', ob).click();
-        }
+        initSearch(ob);
         
         if (opts.autoComplete) {
                 checkAutocomplete(ob, opts);

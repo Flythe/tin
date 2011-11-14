@@ -233,9 +233,9 @@ function search(ob, url)
                                 parseFacets(ob, jsonObject);
 
                         $('a.hiddenUpdater', ob).fragment($.param( params ));
-
-                        parseTagCloud(ob, jsonObject);
                         
+                        parseTagCloud(ob, jsonObject);
+
                         parseParams(ob, params);
                         
                         // remove loading.gif
