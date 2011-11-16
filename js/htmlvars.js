@@ -12,7 +12,7 @@ function getMainStruc(opts) {
                         searchMenu +
                 '</div>' +
                 '<div class="tinSearchContainer">' +
-                        '<div class="welcome">Welkom in de nieuwe TIN catalogus. Vanaf 17 oktober is een sneak preview beschikbaar die makkelijker en sneller zoekt, maar vooral beter vindt. U bent van harte welkom om \'m te testen en ons van feedback te voorzien: <a href="mailto:mediatheek@tin.nl">mediatheek@tin.nl</a></div>' +
+                        '<div class="welcome">Welkom in de nieuwe TIN catalogus. Deze catalogus biedt een overzicht van wat TIN in de mediatheek-, bibliotheek-, en museumcollectie heeft. Wij zijn benieuwd naar uw feedback. Heeft u opmerkingen, vragen of tips? Mail ons dan: <a href="mailto:mediatheek@tin.nl">mediatheek@tin.nl</a></div>' +
                         '<div class="tinSearchNumberOfResults"></div>' +
                         '<div class="tinSearchSuggestion"></div>' +
                         '<div class="tinSearchResults">' +
