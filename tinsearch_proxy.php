@@ -32,6 +32,7 @@ if (isset($_GET['query'])) {
 	curl_setopt($handle, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
 	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         //print_r($call);
+        
 	$rawResponse = curl_exec($handle);
 	if (!$rawResponse) {
 		exit;
