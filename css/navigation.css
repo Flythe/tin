@@ -1,55 +1,55 @@
 div.tinPageNav {
+        width: 616px;
 	margin: 0;
-	color: #5A447A;
+	color: #666666;
 	padding: 0.9em 0 .7em;
-	display: none;
 	text-align: center;
 }
 
-	div.tinPageNavMiddle {
-		position: relative;
-		margin: 0 7em 0 5.5em;
-                float: left;
-	}
+div.tinPageNavMiddle {
+        position: relative;
+        margin: 0 7em 0 5.5em;
+        float: left;
+}
 
-	div.tinPageNav a {
-		padding: 0 4px;
-		color: #5A447A;
-		font-weight: bold;
-		display: inline-block;
-	}
+div.tinPageNav a {
+        text-decoration: none;
+        padding: 0 4px;
+        color: #666666;
+        font-weight: bold;
+        display: inline-block;
+}
 
-	div.tinPageNav span {
-		position: relative;
-		display: inline-block;
-		padding: 0 6px;
-		color: #5A447A;
-		font-weight: bold;
-	}
+div.tinPageNav span {
+        position: relative;
+        display: inline-block;
+        padding: 0 6px;
+        font-weight: bold;
+}
 
-	div.tinPageNav span.tinPageNavNext, div.tinPageNav span.tinPageNavPrev {
-		padding: 0 .8em 0 0;
-		height: auto;
-                min-width: 70px;
-                float: left;
-	}
+div.tinPageNav span.tinPageNavNext, div.tinPageNav span.tinPageNavPrev {
+        padding: 0 .8em 0 0;
+        height: auto;
+        min-width: 70px;
+        float: left;
+}
 
-	div.tinPageNav span.tinPageNavPrev a,
-	div.tinPageNav span.tinPageNavNext a {
-		padding: 0 .2em 0;
-		float: none;
-	}
+div.tinPageNav span.tinPageNavPrev a,
+div.tinPageNav span.tinPageNavNext a {
+        padding: 0 .2em 0;
+        float: none;
+}
 
-	div.tinPageNav span.tinPageNavPrev a {
-		padding-left: .25em;
-	}
+div.tinPageNav span.tinPageNavPrev a {
+        padding-left: .25em;
+}
 
-	div.tinPageNav .tinButton {
-	    margin: -.25em 2px 0;
-	}
+div.tinPageNav .tinButton {
+    margin: -.25em 2px 0;
+}
 
-	div.tinPageNav a.tinButton {
-	    text-decoration: none;
+div.tinPageNav a.tinButton {
+    text-decoration: none;
 	}
 
 div.tinBlock{
