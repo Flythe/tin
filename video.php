@@ -4,4 +4,4 @@
         $('.media').media();
 </script>
 
-<a class="media" href="\\172.16.1.33/video/30/3045-1.wmv"/>
+<a class="media" href="<?php $_GET['f'] ?>"/>

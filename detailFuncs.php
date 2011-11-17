@@ -13,7 +13,7 @@ function disp_media($elements, $parentKey = false, $isList = false)
                                 if($e['photo']) {
                                         array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
                                 } elseif($e['video']) {
-                                        array_push($media, '<a href="file://///'.str_replace('\\','/',str_replace('\\\\','',$e['url'])).'"><img src="http://mediaserver.tin.nl/img/video.png"/></a>');
+                                        array_push($media, '<a href="/video.php?f=' . $e['url'] . '"><img src="http://mediaserver.tin.nl/img/video.png"/></a>');
                                 } elseif($e['audio']) {
                                         array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>');
                                 }
