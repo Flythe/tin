@@ -6,5 +6,5 @@
      <param name="showcontrols" value="true">
      <param name="ShowStatusBar" value="true">
      <param name="windowlessvideo" value="true">
-     <embed src="./test.wmv" autostart="true" showcontrols="true" showstatusbar="1" bgcolor="white" width="320" height="310">
+     <embed src="\\172.16.1.33\video\30\3045-1.wmv" autostart="true" showcontrols="true" showstatusbar="1" bgcolor="white" width="320" height="310">
 </object>
