@@ -28,7 +28,7 @@ include('vars.php');
 				});
 			});
                         
-                function initPlayer(url, height, title) {
+                function initPlayer(url, height, width, title) {
                           //plaats swfobject in html van image-here
                           $('div.image-here').html($('div.image-here').html() + '<h4>' + title + ' ' + count + '</h4><div id="container1">Loading the player ... </div><br/>');
                           //verwijder grijze background
@@ -38,7 +38,7 @@ include('vars.php');
                           var params = { allowfullscreen:'true', allowscriptaccess:'always' };
                           var attributes = { id:'player1', name:'player1' };
                           
-                          swfobject.embedSWF('js/jwplayer/player.swf','container1','640',height,'9.0.115','false', flashvars, params, attributes);
+                          swfobject.embedSWF('js/jwplayer/player.swf','container1',width,height,'9.0.115','false', flashvars, params, attributes);
                           
                           count += 1;
                 }
