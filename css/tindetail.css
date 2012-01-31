@@ -131,15 +131,16 @@ div.search-result img, div.search-result, div.image-here, div.result-data
 	margin-right: 16px;
         
 }
-div.image-here {
+div.image-here, div.image-here img {
         max-width: 440px;
 }
 div.result-data {
         margin-top: 10px;
-        max-width: 420px;
+        max-width: 410px;
 }
 div.search-result h2, div.search-result h1
 {
+        max-width: 350px;
 	font-size: 15px;
         margin: 0;
 }

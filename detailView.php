@@ -12,13 +12,8 @@ include('vars.php');
         <script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="js/tinlogin.js"></script>
         <script type="text/javascript" src="js/jwplayer/swfobject.js"></script>
-        <script type="text/javascript" src="js/prefs.js"></script>
         
-        <script type="text/javascript">
-                user_pref("capability.policy.policynames", "localfilelinks");
-                user_pref("capability.policy.localfilelinks.sites", "http://catalogus.tin.nl");
-                user_pref("capability.policy.localfilelinks.checkloaduri.enabled", "allAccess");
-                
+        <script type="text/javascript">                
                 var count = 1;
                 
         	$(function()
@@ -33,7 +28,7 @@ include('vars.php');
 				});
 			});
                         
-                function initPlayer(url, height, title) {
+                function initPlayer(url, height, width, title) {
                           //plaats swfobject in html van image-here
                           $('div.image-here').html($('div.image-here').html() + '<h4>' + title + ' ' + count + '</h4><div id="container1">Loading the player ... </div><br/>');
                           //verwijder grijze background
@@ -43,11 +38,23 @@ include('vars.php');
                           var params = { allowfullscreen:'true', allowscriptaccess:'always' };
                           var attributes = { id:'player1', name:'player1' };
                           
-                          swfobject.embedSWF('js/jwplayer/player.swf','container1','640',height,'9.0.115','false', flashvars, params, attributes);
+                          swfobject.embedSWF('js/jwplayer/player.swf','container1',width,height,'9.0.115','false', flashvars, params, attributes);
                           
                           count += 1;
                 }
-		</script>
+        </script>
+        
+        <script type="text/javascript">
+                var _gaq = _gaq || [];
+                  _gaq.push(['_setAccount', 'UA-12264262-14']);
+                  _gaq.push(['_trackPageview']);
+
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+        </script>
     </head>
     <body>
         <div id="wrapper">

@@ -13,9 +13,9 @@ function disp_media($elements, $parentKey = false, $isList = false)
                                 if($e['photo']) {
                                         array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
                                 } elseif($e['video']) {
-                                        array_push($media, '<a href="file://///'.str_replace('\\','/',str_replace('\\\\','',$e['url'])).'"><img src="http://mediaserver.tin.nl/img/video.png"/></a>');
+                                        array_push($media, '<a href="/video.php?f=' . $e['url'] . '"><img src="http://mediaserver.tin.nl/img/video.png"/></a>');
                                 } elseif($e['audio']) {
-                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "Geluidsfragment");</script>');
+                                        array_push($media, '<script type="text/javascript">initPlayer("' . str_replace('?webExclusion=true', '', $e['url'].'.mp3') . '", "24", "400", "Geluidsfragment");</script>');
                                 }
                         //webexcluded, geen intern gebruik
                         } elseif ($e['webExclusion'] == true && !$intern) {
@@ -32,9 +32,9 @@ function getArray($element) {
         
         foreach($element as $el) {
                 if(is_array($el)) {
-                        array_push($array, $el['title']);
+                        array_push($array, $el['title']."; ");
                 } else {
-                        array_push($array, $el);
+                        array_push($array, $el."; ");
                 }
         }
         
