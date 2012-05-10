@@ -11,7 +11,7 @@ function disp_media($elements, $parentKey = false, $isList = false)
                         //webexcluded, intern gebruik
                         if(($e['webExclusion'] == true && $intern) || $e['webExclusion'] == false) {
                                 if($e['photo']) {
-                                        array_push($media, '<img src="' . $e['url'] . '" class="adlibimg" />');
+                                        array_push($media, '<a href="' . $e['url'] . '" target="_blank"><img src="' . $e['url'] . '" class="adlibimg" /></a>');
                                 } elseif($e['video']) {
                                         array_push($media, '<a href="/video.php?f=' . $e['url'] . '"><img src="http://mediaserver.tin.nl/img/video.png"/></a>');
                                 } elseif($e['audio']) {

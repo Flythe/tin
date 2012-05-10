@@ -157,13 +157,6 @@
 	$.fn.tinSearch.initialized = false;
 
 	var burl = unescape(window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1));
-	switch (burl) {
-                case 'http://127.0.0.1/develop/':
-                case 'http://src.tin.nl/devtest/':
-                    break;
-                default:
-                    burl = 'http://catalogus.tin.nl/';
-	}
         
         $.fn.tinSearch.defaults = 
         {
