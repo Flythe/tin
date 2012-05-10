@@ -37,12 +37,12 @@
 		this.ignoreValueChange = false;
 		this.serviceUrl = options.serviceUrl;
 		this.isLocal = false;
-                this.timeKill = true;
+        this.timeKill = true;
 		var autoparams = { };
 		//if (options.fq) autoparams.fq = options.fq;
 		if (options.thesaurus) autoparams.thesaurus = options.thesaurus;
 		this.options = {
-                        timeout: 6000,
+            timeout: 6000,
 			autoSubmit: false,
 			minChars: 1,
 			maxHeight: 300,
