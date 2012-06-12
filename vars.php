@@ -38,7 +38,7 @@ $host = 'http://rest.tin.nl/';
 // end host
 
 // translations
-$adlibEnglish = array('recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available', 'on loan', 'production');
-$adlibDutch = array('teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar', 'uitgeleend', 'productie');
+$adlibEnglish = array('recalled', 'lost or stolen', 'withdrawn', 'temp.withdrawn', 'in transit', 'available', 'on loan');
+$adlibDutch = array('teruggeroepen', 'vermist', 'niet uitleenbaar', 'tijdelijk niet uitleenbaar', 'onderweg', 'beschikbaar', 'uitgeleend');
 // end translations
 ?>

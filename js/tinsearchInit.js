@@ -191,6 +191,7 @@
                         materialtype: 'Materiaaltype',
                         casttotal: 'Rolbezetting',
                         year: 'Jaar',
+                        production: 'Productie',
                         castamounts: 'Aantal rollen',
                         ChoiceCollect: 'TIN Collectie',
                         ChoiceFullCatalogue: 'TIN Catalogus',

@@ -1,9 +1,8 @@
-<?php
-include('vars.php');
-?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <?php include('vars.php'); ?>
+    
     <head>
     	<title>TIN Zoekresultaten</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -30,7 +29,7 @@ include('vars.php');
                         
                 function initPlayer(url, height, width, title) {
                           //plaats swfobject in html van image-here
-                          $('div.image-here').html($('div.image-here').html() + '<h4>' + title + ' ' + count + '</h4><div id="container1">Loading the player ... </div><br/>');
+                          $('div.image-here').append('<h4>' + title + ' ' + count + '</h4><div id="container1">Loading the player ... </div><br/>');
                           //verwijder grijze background
                           $('div.image-here').css('background', 'none');
                           

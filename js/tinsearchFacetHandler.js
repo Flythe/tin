@@ -132,7 +132,11 @@ function parseFacets(container, jsonObject, facets)
                                 selected_facets = false;
                                 drop_facet = true;
                         }
-
+                        
+                        if (f == 'productie') {
+                            f = 'production';
+                        }
+                        
                         facets_html += 
                                 '<li' + attr_current + '>' +
                                         '<a href="#tinFilter=' + facet + ':' + f + ((selected_facets) ? extra_facets : '') +'&parseFacets=1" class="tinSearchAddFacet">' + facet_title + '&nbsp; <span class="number">(' + jsonObject.facets[k].facets[i].value + ')</span></a>' +

@@ -66,7 +66,7 @@ function loop($el, $indent = false) {
                 return;
         }
         
-        if(is_array($el->content)) {
+         if(is_array($el->content) && count($el->content) > 1) {
                 //var_dump($el);
                 foreach($el->content as $e) {                        
                         echo $e;                    
