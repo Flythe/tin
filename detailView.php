@@ -80,7 +80,7 @@
                         <div class="image-here">
                                 <?php
                                         if(count($data->media) > 1 && !$intern) {
-                                                echo($data->media[0]);
+                                                echo $data->media->content[0];
                                         } else {
                                                 loop($data->media);
                                         }

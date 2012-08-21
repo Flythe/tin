@@ -71,6 +71,8 @@ function loop($el, $indent = false) {
                 foreach($el->content as $e) {                        
                         echo $e;                    
                 }
+        } elseif (is_array($el->content)) {
+                echo $el->content[0];
         } else {
                 echo $el->content;
         }
