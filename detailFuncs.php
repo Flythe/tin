@@ -42,40 +42,44 @@ function getArray($element) {
 }
 
 function loop($el, $indent = false) {
+        $str = '';
+    
         if($el == '') {
-                return;
+            return;
         }
         
         if(!isset($el->title)) {
-                foreach($el as $e) {
-                       loop($e, true);
-                }
-                
-                return;
+            foreach($el as $e) {
+               loop($e, true);
+            }
+
+            return;
         }
         
         $add = '';
         
         if($indent) {
-                $add = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            $add = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         }
         
         echo $add.$el->title;
         
         if($el->content == '') {
-                return;
+            return;
         }
         
          if(is_array($el->content) && count($el->content) > 1) {
-                //var_dump($el);
-                foreach($el->content as $e) {                        
-                        echo $e;                    
-                }
+            //var_dump($el);
+            foreach($el->content as $e) {
+                $str .= $e;
+            }
         } elseif (is_array($el->content)) {
-                echo $el->content[0];
+            $str .= $el->content[0];
         } else {
-                echo $el->content;
+            $str .= $el->content;
         }
+        
+        echo rtrim($str, "; ");
         
         echo '<br/>';
 }

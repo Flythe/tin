@@ -111,6 +111,21 @@
                                                 loop($data->omschrijving);
 
                                                 disp($data->copyright);
+                                                
+                                                disp($data->jaar);
+                                                
+                                                disp($data->dbname);
+                                                disp($data->source_title);
+                                                disp($data->author_name_lref);
+                                                disp($data->author_name);
+                                                disp($data->performance_production_code);
+                                                disp($data->place_of_publication);
+                                                disp($data->publisher);
+                                                disp($data->keywords);
+                                                disp($data->notes);
+                                                disp($data->isbn);
+                                                disp($data->person_keyword_name);
+                                                disp($data->language_code);
                                         ?>
                                 </p>
                         </div>

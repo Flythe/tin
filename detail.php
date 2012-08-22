@@ -39,21 +39,23 @@ $data = new stdClass();
  * - uitleenstatus (loanStatus)
  * - media
  */
-if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true))) {    
+if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true))) {
+        //generic items
+        $data->genre = ''; $data->jaar = ''; $data->makers = ''; $data->materials->materiaal_type = ''; $data->materials->materiaal_subtype = '';
+        $data->omschrijving = ''; $data->copyright = ''; $data->location->kopienummer = ''; $data->location->lokatiecode = '';
+        $data->location->uitleenstatus = ''; $data->titel = ''; $data->media = '';
+        $data->dbname = ''; $data->source_title = ''; $data->author_name_lref = ''; $data->author_name = ''; $data->performance_production_code = ''; $data->place_of_publication = ''; 
+        $data->publisher = ''; $data->keywords = ''; $data->notes = ''; $data->isbn = ''; $data->person_keyword_name = ''; $data->language_code = '';
         //var_dump($record);
         //exit();
         if (!empty($record['discipline'])) {                
                 $data->genre->title = 'Genre: ';
                 $data->genre->content = getArray($record['discipline']);
-        } else {
-                $data->genre = '';
         }
         
         if (!empty($record['year'])) {
                 $data->jaar->title = 'Jaar: ';
                 $data->jaar->content = $record['year'];
-        } else {
-                $data->jaar = '';
         }
         
         if (!empty($record['creatorNames']) || !empty($record['authors'])) {
@@ -63,57 +65,41 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
                 } else {
                         $data->makers->content = getArray($record['authors']);
                 }
-        } else {
-                $data->makers = '';
         }
         
         if (!empty($record['materialType'])) {
                 $data->materials->materiaal_type->title = 'Materiaaltype: ';
                 $data->materials->materiaal_type->content = $record['materialType'];
-        } else {
-                $data->materials->materiaal_type = '';
         }
         
         if (!empty($record['materialSubType'])) {
                 $data->materials->materiaal_subtype->title = 'Materiaal subtype: ';
                 $data->materials->materiaal_subtype->content = $record['materialSubType'];
-        } else {
-                $data->materials->materiaal_subtype = '';
         }
         
         if (!empty($record['titles'])) {
                 $data->omschrijving->title = 'Omschrijving: ';
                 $data->omschrijving->content = getArray($record['titles']);
-        } else {
-                $data->omschrijving = '';
         }
         
         if (!empty($record['copyright'])) {
                 $data->copyright->title = 'Copyright: ';
                 $data->copyright->content = $record['copyright'];
-        } else {
-                $data->copyright = '';
         }
         
         if (!empty($record['copyNumber'])) {
                 $data->location->kopienummer->title = 'Kopienummer: ';
                 $data->location->kopienummer->content = $record['copyNumber'];
-        } else {
-                $data->location->kopienummer = '';
         }
         
         if (!empty($record['shelfMark'])) {
                 $data->location->lokatiecode->title = 'Lokatiecode: ';
                 $data->location->lokatiecode->content = $record['shelfMark'];
-        } else {
-                $data->location->lokatiecode = '';
         }
         
         if (!empty($record['loanStatus'])) {
                 $data->location->uitleenstatus->title = 'Uitleenstatus: ';
                 $data->location->uitleenstatus->content = $record['loanStatus'];
-        } else {
-                $data->location->uitleenstatus = '';
         }
         
         if($data->location->kopienummer == '' && $data->location->lokatiecode == '' && $data->location->uitleenstatus == '') {
@@ -123,16 +109,77 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         if (!empty($record['title'])) {
                 $data->titel->title = 'Titel: ';
                 $data->titel->content = $record['title'];
-        } else {
-                    $data->titel = '';
+        }
+        
+        if (!empty($record['language_code'])) {
+                $data->language_code->title = 'Taal: ';
+                $data->language_code->content = $record['language_code'];
+        }
+        
+        if (!empty($record['person.keyword.name'])) {
+                $data->person_keyword_name->title = 'Persoonstrefwoorden: ';
+                $data->person_keyword_name->content = $record['person.keyword.name'];
+        }
+        
+        if (!empty($record['isbn'])) {
+                $data->isbn->title = 'Isbn: ';
+                $data->isbn->content = $record['isbn'];
+        }
+        
+        if (!empty($record['notes'])) {
+                $data->notes->title = 'Annotatie: ';
+                $data->notes->content = $record['notes'];
+        }
+        
+        if (!empty($record['keywords'])) {
+                $data->keywords->title = 'Trefwoorden: ';
+                $data->keywords->content = $record['keywords'];
+        }
+        
+        if (!empty($record['publisher'])) {
+                $data->publisher->title = 'Uitgever: ';
+                $data->publisher->content = $record['publisher'];
+        }
+        
+        if (!empty($record['place_of_publication'])) {
+                $data->place_of_publication->title = 'Plaats van uitgave: ';
+                $data->place_of_publication->content = $record['place_of_publication'];
+        }
+        
+        if (!empty($record['performance.production_code'])) {
+                $data->performance_production_code->title = 'Gekoppelde productie: ';
+                $data->performance_production_code->content = $record['performance.production_code'];
+        }
+        
+        if (!empty($record['author.name'])) {
+                $data->author_name->title = 'Auteur: ';
+                $data->author_name->content = $record['author.name'];
+        }
+        
+        if (!empty($record['author.name.lref'])) {
+                $data->author_name_lref->title = '';
+                $data->author_name_lref->content = $record['author.name.lref'];
+        }
+        
+        if (!empty($record['source.title'])) {
+                $data->source_title->title = '';
+                $data->source_title->content = $record['source.title'];
+        }
+        
+        if (!empty($record['dbname'])) {
+                $data->dbname->title = 'Uitgever: ';
+                $data->dbname->content = $record['dbname'];
+        }
+        
+        if (!empty($record['keyword.contents'])) {
+                $data->keyword_contents->title = '';
+                $data->keyword_contents->content = $record['keyword.contents'];
         }
         
         //add images
         if(!empty($record['media'])) {
                 $data->media->title = '';
                 $data->media->content = disp_media($record['media'], $data);
-        } else {
-                $data->media = '';
         }
 }
 
