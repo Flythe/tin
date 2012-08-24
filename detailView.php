@@ -120,12 +120,16 @@
                                                 disp($data->author_name);
                                                 disp($data->performance_production_code);
                                                 disp($data->place_of_publication);
-                                                disp($data->publisher);
-                                                disp($data->keywords);
+                                                loop($data->publisher);
+                                                loop($data->keywords);
                                                 disp($data->notes);
                                                 disp($data->isbn);
                                                 disp($data->person_keyword_name);
                                                 disp($data->language_code);
+                                                disp($data->productionId);
+                                                loop($data->childs);
+                                                disp($data->productionTitle);
+                                                disp($data->productionId);
                                         ?>
                                 </p>
                         </div>

@@ -133,12 +133,12 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         
         if (!empty($record['keywords'])) {
                 $data->keywords->title = 'Trefwoorden: ';
-                $data->keywords->content = $record['keywords'];
+                $data->keywords->content = getArray($record['keywords']);
         }
         
         if (!empty($record['publisher'])) {
                 $data->publisher->title = 'Uitgever: ';
-                $data->publisher->content = $record['publisher'];
+                $data->publisher->content = getArray($record['publisher']);
         }
         
         if (!empty($record['place_of_publication'])) {
@@ -161,11 +161,6 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
                 $data->author_name_lref->content = $record['author.name.lref'];
         }
         
-        if (!empty($record['source.title'])) {
-                $data->source_title->title = '';
-                $data->source_title->content = $record['source.title'];
-        }
-        
         if (!empty($record['dbname'])) {
                 $data->dbname->title = 'Uitgever: ';
                 $data->dbname->content = $record['dbname'];
@@ -174,6 +169,26 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         if (!empty($record['keyword.contents'])) {
                 $data->keyword_contents->title = '';
                 $data->keyword_contents->content = $record['keyword.contents'];
+        }
+        
+        if (!empty($record['productionId'])) {
+                $data->productionId->title = 'Productie ID: ';
+                $data->productionId->content = $record['productionId'];
+        }
+        
+        if (!empty($record['childs'])) {
+                $data->childs->title = 'Kinderen: ';
+                $data->childs->content = getArray($record['childs']);
+        }
+        
+        if (!empty($record['sourceTitle'])) {
+                $data->sourceTitle->title = 'Bron: ';
+                $data->sourceTitle->content = $record['sourceTitle'];
+        }
+        
+        if (!empty($record['productionTitle'])) {
+                $data->productionTitle ->title = 'Productie Titel: ';
+                $data->productionTitle ->content = $record['productionTitle'];
         }
         
         //add images
