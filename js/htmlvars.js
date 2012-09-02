@@ -79,8 +79,8 @@ function getMenus(opts)
                                 '</div>' +
 
                                 '<ul id="define_search" style="display: none;">' +
-                                        '<li><input type="radio" value=" AND " name="tinSearchOr" class="tinSearchOr"/><label>Bevat alle woorden</label></li>' +
-                                        '<li><input type="radio" checked="checked" value=" " name="tinSearchOr" class="tinSearchOr"/><label>Bevat een of meer woorden</label></li>' +
+                                        '<li><input type="radio" checked="checked" value=" AND " name="tinSearchOr" class="tinSearchOr"/><label>Bevat alle woorden</label></li>' +
+                                        '<li><input type="radio" value=" " name="tinSearchOr" class="tinSearchOr"/><label>Bevat een of meer woorden</label></li>' +
                                         '<li><input type="radio" value="exact" name="tinSearchOr" class="tinSearchOr"/><label>Bevat exacte regel</label></li>' +
                                 '</ul>' +
 

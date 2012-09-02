@@ -46,6 +46,7 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         $data->location->uitleenstatus = ''; $data->titel = ''; $data->media = '';
         $data->dbname = ''; $data->source_title = ''; $data->author_name_lref = ''; $data->author_name = ''; $data->performance_production_code = ''; $data->place_of_publication = ''; 
         $data->publisher = ''; $data->keywords = ''; $data->notes = ''; $data->isbn = ''; $data->person_keyword_name = ''; $data->language_code = '';
+        $data->childs = ''; $data->productionTitle = ''; $data->productionId = ''; $data->sourceTitle = '';
         //var_dump($record);
         //exit();
         if (!empty($record['discipline'])) {                
@@ -187,8 +188,12 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         }
         
         if (!empty($record['productionTitle'])) {
-                $data->productionTitle ->title = 'Productie Titel: ';
-                $data->productionTitle ->content = $record['productionTitle'];
+                $data->productionTitle->title = 'Productie Titel: ';
+                if(!empty($data->productionId)) {
+                    $data->productionTitle->content = disp_productie($record['productionTitle'], $data->productionId->content);
+                } else {
+                    $data->productionTitle->content = $record['productionTitle'];
+                }                
         }
         
         //add images

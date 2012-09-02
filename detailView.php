@@ -115,7 +115,7 @@
                                                 disp($data->jaar);
                                                 
                                                 disp($data->dbname);
-                                                disp($data->source_title);
+                                                disp($data->sourceTitle);
                                                 disp($data->author_name_lref);
                                                 disp($data->author_name);
                                                 disp($data->performance_production_code);
@@ -126,7 +126,6 @@
                                                 disp($data->isbn);
                                                 disp($data->person_keyword_name);
                                                 disp($data->language_code);
-                                                disp($data->productionId);
                                                 disp($data->childs);
                                                 disp($data->productionTitle);
                                                 disp($data->productionId);

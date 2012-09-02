@@ -33,11 +33,15 @@ function disp_child_url($elements)
     
     if(!empty($elements) && '' != $elements) {
         foreach($elements as $e) {
-            array_push($urls, '<a href="/detail.php?object='.$e.'">'.$e.'</a>,');
+            array_push($urls, '<a href="/detail.php?object='.$e.'">'.$e.'</a>');
         }
     }
     
-    return $urls;
+    return join(', ', $urls);
+}
+
+function disp_productie($title, $id) {    
+    return '<a href="/detail.php?object='.$id.'">'.$title.'</a>';
 }
 
 function getArray($element) {
