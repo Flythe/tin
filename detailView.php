@@ -127,7 +127,7 @@
                                                 disp($data->person_keyword_name);
                                                 disp($data->language_code);
                                                 disp($data->productionId);
-                                                loop($data->childs);
+                                                disp($data->childs);
                                                 disp($data->productionTitle);
                                                 disp($data->productionId);
                                         ?>

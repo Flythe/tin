@@ -69,7 +69,7 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         
         if (!empty($record['materialType'])) {
                 $data->materials->materiaal_type->title = 'Materiaaltype: ';
-                $data->materials->materiaal_type->content = $record['materialType'];
+                $data->materials->materiaal_type->content = str_replace("production", "productie", $record['materialType']);
         }
         
         if (!empty($record['materialSubType'])) {
@@ -178,7 +178,7 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
         
         if (!empty($record['childs'])) {
                 $data->childs->title = 'Kinderen: ';
-                $data->childs->content = getArray($record['childs']);
+                $data->childs->content = disp_child_url($record['childs']);
         }
         
         if (!empty($record['sourceTitle'])) {

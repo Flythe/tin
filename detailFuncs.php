@@ -27,6 +27,19 @@ function disp_media($elements, $parentKey = false, $isList = false)
         return $media;
 }
 
+function disp_child_url($elements)
+{
+    $urls = array();
+    
+    if(!empty($elements) && '' != $elements) {
+        foreach($elements as $e) {
+            array_push($urls, '<a href="/detail.php?object='.$e.'">'.$e.'</a>,');
+        }
+    }
+    
+    return $urls;
+}
+
 function getArray($element) {
         $array = array();
         
