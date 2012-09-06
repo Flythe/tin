@@ -172,11 +172,6 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
                 $data->keyword_contents->content = $record['keyword.contents'];
         }
         
-        if (!empty($record['productionId'])) {
-                $data->productionId->title = 'Productie ID: ';
-                $data->productionId->content = $record['productionId'];
-        }
-        
         if (!empty($record['childs'])) {
                 $data->childs->title = 'Kinderen: ';
                 $data->childs->content = disp_child_url($record['childs']);
@@ -187,10 +182,16 @@ if (($jsonStr = curl_get_uri($xmluri)) && ($record = json_decode($jsonStr, true)
                 $data->sourceTitle->content = $record['sourceTitle'];
         }
         
+        if (!empty($record['productionId'])) {
+                $data->productionId->title = 'Productie ID: ';
+                $data->productionId->content = $record['productionId'];
+        }
+        
         if (!empty($record['productionTitle'])) {
                 $data->productionTitle->title = 'Productie Titel: ';
                 if(!empty($data->productionId)) {
                     $data->productionTitle->content = disp_productie($record['productionTitle'], $data->productionId->content);
+                    $data->productionId = '';
                 } else {
                     $data->productionTitle->content = $record['productionTitle'];
                 }                

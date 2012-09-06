@@ -41,7 +41,7 @@ function disp_child_url($elements)
 }
 
 function disp_productie($title, $id) {    
-    return '<a href="/detail.php?object='.$id.'">'.$title.'</a>';
+    return '<a href="/detail.php?production='.$id.'">'.$title.'</a>';
 }
 
 function getArray($element) {
